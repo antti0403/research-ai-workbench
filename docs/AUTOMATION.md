@@ -1,6 +1,6 @@
 # Foundation first, then personalization
 
-Version 0.2.0 separates machine preparation from research decisions. The installer does not guess a discipline. The user's existing AI interprets a few answers and selects documented extensions. No extra model API is built into the installer.
+Version 0.2.1 separates machine preparation from research decisions. The installer does not guess a discipline. The user's existing AI interprets a few answers and selects documented extensions. No extra model API is built into the installer.
 
 ## User journey
 
@@ -26,10 +26,10 @@ python workbench.py doctor --workspace "/path/to/project"
 
 `plan` is read-only. `setup --offline` writes foundation files without downloading packages; incomplete checks remain pending. `apply` requires a verified foundation. It continues other selected profiles when one fails. Repeating `apply` retries incomplete work and checks existing installations. Selection of an empty list is valid. Applying a smaller selection does not uninstall earlier extensions.
 
-After setup, the engine is copied into `.workbench/kit/0.2.0/`. The installed Python path appears in `START_HERE.md`. From the workspace on macOS/Linux, for example:
+After setup, the engine is copied into `.workbench/kit/0.2.1/`. The installed Python path appears in `START_HERE.md`. From the workspace on macOS/Linux, for example:
 
 ```bash
-.workbench/envs/core/bin/python .workbench/kit/0.2.0/workbench.py doctor --workspace .
+.workbench/envs/core/bin/python .workbench/kit/0.2.1/workbench.py doctor --workspace .
 ```
 
 On Windows use `.workbench\envs\core\Scripts\python.exe` for that interpreter. The workspace must stay at its original path: Python virtual environments are not portable. Rebuild environments after moving a workspace. When Python was downloaded automatically, it lives under `.workbench/bootstrap/`; keep that directory. After a successful setup, the original download folder is no longer needed by the installed engine. An externally reused Python installation must still remain available.
@@ -46,7 +46,7 @@ Use [profile.example.json](../profile.example.json). Only the `extensions` list 
 | `units` | Units/uncertainty skill and isolated libraries | Measurement model and justified uncertainty inputs |
 | `matlab` | MATLAB guidance skill | MATLAB or compatible runtime, required toolboxes, license |
 | `data` | NumPy, pandas, SciPy, and Matplotlib environment | Method selection, data quality, interpretation |
-| `figures` | Scientific figure skill and plotting environment | Data, figure design, journal requirements, any additional packages |
+| `figures` | NumPy and Matplotlib environment; nature-figure withheld pending nested-asset permissions | Data, figure design, journal requirements, any additional packages |
 
 Use the recorded environment for its task. A skill may document additional integrations; installing the selected profile does not install every optional dependency mentioned upstream. The AI checks only the dependencies needed for the chosen task. Needs outside the catalog go through the source and license review in [SETUP.md](../SETUP.md).
 
@@ -60,6 +60,7 @@ Use the recorded environment for its task. A skill may document additional integ
 | `.workbench/install-report.md` | Readable component status |
 | `.workbench/profile.json` | Local answers and selected extensions |
 | `.workbench/envs/` | Separate runtime for each configured profile |
+| `.workbench/kit/0.2.1/NOTICE.md`, `THIRD_PARTY.md`, `SKILLS.md` | Retained source, attribution and license-scope documentation |
 | `.workbench/locks/` | Resolved installed package versions |
 | `.agents/skills/` | Project-scoped skill files |
 

@@ -1,6 +1,8 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.2.0. Tests used temporary workspaces and synthetic or public inputs, separate from private research.
+Updated: 2026-10-03 for repository 0.2.1. Tests used temporary workspaces and synthetic or public inputs, separate from private research. Full runtime results below were obtained for 0.2.0; they are historical evidence, not a new full installation of 0.2.1.
+
+The 0.2.1 attribution patch passed 16 automated tests and the Bash syntax check. The tests verify that source/license documents remain in the installed kit, root and nested notices survive skill extraction, and the figures profile keeps its plotting runtime without requesting the withheld skill. Internal documentation links and direct dependency/source coverage were checked. Runtime package pins and launchers are unchanged. No additional Windows/Linux or personal research acceptance test was performed.
 
 | Environment or capability | Actual result and limits |
 | --- | --- |
@@ -14,7 +16,7 @@ Updated: 2026-10-03 for repository 0.2.0. Tests used temporary workspaces and sy
 | Units and uncertainty | Skill integrity and environment installation passed; power units, incompatible-unit rejection, and uncertainty checks passed. |
 | Literature, writing, and MATLAB skills | Complete selected files and retained licenses matched recorded sources. Host discovery, workflow-specific dependencies, writing quality, and MATLAB runtime/license were not verified. |
 | Data analysis | Pinned environment installed; small numerical and exported-figure checks passed. This does not validate a real statistical analysis. |
-| Figure profile | Skill files and pinned plotting environment installed; numerical and PNG export checks passed. Manuscript-specific formats and visual acceptance remain task-specific. |
+| Figure profile (0.2.0 historical result) | Skill files and pinned plotting environment installed; numerical and PNG export checks passed. In 0.2.1 the skill is withheld because of nested-asset permissions; runtime pins remain unchanged. A functional test does not establish redistribution rights. |
 | Failure and preservation tests | 15 automated tests passed: human-content preservation, repeated offline setup, modified skills, read-only planning, profile validation, prerequisite enforcement, path/archive checks, complete skill resources and licenses, corrupt state, concurrent installation, download integrity, partial profile failure, installed-engine operation, and honest doctor failure reporting. |
 | Original skill format | Both bundled skills passed the local skill format validator. Native invocation in a new host session remains unverified. |
 | Shell launcher | Bash syntax check and actual macOS execution passed. |
