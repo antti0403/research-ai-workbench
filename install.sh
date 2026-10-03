@@ -36,7 +36,7 @@ if [[ "$workbench_workspace" == / || "$workbench_workspace" == "$HOME" || "$work
   printf '%s\n' 'Choose a dedicated workspace outside the installer source.' >&2; exit 1
 fi
 workbench_bootstrap="$workbench_workspace/.workbench/bootstrap"
-for workbench_path in "$workbench_workspace/.workbench" "$workbench_bootstrap"; do
+for workbench_path in "$workbench_workspace/.workbench" "$workbench_bootstrap" "$workbench_bootstrap/uv" "$workbench_bootstrap/python" "$workbench_bootstrap/bin" "$workbench_bootstrap/cache"; do
   [[ ! -L "$workbench_path" ]] || { printf '%s\n' 'Preserved a symbolic link at the runtime destination.' >&2; exit 1; }
 done
 mkdir -p "$workbench_bootstrap"

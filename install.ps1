@@ -36,9 +36,13 @@ if ($Workspace -eq [IO.Path]::GetPathRoot($Workspace) -or $Workspace -eq [Enviro
 }
 $Control = Join-Path $Workspace '.workbench'
 $Bootstrap = Join-Path $Control 'bootstrap'
-foreach ($Path in @($Control, $Bootstrap)) {
-    if ((Test-Path -LiteralPath $Path) -and ((Get-Item -LiteralPath $Path).Attributes -band [IO.FileAttributes]::ReparsePoint)) {
-        throw 'Preserved a link at the runtime destination.'
+foreach ($Path in @($Bootstrap, (Join-Path $Bootstrap 'uv'), (Join-Path $Bootstrap 'python'), (Join-Path $Bootstrap 'bin'), (Join-Path $Bootstrap 'cache'))) {
+    $CheckPath = $Path
+    while ($CheckPath) {
+        if ((Test-Path -LiteralPath $CheckPath) -and ((Get-Item -Force -LiteralPath $CheckPath).Attributes -band [IO.FileAttributes]::ReparsePoint)) {
+            throw 'Preserved a link or reparse point at the runtime destination.'
+        }
+        $CheckPath = [IO.Path]::GetDirectoryName($CheckPath)
     }
 }
 New-Item -ItemType Directory -Force -Path $Bootstrap | Out-Null

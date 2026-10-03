@@ -65,7 +65,7 @@ The AI can prepare a local profile from [profile.example.json](profile.example.j
 
 ## Status and documentation
 
-Repository **0.2.1**, guide **1.4**. Check [compatibility and actual test coverage](docs/COMPATIBILITY.md) before assuming support on a particular computer. Windows and Linux runtime verification and independent user acceptance remain pending.
+Repository **0.2.2**, guide **1.4**. Check [compatibility and actual test coverage](docs/COMPATIBILITY.md) for tested environments and remaining limits. Automated checks cover preservation, offline launchers, and supported runtime operations; personal research acceptance remains separate.
 
 | Need | Entry point |
 | --- | --- |
@@ -75,8 +75,10 @@ Repository **0.2.1**, guide **1.4**. Check [compatibility and actual test covera
 | Authors, dependencies, inspirations, and reuse limits | [Third-party inventory](THIRD_PARTY.md), [notices](NOTICE.md) |
 | Failure or interrupted setup | [Troubleshooting](docs/TROUBLESHOOTING.md) |
 | Source-grounded reading example | [Example](examples/README.md) |
+| First task after installation | [First-task walkthrough](docs/FIRST_TASK.md) |
 | Personal configuration | [Rules template](templates/project-instructions.md), [configuration template](templates/workbench-config.md) |
 | Development and tests | [Contributing](CONTRIBUTING.md) |
+| Maintenance priorities and release checks | [Maintenance](docs/MAINTENANCE.md) |
 
 ## Language and license
 

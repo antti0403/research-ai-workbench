@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.2 — 2026-10-03
+
+- Reject Windows junctions and reparse points in managed paths, and confirm resolved paths stay inside the workspace. Protect interpreter parent directories while allowing POSIX venv interpreter links.
+- Record runtime ownership in state and a matching environment marker before creation. Repair only recognized environments; reuse working legacy runtimes without adopting or modifying their packages.
+- Recheck foundation skills and the current PDF runtime before applying extensions. Record runtime creation and dependency failures for recovery.
+- Ignore normal Python bytecode caches beside their source files during skill verification, while still rejecting source edits, unexpected scripts, and links.
+- Normalize the skill root before comparisons so macOS temporary-directory aliases, Windows short paths, and relative paths use the same canonical location.
+- Accept optional UTF-8 BOMs in profiles and state; validate state structure and nested records before using them. Capture Unicode subprocess output explicitly.
+- Update unchanged installer-owned START_HERE.md when the engine version changes, backing up its previous contents. Preserve edited entry points and provide versioned instructions.
+- Add CI for Windows, macOS, and Linux on Python 3.11, 3.12, and 3.14; add separate actual PDF/figures installation and resume checks on Python 3.12.
+- Add repository validation, a first-task walkthrough, and maintenance priorities. Keep guide version 1.4 and existing dependency/skill pins.
+
 ## 0.2.1 — 2026-10-03
 
 - Add a component-level third-party inventory with authors, pinned sources, license links, installation scope, runtime dependencies, and workflow inspirations.

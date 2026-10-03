@@ -4,7 +4,7 @@ See [SETUP.md](SETUP.md) for selection criteria. This file records known revisio
 
 Track source review, file installation, runtime dependencies, host discovery, and real task execution separately. Passing one stage does not establish the next.
 
-## Automatic catalog in 0.2.1
+## Automatic catalog in 0.2.2
 
 The common foundation installs two original MIT-licensed skills: `research-workbench` for intake and setup, and `research-reading` for source-linked notes. The machine-readable [registry](registry.json) defines optional bundles. Initial automated bundles cover a subset of the candidates below; the rest require task-specific agent review.
 
