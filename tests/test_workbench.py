@@ -82,6 +82,24 @@ class WorkbenchTests(unittest.TestCase):
         with self.assertRaises(w.SetupError):
             w.load_profile(p)
 
+    def test_python_311_rejects_figures_before_creating_or_installing_a_runtime(self):
+        state = w.read_state(self.root)
+        with patch.object(w.sys, 'version_info', (3, 11, 9)), patch.object(w, 'run') as run, patch.object(w.venv.EnvBuilder, 'create') as create:
+            with self.assertRaisesRegex(w.SetupError, 'requires Python 3.12'):
+                w.runtime(self.root, state, 'figures', w.REGISTRY['profiles']['figures']['requirements'])
+        self.assertFalse((self.root / '.workbench/envs/figures').exists())
+        run.assert_not_called()
+        create.assert_not_called()
+        self.assertEqual(state['checks']['runtime:figures']['status'], 'failed')
+
+    def test_python_311_can_still_prepare_figures_offline_without_packages(self):
+        state = w.read_state(self.root)
+        with patch.object(w.sys, 'version_info', (3, 11, 9)), patch.object(w, 'run') as run:
+            w.runtime(self.root, state, 'figures', w.REGISTRY['profiles']['figures']['requirements'], offline=True)
+        self.assertEqual(state['checks']['runtime:figures']['status'], 'pending')
+        self.assertFalse((self.root / '.workbench/envs/figures').exists())
+        run.assert_not_called()
+
     def test_unknown_research_can_defer_everything(self):
         self.assertEqual(w.plan({'extensions': []})['extensions'], [])
         self.assertEqual(len(w.plan({'extensions': ['units', 'units']})['extensions']), 1)

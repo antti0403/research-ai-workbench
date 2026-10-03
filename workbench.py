@@ -24,7 +24,7 @@ import venv
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.3.0'
+VERSION = '0.3.1'
 REGISTRY = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
 MAX_DOWNLOAD = 80 * 1024 * 1024
 MAX_EXPANDED = 200 * 1024 * 1024
@@ -289,6 +289,9 @@ def prepare_runtime(root, state, profile, requirements, offline=False):
         if offline:
             record(root, state, 'runtime:' + profile, 'pending', 'Offline mode: no packages installed. Rerun without --offline.')
             return
+        minimum = REGISTRY['profiles'].get(profile, {}).get('python_minimum', '3.11')
+        if sys.version_info[:2] < tuple(map(int, minimum.split('.'))):
+            raise SetupError(profile + ' requires Python ' + minimum + '+. Rerun apply with a compatible Python; no profile environment was created. The foundation can keep its existing interpreter.')
         if envdir.exists() and not owned:
             raise SetupError('Preserved unrecognized environment: ' + str(envdir))
         if not envdir.exists():
@@ -311,6 +314,8 @@ def prepare_runtime(root, state, profile, requirements, offline=False):
             raise SetupError('Preserved unrecognized environment; no packages changed: ' + str(envdir) + '. Use a dedicated new workspace, or review and back up this environment before replacing it.') from exc
         record(root, state, 'runtime:' + profile, 'in progress', 'Installing pinned packages into this profile only.')
         executable = runtime_command(python, profile)
+        minimum = REGISTRY['profiles'].get(profile, {}).get('python_minimum', '3.11')
+        run([executable, '-c', 'import sys; sys.exit(0 if sys.version_info[:2] >= ' + repr(tuple(map(int, minimum.split('.')))) + ' else "This profile requires Python ' + minimum + '+. Preserve this environment and review rebuilding it with a compatible interpreter.")'], timeout=30)
         try:
             run([executable, '-m', 'pip', '--version'], timeout=60)
         except SetupError:
@@ -416,7 +421,7 @@ def remote_skill(root, state, name, offline):
 
 def install_kit(root, state):
     destination = '.workbench/kit/' + VERSION
-    paths = ['workbench.py', 'registry.json', 'SETUP.md', 'LICENSE', 'NOTICE.md', 'THIRD_PARTY.md', 'SKILLS.md', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'profile.example.json', 'templates/workbench-config.md', 'templates/project-instructions.md']
+    paths = ['workbench.py', 'registry.json', 'SETUP.md', 'LICENSE', 'NOTICE.md', 'THIRD_PARTY.md', 'SKILLS.md', 'README.md', 'README.zh-CN.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'profile.example.json', 'templates/workbench-config.md', 'templates/project-instructions.md']
     paths += [p.relative_to(ROOT).as_posix() for folder in ('scripts', 'skills', 'docs', 'examples') for p in (ROOT / folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
     for relative in paths:
         outcome = create_once(root, state, destination + '/' + relative, (ROOT / relative).read_bytes())

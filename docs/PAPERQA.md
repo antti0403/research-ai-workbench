@@ -75,6 +75,10 @@ First inspect the settings. Once paper/model scope is authorized, index the same
 
 This version resolves named settings from `PQA_HOME/.pqa/settings/`; use `--settings research`, rather than assuming an arbitrary JSON path works. Keep indexes, model logs, and answer sessions in `.workbench/.pqa/`, which the workbench ignores in Git. Inspect logs before sharing: questions and source content can appear there.
 
+## Small real-query acceptance
+
+After model configuration and source-sharing/cost authorization, begin with the public paper in the [full-text worked example](../examples/attention-scaling.md). Ask what motivates its attention-score scaling, then ask whether that selected evidence guarantees improved accuracy in every application. Compare the answer's passages and locators with the example; the second question should retain the unsupported scope rather than invent evidence. Record models/settings, actual provider usage, session output, and each claim's support. These are proposed acceptance cases, not completed model-query results. Stop on extraction, authentication, or spending limits and retain the last successful step.
+
 ## Check and save the result
 
 Ask your agent: “Use research-paperqa to answer this question using only my selected papers. Save the answer and evidence, verify each central claim against the cited original, and identify unsupported or contradictory findings.”

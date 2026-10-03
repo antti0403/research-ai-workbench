@@ -2,6 +2,18 @@
 
 Start in the installed workspace. Read `.workbench/install-report.md`; repair failed foundation steps before using its Python tools. Installed files and small runtime checks do not yet prove that your research workflow works.
 
+## Choose one output
+
+Use START_HERE.md as the project entry point, then give the agent one request:
+
+| Task | Copyable request | Expected output |
+| --- | --- | --- |
+| Start reading | Read one selected abstract, explain its question and approach, and mark full-text gaps. Save a source-linked note. | One note under `wiki/` or your existing system |
+| Check a claim | Check one selected full-text claim against its passage or equation. Retain assumptions, run a small calculation when useful, and label unsupported conclusions. | A claim-to-evidence table and actual check output; see [worked example](../examples/attention-scaling.md) |
+| Compare papers | Use research-paperqa on my selected papers within my existing model/data/cost authorization. Save evidence, check central citations, and record unanswered questions. | A comparison note and local session/evidence; [configuration and acceptance](PAPERQA.md) |
+
+Record file installation, host invocation, real task execution, and claim support separately in workbench-config.md. A model answer is an input to verification.
+
 ## Read one public abstract
 
 Open the workspace in your existing agent and send:
@@ -21,13 +33,16 @@ The foundation's helper can extract text with page numbers. It does not perform 
 **macOS / Linux**
 
 ```bash
-.workbench/envs/core/bin/python .workbench/kit/0.2.4/scripts/research_tools.py pdf paper.pdf --start 1 --end 2
+KIT=$(.workbench/envs/core/bin/python -c 'import json; print(".workbench/kit/" + json.load(open(".workbench/state.json", encoding="utf-8-sig"))["version"])')
+.workbench/envs/core/bin/python "$KIT/scripts/research_tools.py" pdf paper.pdf --start 1 --end 2
 ```
 
 **Windows PowerShell**
 
 ```powershell
-& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.2.4\scripts\research_tools.py pdf .\paper.pdf --start 1 --end 2
+$kitVersion = (Get-Content -LiteralPath .\.workbench\state.json -Raw | ConvertFrom-Json).version
+$kit = Join-Path .\.workbench\kit $kitVersion
+& .\.workbench\envs\core\Scripts\python.exe (Join-Path $kit 'scripts/research_tools.py') pdf .\paper.pdf --start 1 --end 2
 ```
 
 Give the numbered excerpt to your agent, ask it to save a source-linked note, then compare the note with the original pages. Inspect equations, tables, and diagrams visually. If a page has no extractable text, retain that limitation and use an authorized OCR route when needed.

@@ -1,6 +1,6 @@
 # Third-party sources, dependencies, and acknowledgements
 
-Reviewed on 2026-10-03 for repository 0.3.0 and guide 1.6. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
+Reviewed on 2026-10-03 for repository 0.3.1 and guide 1.7. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
 
 ## What this repository contains
 
@@ -132,7 +132,7 @@ The foundation-first installer, question grouping, catalog integration, verifica
 
 ## Research example, API, and existing applications
 
-- **Paper:** Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. *Attention Is All You Need* (2017), [arXiv:1706.03762](https://arxiv.org/abs/1706.03762), [DOI](https://doi.org/10.48550/arXiv.1706.03762). `examples/attention-abstract.md` is our short paraphrase of its abstract. Credit for the scientific work belongs to these authors. No PDF, figure, table or full abstract is reproduced. Paper rights remain separate from our MIT license.
+- **Paper:** Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. *Attention Is All You Need* (2017), [arXiv:1706.03762](https://arxiv.org/abs/1706.03762), [DOI](https://doi.org/10.48550/arXiv.1706.03762). `examples/attention-abstract.md` is our short paraphrase of its abstract. `examples/attention-scaling.md` checks a selected passage in v7 section 3.2.1 and footnote 4; its evidence table is original, and `examples/attention_scaling.py` is our standard-library synthetic numerical illustration. The v7 HTML and selected PDF page were checked on 2026-10-03; PDF formula extraction was fragmented, so the equation was checked against HTML. This is not reproduced training data, a model answer, or a full-paper review. Credit for the scientific work belongs to these authors. No PDF, figure, table or full abstract is reproduced. Paper rights remain separate from our MIT license.
 - **Crossref:** `scripts/research_tools.py` calls the [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/). Crossref and its depositing members supply bibliographic data. Our request/parser code is our integration; returned research content is not our authorship. Preserve record-level provenance and check content-specific terms before redistribution. Metadata access does not grant full-text rights.
 - **Existing applications:** [Zotero](https://www.zotero.org/) by the Corporation for Digital Scholarship and contributors, [Obsidian](https://obsidian.md/), [MATLAB](https://www.mathworks.com/products/matlab.html) by MathWorks, [GNU Octave](https://octave.org/), [R](https://www.r-project.org/), [Codex](https://developers.openai.com/codex/) by OpenAI, and [GitHub](https://github.com/) are named for interoperability or user choice. They are not bundled or automatically licensed to the user. Accounts, connectors and institutional access require their own review.
 

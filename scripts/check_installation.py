@@ -3,6 +3,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -12,12 +13,12 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))['version']
 
 
-def command(args, expected=0, extra_env=None):
+def command(args, expected=0, extra_env=None, cwd=None):
     env = dict(os.environ)
     env['PATH'] = str(Path(sys.executable).parent) + os.pathsep + env.get('PATH', '')
     env['PYTHONIOENCODING'] = 'utf-8'
     env.update(extra_env or {})
-    result = subprocess.run(args, env=env, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=900)
+    result = subprocess.run(args, env=env, cwd=cwd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=900)
     if result.returncode != expected:
         raise RuntimeError(f'Expected exit {expected}, got {result.returncode}:\n{result.stdout}\n{result.stderr}')
     return result.stdout
@@ -57,7 +58,17 @@ def main():
         assert (root / 'AGENTS.md').read_bytes() == before, 'Resume duplicated or replaced instructions'
         assert (root / 'workbench-config.md').read_bytes() == notes, 'Resume changed notes'
         command([interpreter, str(engine), 'plan'])
+        command([interpreter, str(engine.parent / 'scripts/check_repository.py')])
         if args.online:
+            command([interpreter, '-c', 'from pypdf import PdfWriter; import sys; writer=PdfWriter(); writer.add_blank_page(width=100,height=100); writer.add_blank_page(width=100,height=100); writer.write(sys.argv[1])', str(root / 'paper.pdf')])
+            tutorial = (engine.parent / 'docs/FIRST_TASK.md').read_text(encoding='utf-8')
+            language = 'powershell' if os.name == 'nt' else 'bash'
+            block = re.search(r'```' + language + r'\n(.*?)```', tutorial, re.DOTALL).group(1)
+            invocation = [shell, '-NoProfile', '-Command', block] if os.name == 'nt' else ['bash', '-c', block]
+            output = command(invocation, cwd=root)
+            assert 'PDF page 1' in output and 'PDF page 2' in output
+            assert 'No extractable text' in output
+            print('Passed: actual documented first-PDF commands through the current installed kit.')
             command([interpreter, str(engine), 'doctor', '--workspace', str(root)])
             profile = root / '.workbench/selected.json'
             selected = ['figures', 'paperqa'] if args.paperqa else ['figures']

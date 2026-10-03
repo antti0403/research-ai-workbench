@@ -1,5 +1,7 @@
 # Example: read a public abstract and save a note
 
+For a methods passage, equation, evidence table, and executable numerical check, use the [full-text claim example](attention-scaling.md). These are different scopes; neither is a complete independent user acceptance trial.
+
 This example shows a small task with a traceable output. Its source is the public abstract of *Attention Is All You Need*. It is not a full-text review or evidence that another computer completed the full setup.
 
 ## Example request

@@ -8,6 +8,10 @@ import sys
 import tempfile
 
 profile, requirements = sys.argv[1:]
+registry = json.loads((Path(__file__).resolve().parents[1] / 'registry.json').read_text(encoding='utf-8'))
+minimum = registry['profiles'].get(profile, {}).get('python_minimum', '3.11')
+if sys.version_info[:2] < tuple(map(int, minimum.split('.'))):
+    raise RuntimeError(profile + ' requires Python ' + minimum + '+')
 for requirement in json.loads(requirements):
     name, version = requirement.split('==')
     if importlib.metadata.version(name) != version:
