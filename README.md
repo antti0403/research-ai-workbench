@@ -1,52 +1,79 @@
 # Research AI Workbench
 
-Set up a research workspace, then let your existing AI add the tools your next task needs.
+[![Installer checks](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml/badge.svg)](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml)
 
-The installer prepares project folders, two research skills, an isolated PDF-reading runtime, and records that let you resume setup. Start with reading and notes; add literature search, writing, symbolic mathematics, units, MATLAB guidance, data analysis, or plotting as needed. You do not need to choose unfamiliar skill names or buy another model API subscription for the installer.
+A local setup toolkit for AI-assisted research, with a Python installer and a standalone setup guide.
 
-## Start
+It prepares a workspace for reading, notes, and research outputs. Your existing AI agent then selects extensions for your next task.
 
-1. Download this public repository with **Code → Download ZIP** and extract it.
-2. Open a terminal in the extracted folder and run:
+## Features
 
-   **macOS / Linux**
+- **Research foundation:** project folders, persistent instructions, two original research skills, and an isolated PDF-reading runtime.
+- **Optional extensions:** literature search, writing, symbolic mathematics, units, MATLAB guidance, data analysis, and plotting.
+- **Resumable setup:** recorded checks, isolated environments, and preservation of existing files and settings.
+- **Agent-led configuration:** reuse your tools and add capabilities for a concrete task. The installer requires no additional model API subscription.
 
-   ```bash
-   bash install.sh
-   ```
+## Quick start
 
-   **Windows PowerShell**
+Download and extract the repository using **Code → Download ZIP**, or clone it:
 
-   ```powershell
-   .\install.ps1
-   ```
+```bash
+git clone https://github.com/antti0403/research-ai-workbench.git
+cd research-ai-workbench
+```
 
-   The workspace defaults to `ResearchWorkbench` in your home directory. Add `--workspace "path/to/my-project"` to choose another location. Keep the download until setup finishes. If execution is blocked, use [troubleshooting](docs/TROUBLESHOOTING.md).
-3. Open the workspace in Codex or your existing local agent and send:
+From the repository folder, run the command for your system:
 
-   > Read START_HERE.md and personalize my research workbench. Ask only for missing details about my next output, methods, existing tools, and constraints. Select and install suitable extensions, then verify one real task. Use my preferred language.
+**macOS / Linux**
 
-For agent-led setup, give your AI [SETUP.md](SETUP.md), the complete guide. It also works on its own; the standalone file does not contain the installer.
+```bash
+bash install.sh
+```
 
-## After setup
+**Windows PowerShell**
 
-Start with the [first-task walkthrough](docs/FIRST_TASK.md). It checks a saved, source-linked reading note before you expand the workbench. Installation checks and a successful research task are recorded separately.
+```powershell
+.\install.ps1
+```
 
-| Need | Read |
-| --- | --- |
-| Commands, extensions, and installation records | [Automation reference](docs/AUTOMATION.md), [skill sources](SKILLS.md) |
-| Failed or interrupted setup; tested environments | [Troubleshooting](docs/TROUBLESHOOTING.md), [compatibility](docs/COMPATIBILITY.md) |
-| Personal research context and project rules | [Configuration template](templates/workbench-config.md), [rules template](templates/project-instructions.md) |
-| Development, priorities, and releases | [Contributing](CONTRIBUTING.md), [maintenance](docs/MAINTENANCE.md), [changelog](CHANGELOG.md) |
+The default workspace is `~/ResearchWorkbench`. Add `--workspace "path/to/project"` to choose another location. The launchers reuse Python 3.11+ or obtain it locally. Keep the source folder until setup finishes; see [troubleshooting](docs/TROUBLESHOOTING.md) if execution is blocked.
 
-Repository **0.2.3**, guide **1.5**. See compatibility for actual test scope.
+Open the workspace in Codex or your existing local agent and send:
 
-## Access, language, and credits
+> Read START_HERE.md and personalize my research workbench. Ask only for missing task details, reuse my tools, install suitable extensions within my authorization, and verify one real task. Use my preferred language.
 
-The installer downloads public dependencies; it does not upload research files or request credentials. Optional search sends the query to its provider. Account login and paid choices remain with you. The AI application, MATLAB, commercial licenses, and institutional access are not included. Your agent's own data policies still apply.
+For setup handled entirely by an agent, give it [SETUP.md](SETUP.md). That guide also works as a standalone file.
 
-Instructions are in English; conversation follows your language and deliverables follow their target requirements. Original code and material use the [MIT license](LICENSE). External components retain their own terms.
+## Usage
 
-Optional skills come from **袁一哲 / Yuan1z0825 and Nature Skills contributors**, and **K-Dense Inc. and Scientific Agent Skills contributors**. Workflow inspiration comes from **艺雨YiLight**, reviewed through **sunweihunu's transcript**; communication guidance draws on **ASD-STE100** and **Andrej Karpathy** without claiming standards compliance. See the [third-party inventory](THIRD_PARTY.md) and [notices](NOTICE.md) for sources, runtime dependencies, and licenses.
+Inspect a proposed setup or check an existing workspace from the repository with Python 3.11+:
 
-ARS is excluded from automatic installation because of its noncommercial terms. `nature-figure` is withheld pending permission for nested assets; the `figures` plotting runtime remains available. Attribution does not grant permission or imply endorsement.
+```bash
+python workbench.py plan
+python workbench.py doctor --workspace "path/to/project"
+```
+
+Start with the [first-task walkthrough](docs/FIRST_TASK.md), then select extensions for actual gaps. See the [installer reference](docs/AUTOMATION.md) for profiles, apply/resume commands, and installed interpreter paths.
+
+The installer downloads public dependencies and does not upload research files or request credentials. Search queries go to their provider; your agent's data policies still apply. AI applications and any required MATLAB runtimes, accounts, commercial licenses, or institutional access are provided separately.
+
+## Documentation
+
+- [Setup guide](SETUP.md) — complete agent workflow.
+- [Skill catalog and candidates](SKILLS.md) — sources and verification scope.
+- [Compatibility](docs/COMPATIBILITY.md) — tested environments and limits.
+- [Templates](templates/workbench-config.md) — personal configuration and [project rules](templates/project-instructions.md).
+
+Repository **0.2.4**, guide **1.5**. Changes are recorded in the [changelog](CHANGELOG.md).
+
+## Contributing
+
+Bug reports, documentation improvements, and reproducible environment checks are welcome. Read [Contributing](CONTRIBUTING.md) for development checks and source-review requirements, and [maintenance priorities](docs/MAINTENANCE.md) for planned work. Keep private research and credentials out of reports.
+
+## License and acknowledgements
+
+Original code, skills, and documentation use the [MIT license](LICENSE). External components retain their own terms; see [notices](NOTICE.md) and the [third-party inventory](THIRD_PARTY.md).
+
+Optional skills are by **袁一哲 / Yuan1z0825 and Nature Skills contributors**, and **K-Dense Inc. and Scientific Agent Skills contributors**. Workflow inspiration comes from **艺雨YiLight**, reviewed through **sunweihunu's transcript**. Communication guidance draws on **ASD-STE100** and **Andrej Karpathy**, without claiming standards compliance. Instructions are in English; conversation and deliverables follow the user's language requirements.
+
+ARS is excluded from automatic installation because of its noncommercial terms. `nature-figure` is withheld pending nested-asset permissions; the `figures` runtime remains available. Attribution does not grant permission or imply endorsement.

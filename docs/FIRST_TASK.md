@@ -21,13 +21,13 @@ The foundation's helper can extract text with page numbers. It does not perform 
 **macOS / Linux**
 
 ```bash
-.workbench/envs/core/bin/python .workbench/kit/0.2.3/scripts/research_tools.py pdf paper.pdf --start 1 --end 2
+.workbench/envs/core/bin/python .workbench/kit/0.2.4/scripts/research_tools.py pdf paper.pdf --start 1 --end 2
 ```
 
 **Windows PowerShell**
 
 ```powershell
-& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.2.3\scripts\research_tools.py pdf .\paper.pdf --start 1 --end 2
+& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.2.4\scripts\research_tools.py pdf .\paper.pdf --start 1 --end 2
 ```
 
 Give the numbered excerpt to your agent, ask it to save a source-linked note, then compare the note with the original pages. Inspect equations, tables, and diagrams visually. If a page has no extractable text, retain that limitation and use an authorized OCR route when needed.

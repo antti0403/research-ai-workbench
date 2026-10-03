@@ -1,6 +1,10 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.2.3. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-03 for repository 0.2.4. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.2.4 project overview
+
+Local Windows repository validation and actual offline launcher/copied-engine checks passed. A canonical-source 0.2.3→0.2.4 offline upgrade/resume preserved the earlier kit, human notes/configuration/instructions, and skill files. Only the README and release metadata changed; use CI for the proposed commit's unit and online runtime results.
 
 ## 0.2.3 documentation release
 

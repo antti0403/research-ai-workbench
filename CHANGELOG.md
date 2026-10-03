@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 — 2026-10-03
+
+- Present README as a project overview with features, quick start, usage, documentation, contributing, and license sections.
+- Identify the Python installer and standalone guide directly; add the CI status badge and clone instructions.
+- Advance kit metadata for the revised bundled README. The standalone guide, installer behavior, original skills, and dependency/source pins are unchanged.
+
 ## 0.2.3 — 2026-10-03
 
 - Shorten README around setup and the first task; group references by purpose.
