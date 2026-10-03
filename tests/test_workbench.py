@@ -34,6 +34,10 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(state['skills']['research-reading']['host_discovery'], 'not verified')
         self.assertTrue((self.root / 'START_HERE.md').is_file())
         self.assertIn('.workbench/', (self.root / '.gitignore').read_text())
+        # Attribution remains available after the downloaded source folder is gone.
+        kit = self.root / '.workbench/kit' / w.VERSION
+        for name in ('LICENSE', 'NOTICE.md', 'THIRD_PARTY.md', 'SKILLS.md'):
+            self.assertEqual((kit / name).read_bytes(), (w.ROOT / name).read_bytes())
 
     def test_modified_skill_is_preserved(self):
         w.main(['setup', '--workspace', str(self.root), '--offline'])
@@ -88,10 +92,22 @@ class WorkbenchTests(unittest.TestCase):
         with zipfile.ZipFile(archive, 'w') as z:
             z.writestr('root/skills/example/SKILL.md', 'test')
             z.writestr('root/skills/example/references/a.md', 'evidence')
+            z.writestr('root/skills/example/assets/THIRD_PARTY_NOTICES.md', 'nested terms')
             z.writestr('root/LICENSE', 'upstream terms')
+            z.writestr('root/NOTICE', 'upstream attribution')
             z.writestr('root/unrelated.txt', 'do not install')
         files = w.archive_skill(archive, 'skills/example')
-        self.assertEqual(set(files), {'SKILL.md', 'references/a.md', 'UPSTREAM_LICENSE'})
+        self.assertEqual(set(files), {'SKILL.md', 'references/a.md', 'assets/THIRD_PARTY_NOTICES.md', 'UPSTREAM_LICENSE', 'UPSTREAM_NOTICE'})
+        self.assertEqual(files['UPSTREAM_NOTICE'], b'upstream attribution')
+        self.assertEqual(files['assets/THIRD_PARTY_NOTICES.md'], b'nested terms')
+
+    def test_figure_profile_does_not_fetch_withheld_assets(self):
+        state = w.read_state(self.root)
+        with patch.object(w, 'remote_skill') as fetch, patch.object(w, 'runtime') as runtime:
+            self.assertTrue(w.apply_profile(self.root, state, {'extensions': ['figures']}, False))
+        fetch.assert_not_called()
+        self.assertEqual(runtime.call_args.args[3], ['numpy==2.5.3', 'matplotlib==3.11.2'])
+        self.assertNotIn('nature-figure', w.REGISTRY['skills'])
 
     def test_corrupt_state_is_preserved(self):
         control = self.root / '.workbench'
