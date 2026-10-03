@@ -1,79 +1,97 @@
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 # Research AI Workbench
+
+A local setup toolkit that builds a clean, structured workspace for AI-assisted research. Includes a Python installer script and a standalone setup guide for coding agents.
 
 [![Installer checks](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml/badge.svg)](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml)
 
-A local setup toolkit for AI-assisted research, with a Python installer and a standalone setup guide.
+---
 
-It prepares a workspace for reading, notes, and research outputs. Your existing AI agent then selects extensions for your next task.
+## Why this exists
 
-## Features
+Setting up an AI agent for academic research usually runs into two problems:
+1. **The blank slate problem**: You start in an empty directory. The model has no local tools, no structured place to put notes, and no guidelines on how to read PDFs without hallucinating.
+2. **The bloated bundle problem**: A script tries to install 50 heavy packages on day one, cluttering your system with dependencies you might never use.
 
-- **Research foundation:** project folders, persistent instructions, two original research skills, and an isolated PDF-reading runtime.
-- **Optional extensions:** literature search, [PaperQA evidence questions](docs/PAPERQA.md), writing, symbolic mathematics, units, MATLAB guidance, data analysis, and plotting.
-- **Resumable setup:** recorded checks, isolated environments, and preservation of existing files and settings.
-- **Agent-led configuration:** reuse your tools and add capabilities for a concrete task. The installer requires no additional model API subscription.
+This workbench uses a progressive setup instead:
+- **Minimal core first**: It creates an organized workspace directory (`~/ResearchWorkbench`), configures an isolated environment for reading papers and extracting text, and writes down clear communication and evidence rules.
+- **Agent adds what is needed**: You open the workspace in your coding agent (Codex, Claude Code, Cursor, etc.). The agent asks what you are actually working on, then installs only the tools your specific task requires.
+
+---
+
+## Core components
+
+- **Research workspace layout**: Structured folders for raw papers, reading notes, intermediate data, and drafts.
+- **Isolated PDF reading runtime**: Dedicated environment for reading papers and extracting text without polluting your global Python setup.
+- **Persistent research rules**: Clear directives on evidence grading, formula preservation, and active communication. Borrowed from ASD-STE100 and Karpathy's output ladder concepts.
+- **Optional task extensions**: Plug in only what you need, such as arXiv/Semantic Scholar literature search, PaperQA for evidence retrieval, SymPy for math derivations, units validation, MATLAB guidance, or data visualization.
+
+---
 
 ## Quick start
 
-Download and extract the repository using **Code → Download ZIP**, or clone it:
+Clone the repository:
 
 ```bash
 git clone https://github.com/antti0403/research-ai-workbench.git
 cd research-ai-workbench
 ```
 
-From the repository folder, run the command for your system:
+Run the installer for your platform:
 
-**macOS / Linux**
-
+**macOS / Linux:**
 ```bash
 bash install.sh
 ```
 
-**Windows PowerShell**
-
+**Windows (PowerShell):**
 ```powershell
 .\install.ps1
 ```
 
-The default workspace is `~/ResearchWorkbench`. Add `--workspace "path/to/project"` to choose another location. The launchers reuse Python 3.11+ or obtain it locally. Keep the source folder until setup finishes; see [troubleshooting](docs/TROUBLESHOOTING.md) if execution is blocked.
+The default workspace path is `~/ResearchWorkbench`. If you want to put it somewhere else, pass `--workspace "path/to/project"`.
 
-Open the workspace in Codex or your existing local agent and send:
+Once the setup script finishes, open that workspace folder in your AI agent and send:
 
 > Read START_HERE.md and personalize my research workbench. Ask only for missing task details, reuse my tools, install suitable extensions within my authorization, and verify one real task. Use my preferred language.
 
-For setup handled entirely by an agent, give it [SETUP.md](SETUP.md). That guide also works as a standalone file.
+If you prefer to let an AI agent handle the whole setup without running shell scripts first, give it `SETUP.md`. That file is completely self-contained.
 
-## Usage
+---
 
-Inspect a proposed setup or check an existing workspace from the repository with Python 3.11+:
+## CLI checks and maintenance
+
+The repository includes a Python utility (`workbench.py`) to inspect or check your setup:
 
 ```bash
+# Preview what would be installed
 python workbench.py plan
+
+# Run a health check on an existing workspace
 python workbench.py doctor --workspace "path/to/project"
 ```
 
-Start with the [first-task walkthrough](docs/FIRST_TASK.md), then select extensions for actual gaps. See the [installer reference](docs/AUTOMATION.md) for profiles, apply/resume commands, and installed interpreter paths.
+The installer only fetches public open-source packages. It never uploads research files or requires external API subscriptions beyond what your local agent already uses.
 
-The installer downloads public dependencies and does not upload research files or request credentials. Search queries go to their provider; PaperQA may send selected paper passages to configured model/embedding services; your agent's data policies still apply. AI applications and any required MATLAB runtimes, accounts, commercial licenses, or institutional access are provided separately.
+---
 
 ## Documentation
 
-- [Setup guide](SETUP.md) — complete agent workflow.
-- [Skill catalog and candidates](SKILLS.md) — sources and verification scope.
-- [Compatibility](docs/COMPATIBILITY.md) — tested environments and limits.
-- [Templates](templates/workbench-config.md) — personal configuration and [project rules](templates/project-instructions.md).
+- [SETUP.md](SETUP.md): Standalone setup guide for agents.
+- [SKILLS.md](SKILLS.md): Catalog of supported research skills and candidates.
+- [docs/FIRST_TASK.md](docs/FIRST_TASK.md): Step-by-step walkthrough of your first research task.
+- [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md): Tested operating systems, Python versions, and limits.
+- [docs/AUTOMATION.md](docs/AUTOMATION.md): Reference for unattended profiles and CLI arguments.
 
-Repository **0.3.0**, guide **1.6**. Changes are recorded in the [changelog](CHANGELOG.md).
+---
 
-## Contributing
+## Credits and license
 
-Bug reports, documentation improvements, and reproducible environment checks are welcome. Read [Contributing](CONTRIBUTING.md) for development checks and source-review requirements, and [maintenance priorities](docs/MAINTENANCE.md) for planned work. Keep private research and credentials out of reports.
+Original code and documentation are released under the [MIT License](LICENSE).
 
-## License and acknowledgements
-
-Original code, skills, and documentation use the [MIT license](LICENSE). External components retain their own terms; see [notices](NOTICE.md) and the [third-party inventory](THIRD_PARTY.md).
-
-Optional skills are by **袁一哲 / Yuan1z0825 and Nature Skills contributors**, and **K-Dense Inc. and Scientific Agent Skills contributors**. Workflow inspiration comes from **艺雨YiLight**, reviewed through **sunweihunu's transcript**. Communication guidance draws on **ASD-STE100** and **Andrej Karpathy**, without claiming standards compliance. Instructions are in English; conversation and deliverables follow the user's language requirements.
-
-ARS is excluded from automatic installation because of its noncommercial terms. `nature-figure` is withheld pending nested-asset permissions; the `figures` runtime remains available. Attribution does not grant permission or imply endorsement.
+Acknowledgements:
+- Skill sources and patterns from **袁一哲 / Yuan1z0825 (Nature Skills)** and **K-Dense Inc. (Scientific Agent Skills)**.
+- Workflow design inspired by **艺雨YiLight** and reviewed through **sunweihunu's transcript**.
+- Communication principles borrow from **ASD-STE100** and **Andrej Karpathy**'s technical presentation notes.
+- Third-party components retain their respective licenses. See [NOTICE.md](NOTICE.md) and [THIRD_PARTY.md](THIRD_PARTY.md) for full attribution.
