@@ -4,6 +4,8 @@
 
 Source: [arXiv:1706.03762, abstract page](https://arxiv.org/abs/1706.03762). The page lists an initial submission in 2017 and version 7 revised in 2023. All paper-specific statements below come from its abstract.
 
+Authors: Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. *Attention Is All You Need* (2017), [DOI](https://doi.org/10.48550/arXiv.1706.03762). Credit for the research belongs to these authors. This note is our paraphrase; the paper and its rights are not covered by this repository’s MIT license.
+
 ## Main proposal
 
 The authors introduce the Transformer, a sequence transduction model built around attention without recurrent or convolutional components. Translating a sentence from one language into another is one example of a sequence transduction task.
