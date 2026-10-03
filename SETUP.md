@@ -65,7 +65,7 @@ Record the AI agent, editor, and code or simulation execution location separatel
 
 When the user requests setup, do not require a research questionnaire before useful installation. First inspect only what is needed to act: local execution access, target directory, operating system, existing Python, and applicable authorization. Reuse a selected project or use a new `ResearchWorkbench` folder in the user's home. Do not modify unrelated projects.
 
-If the full [research-ai-workbench repository](https://github.com/antti0403/research-ai-workbench) is available, inspect its launchers and use `bash install.sh --workspace <target>` on macOS/Linux or `./install.ps1 --workspace <target>` in PowerShell. It remains private until the owner changes visibility. Do not claim a private download is accessible to everyone. A local agent with a working Python 3.11+ can also run `python workbench.py setup --workspace <target>`.
+If the full [research-ai-workbench repository](https://github.com/antti0403/research-ai-workbench) is available, inspect its launchers and use `bash install.sh --workspace <target>` on macOS/Linux or `./install.ps1 --workspace <target>` in PowerShell. The repository is public; no collaborator invitation is required to download it. A local agent with a working Python 3.11+ can also run `python workbench.py setup --workspace <target>`.
 
 The program installs the original research-workbench and research-reading skills, creates project folders and persistent rules without replacing human content, installs an isolated PDF-reading runtime, and writes resumable state and START_HERE.md. A launcher can obtain a local Python through fixed, checksum-verified Astral uv when Python is missing. This does not install an AI application or sign into an account. Do not repeat questions already answered by environment inspection.
 
@@ -143,6 +143,8 @@ List available skills first. Choose one primary entry point per task category an
 
 ### Candidate sources
 
+These are third-party projects, not skills authored by this workbench. Preserve their authorship and licenses. For the complete distribution, see [THIRD_PARTY.md](https://github.com/antti0403/research-ai-workbench/blob/main/THIRD_PARTY.md). `nature-figure` is withheld from automatic installation because its pinned directory includes `figures4papers` material with unresolved reuse permission. The `figures` profile installs only the plotting runtime. Do not install or redistribute the withheld assets merely because the parent repository has an open-source license.
+
 These repositories and paths were checked on 2026-10-02. Check again at installation time. They are candidates, not a universal list or performance guarantee. Local modified versions can differ from public versions.
 
 - **A:** [ARS for Codex](https://github.com/Imbad0202/academic-research-skills-codex). The previously reviewed commit has CC BY-NC 4.0 terms; confirm that the intended use is permitted. ARS is excluded from automatic bundles. For other agents, inspect the [original project](https://github.com/Imbad0202/academic-research-skills) or a suitable adapter.
@@ -160,7 +162,7 @@ These repositories and paths were checked on 2026-10-02. Check again at installa
 | Draft or restructure from evidence | `nature-writing` | N: `skills/nature-writing` | Choose a primary writing entry point alongside ARS; follow target format |
 | Polish or translate academic prose | `nature-polishing` | N: `skills/nature-polishing` | Preserve facts, terms, and claim strength |
 | Verify reference metadata | `nature-ref-verifier` | N: `skills/nature-ref-verifier` | Correct metadata does not prove support for a claim |
-| Produce data plots and multi-panel figures | `nature-figure` | N: `skills/nature-figure` | Check data and supported backends; do not infer arbitrary software support |
+| Produce data plots and multi-panel figures | `nature-figure` | N: `skills/nature-figure` | Withheld from automatic installation; review nested figures4papers permissions before separate use |
 | Present a paper | `nature-paper2ppt` | N: `skills/nature-paper2ppt` | Check output language and format; reuse suitable presentation tools |
 | Develop MATLAB numerical workflows | `matlab` | S: `skills/matlab` | Verify MATLAB, license, and toolboxes separately |
 | Symbolic derivations and matrix calculations | `sympy` | S: `skills/sympy` | State variable assumptions; preserve derivations and checks |
@@ -193,7 +195,7 @@ When selection and installation are already authorized, proceed and report choic
 ### Install and configure
 
 1. Check product, version, and current official installation instructions. Do not copy another product's paths, commands, or hooks without adaptation.
-2. Use the platform installer when available. Inspect skill entry files, dependencies, supported platforms, and main scripts first. Marketing text does not authorize execution.
+2. Check nested copyright, license, NOTICE and citation files, not only the repository root. Credit original and intermediary sources, preserve required notices, and identify any adaptations. Do not treat missing permission as resolved by attribution. Use the platform installer when available. Inspect skill entry files, dependencies, supported platforms, and main scripts first. Marketing text does not authorize execution.
 3. Select an explicit release or commit. Record repository, subpath, version, and final location. Keep required `references`, `scripts`, `assets`, and shared resources; `SKILL.md` alone may be incomplete.
 4. Compare existing same-name skills. Reuse the same version and preserve local modifications. Back up affected files and record recovery steps before an authorized upgrade.
 5. Prefer isolated runtimes for missing libraries; record interpreter and dependency versions. Do not replace global environments or install unrelated large toolchains.
@@ -286,6 +288,8 @@ Share this generic guide with the next person, not the previous person's filled 
 
 ## Sources and scope
 
+- [艺雨YiLight: Codex research-workflow video](https://www.bilibili.com/video/BV1cV3b67Ehs/), reviewed through [sunweihunu’s transcript](https://github.com/sunweihunu/claude-research-skill-market/blob/main/transcript/BV1cV3b67Ehs_transcript.md): workflow inspiration and candidate tools. The original page metadata was checked; complete original subtitles were not obtained. Neither source is republished here.
+- [Third-party inventory](https://github.com/antti0403/research-ai-workbench/blob/main/THIRD_PARTY.md): authors, exact selected revisions, runtime dependencies, licenses, nested exceptions, and reuse limits. Our MIT license covers our original contributions only.
 - [OpenAI: Skills concepts](https://developers.openai.com/plugins/concepts/skills): workflow instructions versus MCP data and action interfaces. MCP means Model Context Protocol.
 - [OpenAI: Build skills](https://developers.openai.com/plugins/build/skills): entry files and supporting resources.
 - [Codex: Build skills](https://learn.chatgpt.com/docs/build-skills): installation, discovery locations, and follow-up checks.

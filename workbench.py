@@ -23,7 +23,7 @@ import venv
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 REGISTRY = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
 MAX_DOWNLOAD = 80 * 1024 * 1024
 MAX_EXPANDED = 200 * 1024 * 1024
@@ -308,8 +308,8 @@ def remote_skill(root, state, name, offline):
 
 def install_kit(root, state):
     destination = '.workbench/kit/' + VERSION
-    paths = ['workbench.py', 'registry.json', 'SETUP.md', 'LICENSE', 'profile.example.json', 'templates/workbench-config.md', 'templates/project-instructions.md']
-    paths += [p.relative_to(ROOT).as_posix() for folder in ('scripts', 'skills') for p in (ROOT / folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
+    paths = ['workbench.py', 'registry.json', 'SETUP.md', 'LICENSE', 'NOTICE.md', 'THIRD_PARTY.md', 'SKILLS.md', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'profile.example.json', 'templates/workbench-config.md', 'templates/project-instructions.md']
+    paths += [p.relative_to(ROOT).as_posix() for folder in ('scripts', 'skills', 'docs', 'examples') for p in (ROOT / folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
     for relative in paths:
         outcome = create_once(root, state, destination + '/' + relative, (ROOT / relative).read_bytes())
         if outcome == 'preserved existing file':

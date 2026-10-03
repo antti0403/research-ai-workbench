@@ -6,6 +6,14 @@ For issues, include operating system and agent versions, selected skill revision
 
 A new skill recommendation needs a source repository, actual subpath, purpose, dependencies, license link, account or cost requirements, and verification scope. Mark untested items as candidates. Popularity and marketing claims are not reasons to install an entire collection.
 
+## Attribution and third-party material
+
+Update [THIRD_PARTY.md](THIRD_PARTY.md) whenever you add, remove, update, copy, adapt, or recommend an external component. Record its upstream author or project, canonical URL, exact revision when available, the files or feature that use it, whether it is bundled or downloaded, its license, any modifications, and any unresolved permission limits. Credit workflow inspirations separately from executable dependencies. Credit an intermediary adaptation as well as its original source when both informed the work.
+
+Inspect nested assets and notices; a repository-level license is not proof that every included paper, image, dataset, or reference has the same terms. Retain upstream copyright, license, NOTICE, and citation files when required. Mark changes to copied files. Do not use a source link or an acknowledgement as a substitute for permission. Keep components with unresolved reuse permissions out of automatic installation until reviewed.
+
+The project's MIT license covers its original contributions. Do not relabel external material as MIT or imply that upstream authors endorse this project. For dependencies resolved at installation time, retain their distribution metadata and licenses; review the actual distribution before redistributing an installed environment. A license summary does not replace the full terms.
+
 Keep canonical documentation and AI instructions in English. Preserve the user's choice of conversation language and the required language for deliverables. Do not claim that English by itself improves model accuracy. Simplify wording without weakening technical meaning, evidence requirements, or authorization boundaries.
 
 Keep SETUP.md independently usable. Update affected README guidance and CHANGELOG, and check internal links. For environment validation, provide reproducible details using the [compatibility record](docs/COMPATIBILITY.md).

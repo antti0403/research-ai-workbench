@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "core_requirements": [
     "pypdf==6.19.0"
   ],
@@ -273,10 +273,6 @@
     "nature-shared": {
       "source": "nature",
       "path": "skills/nature-shared"
-    },
-    "nature-figure": {
-      "source": "nature",
-      "path": "skills/nature-figure"
     }
   },
   "profiles": {
@@ -340,15 +336,13 @@
       "limits": "Runtime checks do not validate the scientific method or user data."
     },
     "figures": {
-      "purpose": "Scientific plotting guidance with Python plotting tools",
-      "skills": [
-        "nature-figure"
-      ],
+      "purpose": "Scientific plotting with Python tools",
+      "skills": [],
       "requirements": [
         "numpy==2.5.3",
         "matplotlib==3.11.2"
       ],
-      "limits": "Additional backends and manuscript-specific formats need agent verification."
+      "limits": "nature-figure is withheld because permission for its nested figures4papers assets is unresolved; see THIRD_PARTY.md. Plotting runtime remains available. Manuscript-specific formats need agent verification."
     }
   }
 }

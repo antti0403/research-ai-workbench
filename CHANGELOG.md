@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 — 2026-10-03
+
+- Add a component-level third-party inventory with authors, pinned sources, license links, installation scope, runtime dependencies, and workflow inspirations.
+- Credit the original YiLight video, the transcript used for review, ASD-STE100, Karpathy, upstream skills, and the paper used in the reading example.
+- Exclude `nature-figure` from automatic selection because the pinned skill contains `figures4papers` assets whose reuse permission is unresolved. Keep the `figures` plotting runtime. Existing installations are not removed.
+- Retain source and attribution documents in the installed engine kit, and require the same provenance checks for future contributions.
+- Correct public-download guidance. The guide remains version 1.4; this patch does not add a research workflow.
+
 ## 0.2.0 — 2026-10-03
 
 - Add macOS/Linux and Windows launchers, with existing-Python reuse and a local Astral uv fallback.

@@ -6,7 +6,7 @@ The installer prepares a project, two general research skills, an isolated PDF-r
 
 ## Start
 
-1. Download this repository with **Code → Download ZIP** and extract it. While the repository is private, only authorized GitHub users can download it. Keep the extracted folder until setup finishes.
+1. Download this public repository with **Code → Download ZIP** and extract it. Keep the extracted folder until setup finishes.
 2. Open a terminal in the extracted folder and run one command:
 
    **macOS / Linux**
@@ -65,13 +65,14 @@ The AI can prepare a local profile from [profile.example.json](profile.example.j
 
 ## Status and documentation
 
-Repository **0.2.0**, guide **1.4**. This is the first executable installer release. Check [compatibility and actual test coverage](docs/COMPATIBILITY.md) before assuming support on a particular computer. Windows and Linux runtime verification and independent user acceptance remain pending.
+Repository **0.2.1**, guide **1.4**. Check [compatibility and actual test coverage](docs/COMPATIBILITY.md) before assuming support on a particular computer. Windows and Linux runtime verification and independent user acceptance remain pending.
 
 | Need | Entry point |
 | --- | --- |
 | Full agent workflow | [SETUP.md](SETUP.md) |
 | Automatic installation boundaries and recovery | [Automation](docs/AUTOMATION.md) |
 | Candidate skills, versions, and licenses | [Skills](SKILLS.md), [machine catalog](registry.json) |
+| Authors, dependencies, inspirations, and reuse limits | [Third-party inventory](THIRD_PARTY.md), [notices](NOTICE.md) |
 | Failure or interrupted setup | [Troubleshooting](docs/TROUBLESHOOTING.md) |
 | Source-grounded reading example | [Example](examples/README.md) |
 | Personal configuration | [Rules template](templates/project-instructions.md), [configuration template](templates/workbench-config.md) |
@@ -82,3 +83,11 @@ Repository **0.2.0**, guide **1.4**. This is the first executable installer rele
 Canonical instructions and templates are in English. Conversation follows each user's language; manuscripts follow submission requirements. Clear wording, consistent terms, and evidence matter more than language alone. ASD-STE100 principles are used as guidance, not a compliance claim.
 
 Original code, skills, instructions, and templates use the [MIT license](LICENSE). Downloaded third-party material keeps its own terms; see [NOTICE.md](NOTICE.md). No third-party skill source or paper PDF is bundled in the repository.
+
+## Credits and external components
+
+This workbench connects work from several communities. Optional skills come from **袁一哲 / Yuan1z0825 and Nature Skills contributors**, and **K-Dense Inc. and Scientific Agent Skills contributors**. Runtime tools include Astral uv, Python, pypdf, SymPy, Pint, uncertainties, NumPy, pandas, SciPy, and Matplotlib. These components were not authored by this workbench's maintainer.
+
+The workflow was informed by **艺雨YiLight's Codex research video**, reviewed with **sunweihunu's transcript**. Communication guidance draws on **ASD-STE100** and **Andrej Karpathy's suggestions**. The installer and its two bundled onboarding/reading skills were developed for this project. The [third-party inventory](THIRD_PARTY.md) explains each contribution, the exact source used, and what is only a recommendation.
+
+**License exceptions:** ARS has noncommercial terms and is not automatically installed. `nature-figure` is also excluded while permission for its nested `figures4papers` assets is unresolved; the `figures` profile still installs the Python plotting runtime. Attribution does not grant missing permissions or imply endorsement.

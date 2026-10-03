@@ -4,11 +4,11 @@ See [SETUP.md](SETUP.md) for selection criteria. This file records known revisio
 
 Track source review, file installation, runtime dependencies, host discovery, and real task execution separately. Passing one stage does not establish the next.
 
-## Automatic catalog in 0.2.0
+## Automatic catalog in 0.2.1
 
 The common foundation installs two original MIT-licensed skills: `research-workbench` for intake and setup, and `research-reading` for source-linked notes. The machine-readable [registry](registry.json) defines optional bundles. Initial automated bundles cover a subset of the candidates below; the rest require task-specific agent review.
 
-Nature bundles use the recorded Apache-2.0 revision with its license retained. Scientific computation skills use the recorded MIT revision and individual file hashes, avoiding a download of the entire large collection. Writing includes nature-shared. MATLAB is guidance only until the user provides a working licensed or otherwise authorized runtime.
+Nature bundles use the recorded root Apache-2.0 revision with its license retained; nested material may have separate terms. Creator and component-level credits are in [THIRD_PARTY.md](THIRD_PARTY.md). Scientific computation skills use the recorded MIT revision and individual file hashes, avoiding a download of the entire large collection. Writing includes nature-shared. `nature-figure` is withheld because its figures4papers assets have unresolved reuse permission. The figures profile retains NumPy and Matplotlib. This does not remove earlier installed skills. MATLAB is guidance only until the user provides a working licensed or otherwise authorized runtime.
 
 **ARS at the recorded revision uses CC BY-NC 4.0. It is not an automatic bundle.** Check intended use and license terms before a separate installation, particularly for paid setup services or commercial use. Installing a package does not change its license.
 
@@ -38,7 +38,7 @@ Recorded calculation environment: Python 3.14.4, SymPy 1.14.0, NumPy 2.4.4, SciP
 | Reading and detailed analysis | nature-reader, nature-paper-card | Check nature-shared for reader; state partial access explicitly |
 | Writing and polishing | nature-writing, nature-polishing | Check nature-shared; preserve facts, terminology, and claim strength |
 | Citation verification | nature-ref-verifier | Correct bibliography does not prove support for a claim |
-| Figures and presentations | nature-figure, nature-paper2ppt | Check libraries and output formats; check nature-shared for paper2ppt |
+| Figures and presentations | nature-figure, nature-paper2ppt | nature-figure is withheld pending nested-asset permissions; use the plotting runtime. Review paper2ppt separately and check nature-shared. |
 
 Use the README, SKILL.md, and cross-directory references from the selected revision when repositories change. Other agents need their own supported directories and installation methods.
 

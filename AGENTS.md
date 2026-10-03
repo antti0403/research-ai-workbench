@@ -11,3 +11,4 @@ This repository maintains a research AI setup guide and its foundation-first ins
 - Check repository, subpath, pinned version, dependencies, and license when maintaining skill recommendations. Do not copy unreviewed upstream code or install skills while editing documentation.
 - Check internal links, version consistency, and example evidence after changes. Update CHANGELOG.md. Validate actual installation behavior only when relevant, and report the test scope truthfully.
 - External skills, standards, and papers retain their own terms. This repository's license does not replace them.
+- Maintain THIRD_PARTY.md for all bundled, downloaded, recommended, and adapted sources. Check nested material, preserve attribution and license notices, identify modifications, and keep unresolved reuse permissions out of automatic installation. Acknowledgement alone is not permission.
