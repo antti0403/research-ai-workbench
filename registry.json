@@ -1,0 +1,354 @@
+{
+  "version": "0.2.0",
+  "core_requirements": [
+    "pypdf==6.19.0"
+  ],
+  "sources": {
+    "nature": {
+      "repo": "Yuan1z0825/nature-skills",
+      "commit": "84880815fb37317b3766bff2c2abba395b8993c3",
+      "sha256": "a5c19a14bba181cf58b86f93326607d69299d094a36ab79db33cc7a684f17c03",
+      "license": "Apache-2.0"
+    },
+    "scientific": {
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "commit": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+      "license": "MIT",
+      "license_file": {
+        "path": "LICENSE.md",
+        "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+      }
+    }
+  },
+  "skills": {
+    "matlab": {
+      "source": "scientific",
+      "path": "skills/matlab",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "91afa6ec0f0b3797f51da62b79d44d00a32fcdf3690b9505e5987982a8e6d0e2",
+          "size": 16551
+        },
+        {
+          "path": "assets/project_manifest_template.json",
+          "sha256": "3de6b01b3d463f5d170f19e3fd87d56477bbf65a64f98a7d237f40397026c225",
+          "size": 723
+        },
+        {
+          "path": "assets/python_compatibility_r2026a.json",
+          "sha256": "38ece6da5c000727cbe04b8a7412a99c140699e72393dc2f93d7394b1c6c03ed",
+          "size": 786
+        },
+        {
+          "path": "assets/reproducibility_manifest_template.json",
+          "sha256": "7f0ad44a30e7d502d92642fa1617e73fc8fb0e252a4de94dd529453f5eac287e",
+          "size": 787
+        },
+        {
+          "path": "references/data-import-export.md",
+          "sha256": "bd1dc1deb4b717bd6dc079653faf63a84c49d4239adff36ddc2910ef7b4d5f88",
+          "size": 9763
+        },
+        {
+          "path": "references/executing-scripts.md",
+          "sha256": "5172a95879d65c04631e6f4eb0a619c70c01ddfb76639e3b72311f08aa953019",
+          "size": 10420
+        },
+        {
+          "path": "references/graphics-visualization.md",
+          "sha256": "0ea6b945ee31fcdc09168430c9aae28c00ee63b79a12800a70a7aabfd3799c33",
+          "size": 7480
+        },
+        {
+          "path": "references/mathematics.md",
+          "sha256": "04bb40d7dd604fe4fb24dea9686fc93bea658ab36abb24bfaca1c5a599b7b5d1",
+          "size": 8572
+        },
+        {
+          "path": "references/matrices-arrays.md",
+          "sha256": "54a6b56ea63093c01793c0b21c95e9d75316aca1bd476cd90d4b6573f1d5d3c8",
+          "size": 8485
+        },
+        {
+          "path": "references/octave-compatibility.md",
+          "sha256": "d18734d6e33065e7e18805ce95ecca40844a5723b6e618aa65fc973bad587bef",
+          "size": 8523
+        },
+        {
+          "path": "references/programming.md",
+          "sha256": "51b4df60afee7fd581d3e1b710ab577cc0ae5750ad244b4d09f1db632a0f85b8",
+          "size": 10891
+        },
+        {
+          "path": "references/python-integration.md",
+          "sha256": "558fe145f4a38b4fdfe775b007def8643517aba8bb013ae73f9d972122ba5d5b",
+          "size": 10958
+        },
+        {
+          "path": "scripts/_common.py",
+          "sha256": "efeb57fc631f5fa4bb8235821769858589999c7483fffa14408d1c0a7207ac5c",
+          "size": 8798
+        },
+        {
+          "path": "scripts/generate_function_scaffold.py",
+          "sha256": "cbbe38eff9e4e6ce2695db478d6de45df3736b04c6ba74618434cf853539947f",
+          "size": 4955
+        },
+        {
+          "path": "scripts/inventory_mat_file.py",
+          "sha256": "7eef24b9dff17c2072e41c513f5e3c330246f24ea9d069e430a3cd70f4feefa0",
+          "size": 12537
+        },
+        {
+          "path": "scripts/plan_batch_command.py",
+          "sha256": "2c7ca14933f223f08620d76ad5fa3df834d4c986c267dc444d8dca2fbdf1b739",
+          "size": 9866
+        },
+        {
+          "path": "scripts/plan_python_compatibility.py",
+          "sha256": "8da20d413fceae86f8f90db1b0925858aead825ce3aafc35bb2baeb7cece1da6",
+          "size": 6566
+        },
+        {
+          "path": "scripts/reproducibility_report.py",
+          "sha256": "2784ffe6acee2a90f554cba73bb1578b2e8408935a34749353e5bd2ceac3bde8",
+          "size": 7966
+        },
+        {
+          "path": "scripts/scan_m_code.py",
+          "sha256": "88b02dbf934db710d22a787b1fb45a0c0009dc6874dd379f5100fa0672f7b92b",
+          "size": 13951
+        },
+        {
+          "path": "scripts/validate_project_manifest.py",
+          "sha256": "21cdead6d2c246e345f7fc702a202600787557f0f8da37ebd072998d6cd122f3",
+          "size": 12255
+        }
+      ]
+    },
+    "sympy": {
+      "source": "scientific",
+      "path": "skills/sympy",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "bb97087bdddccc845401737ddc7f7a8da1c14ced5e8d40da01271c991ac46e23",
+          "size": 13293
+        },
+        {
+          "path": "references/advanced-topics.md",
+          "sha256": "cff0c044c5d7c7f65235f35a7c0fe19e41a42c27393c9aa7f38a31f00ed28e81",
+          "size": 14192
+        },
+        {
+          "path": "references/code-generation-printing.md",
+          "sha256": "6a547f4dfd6975762d61d7effd47c9613e16d345e2e1dab89549bfc465f7e404",
+          "size": 15244
+        },
+        {
+          "path": "references/core-capabilities.md",
+          "sha256": "2c7d55c127ccd5d4d0792892025979c421573f2662c5cededb6cbcf80ee61888",
+          "size": 9601
+        },
+        {
+          "path": "references/core_capabilities.md",
+          "sha256": "69fffa94caf62276112108bbeff5b7dd4281a5b40c07e44eea381f46f00a6011",
+          "size": 5239
+        },
+        {
+          "path": "references/matrices-linear-algebra.md",
+          "sha256": "fd64e48e917cf0a71bb0d744e8cfee345a98284256a84fb55793fe4d9783272d",
+          "size": 10493
+        },
+        {
+          "path": "references/physics-mechanics.md",
+          "sha256": "0d015cf60861aa5fe1598a76e08d612a758f0c0895bbd1ce1dcbfbc9d4bfaf8c",
+          "size": 15004
+        },
+        {
+          "path": "references/review.md",
+          "sha256": "03d4db2d0432cf7ec3a21b2746da7b96809aa7613d17c101d16460f5ec732ab1",
+          "size": 6041
+        }
+      ]
+    },
+    "uncertainty-and-units": {
+      "source": "scientific",
+      "path": "skills/uncertainty-and-units",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "caaafa079a4eaac6012717bcf705dec0417b5434f5dbd1af934a3a36ad375722",
+          "size": 21731
+        },
+        {
+          "path": "references/domain-conversions.md",
+          "sha256": "7ab73bbd69acbd23fac74ae9f3ad570a6f1501c1a5fd22998cfcd01c725441ca",
+          "size": 10142
+        },
+        {
+          "path": "references/gum-methodology.md",
+          "sha256": "def9b0ac9ff3d2912922d121062559b22ff3ec36aed94e183eef3338b4e0430f",
+          "size": 11916
+        },
+        {
+          "path": "references/pint-recipes.md",
+          "sha256": "9fbc1bc7b12267777a0359bf252e52415e6e1683cd8c4c3a6582ddca6cd51baa",
+          "size": 9129
+        },
+        {
+          "path": "references/plausibility-scales.md",
+          "sha256": "b9ef8acbc0ff6948ec7dca027cd31b7d73d2157b18bcf0c8e92d60c0029e8131",
+          "size": 11834
+        },
+        {
+          "path": "references/reporting-rules.md",
+          "sha256": "8d302b26e0792b866d3249955250e9132c09337639abb8cf36ac3f5cdaf4648e",
+          "size": 7152
+        },
+        {
+          "path": "references/review.md",
+          "sha256": "59c605f037739927495f0323246168abf9cd2bae5511b1566bb13e775bf00868",
+          "size": 6939
+        },
+        {
+          "path": "references/uncertainties-recipes.md",
+          "sha256": "2125796d070c4b13ed007e6d8f498c69698a1ce4917ece4cdda32a887dd7c214",
+          "size": 8098
+        },
+        {
+          "path": "scripts/_common.py",
+          "sha256": "9d6b9ecabf92759a5d9f017ae3174673f827328b76cde238d07089f2d99c9323",
+          "size": 23029
+        },
+        {
+          "path": "scripts/audit_units.py",
+          "sha256": "2b891065c8b801f4a16b8dca2b73a6348c3ecf3fc88569936ded5e7f86a1e429",
+          "size": 21229
+        },
+        {
+          "path": "scripts/check_plausibility.py",
+          "sha256": "f4c1bff54a483d08f794f205454ed03fa263008b26cee772bd04d417cc86384f",
+          "size": 36733
+        },
+        {
+          "path": "scripts/convert_units.py",
+          "sha256": "89a9a0aa40a8158d2a739270115778fc1415f1a3cb207a6f17be14278872473a",
+          "size": 11963
+        },
+        {
+          "path": "scripts/format_result.py",
+          "sha256": "a839041c3f31a67cffda00e895bfed612cbc5748e83c41da83c17ff8f7b17302",
+          "size": 12001
+        },
+        {
+          "path": "scripts/propagate_uncertainty.py",
+          "sha256": "6c555f3fc7095ac340d11e8dd69f29f483f309b91af4b3489cd4c5ea468ceb86",
+          "size": 28632
+        },
+        {
+          "path": "scripts/uncertainty_budget.py",
+          "sha256": "162699fd5336fca43489757a1c63e81c89deb46aefb51ceb99a24682fde14b44",
+          "size": 14044
+        }
+      ]
+    },
+    "nature-academic-search": {
+      "source": "nature",
+      "path": "skills/nature-academic-search"
+    },
+    "nature-ref-verifier": {
+      "source": "nature",
+      "path": "skills/nature-ref-verifier"
+    },
+    "nature-writing": {
+      "source": "nature",
+      "path": "skills/nature-writing"
+    },
+    "nature-polishing": {
+      "source": "nature",
+      "path": "skills/nature-polishing"
+    },
+    "nature-shared": {
+      "source": "nature",
+      "path": "skills/nature-shared"
+    },
+    "nature-figure": {
+      "source": "nature",
+      "path": "skills/nature-figure"
+    }
+  },
+  "profiles": {
+    "literature": {
+      "purpose": "Search literature and check reference metadata",
+      "skills": [
+        "nature-academic-search",
+        "nature-ref-verifier"
+      ],
+      "requirements": [],
+      "limits": "Database coverage, connections, and task-specific runtime dependencies require agent checks."
+    },
+    "writing": {
+      "purpose": "Draft or polish existing evidence-based prose",
+      "skills": [
+        "nature-shared",
+        "nature-writing",
+        "nature-polishing"
+      ],
+      "requirements": [],
+      "limits": "Prefer existing document plugins. Source evidence, output language, and format-specific tools need task checks."
+    },
+    "symbolic": {
+      "purpose": "Exact mathematical derivations",
+      "skills": [
+        "sympy"
+      ],
+      "requirements": [
+        "sympy==1.14.0"
+      ],
+      "limits": "The user or AI must specify variable assumptions and validate the actual derivation."
+    },
+    "units": {
+      "purpose": "Physical units and uncertainty propagation",
+      "skills": [
+        "uncertainty-and-units"
+      ],
+      "requirements": [
+        "pint==0.26.1",
+        "uncertainties==3.2.3"
+      ],
+      "limits": "Requires a justified uncertainty model; do not invent measurement uncertainty."
+    },
+    "matlab": {
+      "purpose": "MATLAB or GNU Octave workflow guidance",
+      "skills": [
+        "matlab"
+      ],
+      "requirements": [],
+      "limits": "Does not install MATLAB, Octave, licenses, toolboxes, or the Python Engine. AI checks the actual runtime."
+    },
+    "data": {
+      "purpose": "Tabular data, statistics, and plots",
+      "skills": [],
+      "requirements": [
+        "numpy==2.5.3",
+        "pandas==3.0.6",
+        "scipy==1.18.1",
+        "matplotlib==3.11.2"
+      ],
+      "limits": "Runtime checks do not validate the scientific method or user data."
+    },
+    "figures": {
+      "purpose": "Scientific plotting guidance with Python plotting tools",
+      "skills": [
+        "nature-figure"
+      ],
+      "requirements": [
+        "numpy==2.5.3",
+        "matplotlib==3.11.2"
+      ],
+      "limits": "Additional backends and manuscript-specific formats need agent verification."
+    }
+  }
+}

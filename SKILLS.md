@@ -4,7 +4,17 @@ See [SETUP.md](SETUP.md) for selection criteria. This file records known revisio
 
 Track source review, file installation, runtime dependencies, host discovery, and real task execution separately. Passing one stage does not establish the next.
 
-## Skills with local installation records
+## Automatic catalog in 0.2.0
+
+The common foundation installs two original MIT-licensed skills: `research-workbench` for intake and setup, and `research-reading` for source-linked notes. The machine-readable [registry](registry.json) defines optional bundles. Initial automated bundles cover a subset of the candidates below; the rest require task-specific agent review.
+
+Nature bundles use the recorded Apache-2.0 revision with its license retained. Scientific computation skills use the recorded MIT revision and individual file hashes, avoiding a download of the entire large collection. Writing includes nature-shared. MATLAB is guidance only until the user provides a working licensed or otherwise authorized runtime.
+
+**ARS at the recorded revision uses CC BY-NC 4.0. It is not an automatic bundle.** Check intended use and license terms before a separate installation, particularly for paid setup services or commercial use. Installing a package does not change its license.
+
+Pinned top-level Python packages and resolved runtime versions are recorded separately. Optional skill files can be installed before task-specific dependencies and host invocation are verified; the report preserves that distinction.
+
+## Earlier local installation records
 
 These records come from a macOS maintenance environment on 2026-10-02. Setup was not repeated in another user's clean environment.
 

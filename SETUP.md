@@ -1,14 +1,14 @@
 # Research AI Workbench Setup Guide
 
-Version: **1.3**, 2026-10-03. This English edition adapts the original Chinese guide, version 1.2. Give this file to an AI that can read files. It should identify the user's research task, inspect the relevant environment, select and install suitable skills, and verify a personal research workbench. Codex is the default option; other agents can use the same process with their own supported interfaces.
+Version: **1.4**, 2026-10-03. This English edition adds foundation-first installation to the earlier guide. Give this file to an AI that can read files. It should identify the user's research task, inspect the relevant environment, select and install suitable skills, and verify a personal research workbench. Codex is the default option; other agents can use the same process with their own supported interfaces.
 
-This is a complete setup workflow, not an offline package containing software, accounts, models, or licenses. Share this file on its own. Instructions are in English for reuse. Conversation must follow the user's preferred language; research outputs must follow their target language and submission requirements.
+This file is a complete standalone workflow. The companion repository now includes an installer; this file alone does not contain that program or its dependencies. Neither route bundles accounts, models, or commercial licenses. Share this file on its own for agent-driven setup, or share the repository for the executable route. Instructions are in English for reuse. Conversation must follow the user's preferred language; research outputs must follow their target language and submission requirements.
 
 ## For the user
 
 Send this file to your AI with this request:
 
-> Set up a research AI workbench for me using this guide. First identify my research field, methods, immediate task, and existing tools. Explain which tools and skills will help, and start with what the first task needs. Use Codex by default, or adapt the workflow to my existing agent. Install the selected skills and necessary dependencies within my authorization, then test them with a small task. Save the clear communication and visual explanation rules in my workflow. Preserve existing files and manual settings. When I need to sign in or act, explain the action and how to recognize success. Use my preferred language for our conversation and the required language for deliverables.
+> Set up a research AI workbench for me using this guide. First prepare the general foundation without assuming a research field. Then ask only for missing details about my task, methods, and constraints. Reuse existing software, explain the selected extensions, and add only what the first task needs. Use Codex by default, or adapt the workflow to my existing agent. Install the selected skills and necessary dependencies within my authorization, then test them with a small task. Save the clear communication and visual explanation rules in my workflow. Preserve existing files and manual settings. When I need to sign in or act, explain the action and how to recognize success. Use my preferred language for our conversation and the required language for deliverables.
 
 You do not need to complete a long questionnaire first. The AI should ask only for missing information that matters. An AI without access to your computer can prepare instructions and configuration files, but cannot claim to have installed software there. Give its handoff to an agent with the required local access.
 
@@ -61,9 +61,25 @@ Do not mechanically convert English word limits into character limits for anothe
 
 Record the AI agent, editor, and code or simulation execution location separately. VS Code and the MATLAB editor are not the AI agent. Existing editors and servers can remain in use.
 
+## Phase 0: Prepare the common foundation before research questions
+
+When the user requests setup, do not require a research questionnaire before useful installation. First inspect only what is needed to act: local execution access, target directory, operating system, existing Python, and applicable authorization. Reuse a selected project or use a new `ResearchWorkbench` folder in the user's home. Do not modify unrelated projects.
+
+If the full [research-ai-workbench repository](https://github.com/antti0403/research-ai-workbench) is available, inspect its launchers and use `bash install.sh --workspace <target>` on macOS/Linux or `./install.ps1 --workspace <target>` in PowerShell. It remains private until the owner changes visibility. Do not claim a private download is accessible to everyone. A local agent with a working Python 3.11+ can also run `python workbench.py setup --workspace <target>`.
+
+The program installs the original research-workbench and research-reading skills, creates project folders and persistent rules without replacing human content, installs an isolated PDF-reading runtime, and writes resumable state and START_HERE.md. A launcher can obtain a local Python through fixed, checksum-verified Astral uv when Python is missing. This does not install an AI application or sign into an account. Do not repeat questions already answered by environment inspection.
+
+If only this guide is available and the repository is inaccessible, complete equivalent authorized local preparation with existing host tools and record which steps were agent-driven. Do not describe that route as running the bundled installer. If local execution is unavailable, prepare a short handoff and mark installation unperformed.
+
+After the foundation, ask at most three short grouped questions: (1) research problem and next output; (2) working methods and existing tools; (3) important language, data, access, or cost constraints. The detailed questions in Step 1 are prompts to cover missing information, not an extra questionnaire. If the direction stays unclear, keep a general reading and note-taking workbench and defer specialist tools.
+
+Use the installed research-workbench skill and START_HERE.md for personalization. The AI interprets answers and writes a local profile; the deterministic engine does not infer disciplines from keywords or make paid model calls. Run its `plan`, then `apply` within existing authorization. The initial catalog automates a bounded set of literature, writing, symbolic, units, MATLAB-guidance, data, and figure extensions. Additional domains use the evidence, license, and dependency review in Step 4.
+
+Base runtime tests and downloaded files do not prove host discovery or scientific correctness. Finish Step 6 with a real task. Continue unaffected steps after a failure and keep the report honest. Complete installer details and current validation are in the companion repository; the general process below remains usable on its own.
+
 ## Step 1: Define the task
 
-Use information already provided. Ask at most these five groups of questions when answers are missing; combine them when practical. Do not require technical vocabulary.
+Use information already provided. After Phase 0, use these five topic groups only to identify missing information; combine them into the three-question intake rather than asking all five separately. Do not require technical vocabulary.
 
 1. What field, object, or problem are you studying, and at what stage? Does the work mainly involve literature, theory, simulation, experiments, statistics, interviews, or another method?
 2. What specific task matters next, and what output do you need? What language and explanation depth do you prefer? How familiar are you with programming?
@@ -129,7 +145,7 @@ List available skills first. Choose one primary entry point per task category an
 
 These repositories and paths were checked on 2026-10-02. Check again at installation time. They are candidates, not a universal list or performance guarantee. Local modified versions can differ from public versions.
 
-- **A:** [ARS for Codex](https://github.com/Imbad0202/academic-research-skills-codex). For other agents, inspect the [original project](https://github.com/Imbad0202/academic-research-skills) or a suitable adapter.
+- **A:** [ARS for Codex](https://github.com/Imbad0202/academic-research-skills-codex). The previously reviewed commit has CC BY-NC 4.0 terms; confirm that the intended use is permitted. ARS is excluded from automatic bundles. For other agents, inspect the [original project](https://github.com/Imbad0202/academic-research-skills) or a suitable adapter.
 - **N:** [Nature Skills](https://github.com/Yuan1z0825/nature-skills). Select modules by task. The name does not restrict use to Nature journals or guarantee institutional compliance.
 - **S:** [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills). Select modules by discipline and method; do not install the whole collection by default.
 - **R:** [codex-autoresearch](https://github.com/leo-lilinxiao/codex-autoresearch), for automated experiments with measurable numerical objectives.
@@ -280,4 +296,4 @@ Share this generic guide with the next person, not the previous person's filled 
 - [Karpathy's post](https://x.com/karpathy/status/2105819303471976479) and [public mirror](https://x.twstalker.com/karpathy/status/2105819303471976479): the source review could not directly read X and used accessible mirror text for loose STE style, diagrams, HTML, and video suggestions. Personal suggestions do not prove that more complex formats always work better.
 - [Codex: AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md): persistent instruction discovery, precedence, and later loading.
 
-Skill sources were reviewed on 2026-10-02; communication and persistent instruction sources on 2026-10-03. Other content is a designed workflow, not a vendor deployment promise. The guide has received content and process review, but complete setup has not been verified on another user's Windows, macOS, or Linux computer. Actual support depends on target-environment checks.
+Skill sources were reviewed on 2026-10-02; communication and persistent instruction sources on 2026-10-03. Other content is a designed workflow, not a vendor deployment promise. The companion installer has local automated and isolated installation checks documented in its compatibility record. Complete personal setup has not been verified on another user's Windows, macOS, or Linux computer. Actual support depends on target-environment checks.

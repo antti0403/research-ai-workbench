@@ -1,0 +1,12 @@
+{
+  "research_question": "Unconfirmed: the AI asks after foundation setup",
+  "next_output": "Understand one selected paper and save source-linked notes",
+  "methods": ["reading"],
+  "existing_tools": [],
+  "conversation_language": "Ask only if not already known",
+  "deliverable_language": "Follow the target requirement",
+  "constraints": {"paid_services": "none unless authorized", "private_uploads": false},
+  "extensions": [],
+  "reasons": {},
+  "deferred": ["Specialist tools until a concrete task needs them"]
+}

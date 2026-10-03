@@ -30,3 +30,9 @@ node_modules/
 /data/
 /raw/
 /manuscript/
+
+# Installer development and private workspace state
+.bootstrap/
+.workbench/
+.pytest_cache/
+*.pyc
