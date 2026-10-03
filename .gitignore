@@ -1,0 +1,32 @@
+# Local machine and editor state
+.DS_Store
+.obsidian/
+.idea/
+.vscode/
+
+# Credentials and personal configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+auth.json
+/workbench-config.md
+工作台配置.md
+
+# Runtimes, temporary output, and backups
+.venv/
+venv/
+__pycache__/
+node_modules/
+*.log
+*.bak
+*.tmp
+.local/
+
+# User research materials; generic examples belong in examples/
+/wiki/
+/data/
+/raw/
+/manuscript/
