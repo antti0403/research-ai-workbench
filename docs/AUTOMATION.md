@@ -24,16 +24,16 @@ python workbench.py doctor --workspace "/path/to/project"
 
 Repeat setup/apply to resume. Empty extension lists are valid; a smaller list does not uninstall earlier profiles.
 
-After setup, use the interpreter and engine paths recorded in `START_HERE.md`. For repository 0.2.3, from the workspace:
+After setup, use the interpreter and engine paths recorded in `START_HERE.md`. For repository 0.2.4, from the workspace:
 
 ```bash
 # macOS / Linux
-.workbench/envs/core/bin/python .workbench/kit/0.2.3/workbench.py doctor --workspace .
+.workbench/envs/core/bin/python .workbench/kit/0.2.4/workbench.py doctor --workspace .
 ```
 
 ```powershell
 # Windows PowerShell
-& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.2.3\workbench.py doctor --workspace .
+& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.2.4\workbench.py doctor --workspace .
 ```
 
 Keep the workspace at its original path; virtual environments need rebuilding after a move. Keep `.workbench/bootstrap/` if Python was downloaded there, or the reused external Python installation. The original source download is unnecessary once setup succeeds.
@@ -62,7 +62,7 @@ Use each profile's recorded interpreter. Optional integrations mentioned by upst
 | `workbench-config.md` | Research context, task results, remaining gaps |
 | `.workbench/profile.json` | Private answers and selected extensions |
 | `.workbench/state.json`, `.workbench/install-report.md` | Machine history/hashes and readable status |
-| `.workbench/kit/0.2.3/` | Copied engine, guide, source/license records |
+| `.workbench/kit/0.2.4/` | Copied engine, guide, source/license records |
 | `.workbench/envs/`, `.workbench/locks/` | Profile runtimes and resolved package versions |
 | `.agents/skills/` | Project skill files |
 
@@ -76,7 +76,7 @@ Before apply, the engine rechecks foundation files and the current PDF interpret
 
 Automatic runtime repairs require matching ownership tokens in state and `.workbench/envs/<profile>/.workbench-owner.json`. A working unowned legacy environment can be checked/reused; its packages are not changed and it is not adopted. Failed unowned runtimes need reviewed replacement or a new workspace.
 
-Unchanged installer-owned `START_HERE.md` is backed up and updated for the current kit. Human edits are preserved; current instructions go to `START_HERE-0.2.3.md`. Older schema-1 state remains readable without granting runtime ownership. State/profile JSON accepts a UTF-8 BOM; malformed state is preserved for recovery.
+Unchanged installer-owned `START_HERE.md` is backed up and updated for the current kit. Human edits are preserved; current instructions go to `START_HERE-0.2.4.md`. Older schema-1 state remains readable without granting runtime ownership. State/profile JSON accepts a UTF-8 BOM; malformed state is preserved for recovery.
 
 Skill revisions/hashes and direct package versions are pinned in [registry.json](../registry.json); transitive versions are recorded after installation. This is not a fully hash-locked offline distribution. Missing compatible binary wheels stop installation.
 
