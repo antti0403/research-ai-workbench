@@ -1,26 +1,43 @@
 # Troubleshooting and recovery
 
-Read the target project's `workbench-config.md` first. Reuse unchanged verified steps and address the current failure. Do not reinstall everything in the hope that it will work.
+Read `.workbench/install-report.md` and `workbench-config.md` in the target project first. Address the failed component. Preserve successful work and human edits.
 
-| Symptom | Check first | Next action |
-| --- | --- | --- |
-| AI only gives advice | Does it have file and execution access to the target computer? | Save selections and configuration materials for an authorized agent; keep installation marked not performed |
-| Skill files exist but are not visible | Actual host, discovery location, name, disabled state, and links | Follow current official guidance; start a new session if necessary, then test discovery |
-| Missing library or license | Required interpreter, library, toolbox, or license | Add necessary isolated dependencies; the user supplies commercial access |
-| Library or repository remains unavailable after login | Account, workspace, and scope returned by the actual connection | Check target authorization; browser login does not prove connector login |
-| Only the abstract is accessible | What content did the source actually provide? | Mark abstract-only reading and full-text gaps; do not invent figures, equations, or details |
-| Same-name skill exists | Same version? Local modifications? | Reuse matching files; preserve modifications and back up before upgrades |
-| Work was interrupted | Last successful step and existing outputs | Resume from the record without overwriting notes |
-| Explanations remain difficult | Were rules loaded? Which concept or step is missing? | Explain the gap with an example or diagram; shorter is not the only goal |
+| Symptom | Meaning and next action |
+| --- | --- |
+| Cannot download the repository | While private, the GitHub account needs repository access. A public link alone does not grant it. |
+| Launcher cannot find Python | Online launchers can obtain a local Python through Astral uv. On macOS/Linux this requires Bash, curl, and a SHA-256 utility. Offline use requires Python 3.11+ already installed. |
+| PowerShell blocks the script | Follow the computer's normal software policy. Ask the administrator for an approved method, or have an authorized agent use an already installed Python to run `workbench.py setup`. The launcher does not bypass policy. |
+| Offline setup exits with code 2 | Files were prepared but dependencies are pending. Rerun the same setup online. |
+| Certificate or network error | Check connectivity, proxy configuration, and trusted CA certificates. Python HTTPS failures can use curl's OS trust when available. Never disable certificate checks. |
+| Checksum mismatch | No mismatched download is installed. Retry once; if it persists, verify the upstream release and catalog with the maintainer. Do not remove the hash check. |
+| No compatible package wheel | The operating system, architecture, or Python version may not be supported by a pinned package. Use a compatible environment or review a version update. The installer does not silently build arbitrary native source packages. |
+| A profile failed | Inspect its report. Rerun `apply` with the same local profile after resolving the cause. Other completed profiles remain available. |
+| Installation lock exists | A run is active or was forcibly interrupted. Confirm the recorded process is no longer installing, then remove only the stale `.workbench/install.lock` with the user's applicable authorization and retry. |
+| Same-name skill differs | The installer preserves it. Review and back up local changes before explicitly choosing an upgrade; do not delete the entire skill folder automatically. |
+| Installed engine differs | A same-version engine was changed locally. Preserve it and use a reviewed new release or a separate workspace. No silent overwrite occurs. |
+| State file is unreadable | Preserve `.workbench/state.json` for recovery. Restore a known-good copy or inspect existing outputs before rebuilding the record; do not assume nothing was installed. |
+| Skill files exist but are not visible | Check the actual host's discovery path and disabled state. Reload or start a new session if needed, then invoke the skill. File integrity alone does not prove discovery. |
+| Runtime exists but a task cannot import a package | Use the profile's interpreter from `.workbench/envs/`. Install additional task-specific dependencies only when needed and record them. |
+| Workspace was moved or base Python removed | Virtual environments depend on their original path and base interpreter. Preserve research files, then rebuild the affected environment under a reviewed plan. |
+| AI only gives advice | Local setup requires file and execution tools. Give the installation materials to an authorized local agent and keep installation marked pending. |
+| Library unavailable after browser login | A browser, connector, and local tool may use different accounts. Check the actual connection's account and scope. |
+| Only an abstract is available | Mark the source scope. Do not invent full-text methods, equations, or figures. |
+| Explanations remain difficult | Check whether rules loaded and identify the missing concept. Explain it with a concrete example or diagram. |
 
-## Before and after updating
+## Check and resume
 
-Record the old version, location, and local modifications. Back up affected files privately. Do not commit backups containing personal paths or credentials.
+From the original distribution, use a suitable Python:
 
-Recheck only affected skills and tasks. If the update fails, disable the newly added configuration, restore recorded versions and rules, and verify the previously working task.
+```bash
+python workbench.py setup --workspace "/path/to/project"
+python workbench.py apply --workspace "/path/to/project" --profile "/path/to/profile.json"
+python workbench.py doctor --workspace "/path/to/project"
+```
 
-## Remove or roll back
+Run only the command needed for the current failure. If the distribution was removed, use the copied engine and installed interpreter listed in `START_HERE.md`. `doctor` rechecks files and supported runtimes without downloads. It does not repair missing components or prove the user's task passed. Exit 0 means the command's supported checks passed; exit 2 means checks remain incomplete or failed; exit 1 means setup stopped with an error.
 
-Identify which files, dependencies, and settings this setup added and which already existed or are shared. Roll back only attributable changes. Follow the user's authorization for deletion. Preserve source materials, notes, results, and shared runtimes.
+## Update or remove
 
-There is no universal uninstall script. Locations vary; recovery must follow the actual configuration record.
+Record the old version, location, and local modifications. Back up affected files privately. Recheck affected skills and tasks after an update. This release preserves conflicting files and does not offer an automatic cross-version upgrade or universal uninstall command.
+
+Identify what the workbench added and what is pre-existing or shared. Follow the user's authorization for deletion. Preserve research sources, notes, results, and shared applications. Restore the recorded configuration if a reviewed update fails.
