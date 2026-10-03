@@ -1,6 +1,6 @@
 # Third-party sources, dependencies, and acknowledgements
 
-Reviewed on 2026-10-03 for repository 0.2.1 and guide 1.4. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
+Reviewed on 2026-10-03 for repository 0.2.2 and guide 1.4. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
 
 ## What this repository contains
 
@@ -100,6 +100,15 @@ These were resolved in the 2026-10-03 macOS arm64 verification environments. The
 | typing_extensions — Python typing contributors | [4.16.0](https://pypi.org/project/typing-extensions/4.16.0/) | PSF-2.0 |
 
 pip 26.0.1 was also observed. Native libraries, fonts and pip-vendored modules are not fully enumerated by this package table; their notices ship inside the distributions. This is not a complete cross-platform software bill of materials or permission to strip notices when repackaging.
+
+## Development-only CI dependencies
+
+GitHub Actions downloads the following actions for `.github/workflows/ci.yml`. They are not bundled in the research workspace or used by the installer. Both are maintained by GitHub / the `actions` project and contributors, and retain their own MIT licenses. Action source is used without local modifications.
+
+| Component | Fixed revision | Scope and license |
+| --- | --- | --- |
+| [actions/checkout](https://github.com/actions/checkout) | `3d3c42e5aac5ba805825da76410c181273ba90b1` (`v7.0.1`) | CI source checkout, credentials not persisted. [Pinned MIT license](https://github.com/actions/checkout/blob/3d3c42e5aac5ba805825da76410c181273ba90b1/LICENSE). |
+| [actions/setup-python](https://github.com/actions/setup-python) | `5fda3b95a4ea91299a34e894583c3862153e4b97` (`v7.0.0`) | CI Python runtime selection. [Pinned MIT license](https://github.com/actions/setup-python/blob/5fda3b95a4ea91299a34e894583c3862153e4b97/LICENSE). Managed Python distributions retain their own terms. |
 
 ## Workflow and communication inspirations
 

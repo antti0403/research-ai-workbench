@@ -16,6 +16,10 @@ Read `.workbench/install-report.md` and `workbench-config.md` in the target proj
 | Same-name skill differs | The installer preserves it. Review and back up local changes before explicitly choosing an upgrade; do not delete the entire skill folder automatically. |
 | Installed engine differs | A same-version engine was changed locally. Preserve it and use a reviewed new release or a separate workspace. No silent overwrite occurs. |
 | State file is unreadable | Preserve `.workbench/state.json` for recovery. Restore a known-good copy or inspect existing outputs before rebuilding the record; do not assume nothing was installed. |
+| Unrecognized runtime is preserved | There is no matching ownership record. A working runtime can be checked and reused; repairs require reviewing and backing it up before replacement, or choosing a new workspace. Do not manufacture a marker or treat an old check as ownership. |
+| apply reports failed current foundation checks | Inspect the new core/skill results, rerun setup for the affected foundation, and then retry apply. Old verified records do not bypass missing files or a broken interpreter. |
+| START_HERE.md still refers to an old engine | If the file was edited, setup preserves it and writes versioned instructions. Read the entry-point row in the report and reconcile the new file with your notes. |
+| Managed destination is a junction or link | It is preserved and refused to prevent writes to another location. Select a dedicated directory or reconcile the existing link before setup. |
 | Skill files exist but are not visible | Check the actual host's discovery path and disabled state. Reload or start a new session if needed, then invoke the skill. File integrity alone does not prove discovery. |
 | Runtime exists but a task cannot import a package | Use the profile's interpreter from `.workbench/envs/`. Install additional task-specific dependencies only when needed and record them. |
 | Workspace was moved or base Python removed | Virtual environments depend on their original path and base interpreter. Preserve research files, then rebuild the affected environment under a reviewed plan. |

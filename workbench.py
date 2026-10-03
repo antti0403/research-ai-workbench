@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import secrets
 import shutil
 import ssl
 import stat
@@ -23,7 +24,7 @@ import venv
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.2.1'
+VERSION = '0.2.2'
 REGISTRY = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
 MAX_DOWNLOAD = 80 * 1024 * 1024
 MAX_EXPANDED = 200 * 1024 * 1024
@@ -45,11 +46,19 @@ def safe_path(root, relative):
     parts = PurePosixPath(relative).parts
     if not parts or PurePosixPath(relative).is_absolute() or any(p in ('..', '.') or '\\' in p or ':' in p for p in parts):
         raise SetupError('Unsafe relative path: ' + relative)
+    root = Path(root).resolve()
     current = root
     for part in parts:
         current = current / part
-        if current.is_symlink():
-            raise SetupError('Preserved existing symbolic link; choose another target: ' + str(current))
+        try:
+            info = current.lstat()
+        except FileNotFoundError:
+            info = None
+        if info is not None and (stat.S_ISLNK(info.st_mode) or
+                                 getattr(info, 'st_file_attributes', 0) & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0)):
+            raise SetupError('Preserved existing link or reparse point; choose another target: ' + str(current))
+        if not current.resolve().is_relative_to(root):
+            raise SetupError('Resolved path leaves the workspace: ' + str(current))
     return current
 
 
@@ -67,13 +76,34 @@ def atomic_write(path, data):
 def read_state(root):
     path = safe_path(root, '.workbench/state.json')
     if not path.exists():
-        return {'schema': 1, 'version': VERSION, 'created': now(), 'checks': {}, 'skills': {}, 'profiles': {}, 'owned': {}}
+        return {'schema': 1, 'version': VERSION, 'created': now(), 'checks': {}, 'skills': {}, 'profiles': {}, 'owned': {}, 'runtimes': {}}
     try:
-        result = json.loads(path.read_text(encoding='utf-8'))
+        result = json.loads(path.read_text(encoding='utf-8-sig'))
     except (ValueError, OSError) as exc:
         raise SetupError('Cannot read state; preserved it for recovery: ' + str(exc)) from exc
-    if result.get('schema') != 1 or not all(isinstance(result.get(k), dict) for k in ('checks', 'skills', 'profiles', 'owned')):
+    if not isinstance(result, dict) or result.get('schema') != 1 or not all(isinstance(result.get(k), dict) for k in ('checks', 'skills', 'profiles', 'owned')):
         raise SetupError('Unsupported or incomplete state; no automatic replacement.')
+    result.setdefault('runtimes', {})
+    if not isinstance(result['runtimes'], dict) or not isinstance(result.get('version'), str):
+        raise SetupError('Invalid state metadata; preserved it for recovery.')
+    for name, check in result['checks'].items():
+        if not isinstance(check, dict) or not isinstance(check.get('status'), str) or not isinstance(check.get('detail', ''), str):
+            raise SetupError('Invalid check record: ' + name + '; preserved state for recovery.')
+    for name, skill in result['skills'].items():
+        if not re.fullmatch(r'[a-z0-9-]+', name) or not isinstance(skill, dict) or not isinstance(skill.get('files'), dict):
+            raise SetupError('Invalid skill record: ' + name + '; preserved state for recovery.')
+        for relative, hash_value in skill['files'].items():
+            parts = PurePosixPath(relative).parts
+            if not parts or PurePosixPath(relative).is_absolute() or any(p in ('..', '.') or '\\' in p or ':' in p for p in parts) or not isinstance(hash_value, str) or not re.fullmatch(r'[0-9a-f]{64}', hash_value):
+                raise SetupError('Invalid skill file record: ' + name + '; preserved state for recovery.')
+    for name, profile in result['profiles'].items():
+        if name not in REGISTRY['profiles'] or not isinstance(profile, dict) or not isinstance(profile.get('status'), str):
+            raise SetupError('Invalid or unsupported profile record: ' + name + '; use its original installer for recovery.')
+    for name, ownership in result['runtimes'].items():
+        if name not in ('core', *REGISTRY['profiles']) or not isinstance(ownership, dict) or not isinstance(ownership.get('token'), str) or not re.fullmatch(r'[0-9a-f]{32}', ownership['token']):
+            raise SetupError('Invalid runtime ownership record: ' + name + '; preserved state for recovery.')
+    if any(not isinstance(value, str) or not re.fullmatch(r'[0-9a-f]{64}', value) for value in result['owned'].values()):
+        raise SetupError('Invalid owned-file hashes; preserved state for recovery.')
     return result
 
 
@@ -130,13 +160,36 @@ def create_once(root, state, relative, content):
     return 'created'
 
 
+def update_owned_file(root, state, relative, content):
+    path = safe_path(root, relative)
+    data = content.encode() if isinstance(content, str) else content
+    if path.is_file() and path.read_bytes() != data and digest(path.read_bytes()) == state['owned'].get(relative):
+        original = path.read_bytes()
+        create_once(root, state, '.workbench/backups/' + path.stem + '-' + digest(original)[:12] + path.suffix, original)
+        atomic_write(path, data)
+        state['owned'][relative] = digest(data)
+        save_state(root, state)
+        return 'updated owned file'
+    return create_once(root, state, relative, data)
+
+
 def tree_hashes(directory):
     result = {}
-    for path in sorted(directory.rglob('*')):
-        if path.is_symlink():
-            raise SetupError('Skill contains a symbolic link: ' + str(path))
-        if path.is_file():
-            result[path.relative_to(directory).as_posix()] = digest(path.read_bytes())
+    def visit(folder):
+        for entry in sorted(folder.iterdir()):
+            relative = entry.relative_to(directory).as_posix()
+            path = safe_path(directory, relative)
+            if path.is_dir():
+                visit(path)
+            elif path.is_file():
+                # Imports create these files without changing the selected sources.
+                cache = re.fullmatch(r'(.+)\.(?:cpython|pypy)-[A-Za-z0-9_-]+(?:\.opt-\d+)?\.pyc', path.name)
+                if path.parent.name == '__pycache__' and cache:
+                    source = safe_path(directory, (path.parent.parent / (cache[1] + '.py')).relative_to(directory).as_posix())
+                    if source.is_file():
+                        continue
+                result[relative] = digest(path.read_bytes())
+    visit(directory)
     return result
 
 
@@ -166,9 +219,9 @@ def install_directory(root, state, name, files, source):
 
 def run(command, timeout=900):
     env = dict(os.environ)
-    env.update({'PIP_DISABLE_PIP_VERSION_CHECK': '1', 'PIP_NO_INPUT': '1', 'PYTHONNOUSERSITE': '1'})
+    env.update({'PIP_DISABLE_PIP_VERSION_CHECK': '1', 'PIP_NO_INPUT': '1', 'PYTHONNOUSERSITE': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONIOENCODING': 'utf-8'})
     try:
-        result = subprocess.run(command, capture_output=True, text=True, timeout=timeout, env=env)
+        result = subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=timeout, env=env)
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise SetupError('Could not complete command: ' + type(exc).__name__) from exc
     if result.returncode:
@@ -180,40 +233,79 @@ def run(command, timeout=900):
 
 
 def environment_python(root, profile):
-    relative = '.workbench/envs/' + profile + ('/Scripts/python.exe' if os.name == 'nt' else '/bin/python')
     # A venv's python can legitimately be a symlink created by venv itself.
-    envdir = safe_path(root, '.workbench/envs/' + profile)
-    return envdir / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
+    bindir = safe_path(root, '.workbench/envs/' + profile + ('/Scripts' if os.name == 'nt' else '/bin'))
+    if os.name == 'nt':
+        return safe_path(root, '.workbench/envs/' + profile + '/Scripts/python.exe')
+    return bindir / 'python'
+
+
+def check_runtime(root, profile, requirements):
+    python = environment_python(root, profile)
+    if not python.is_file():
+        raise SetupError('Missing runtime interpreter: ' + str(python))
+    return run([str(python), str(ROOT / 'scripts/verify_runtime.py'), profile, json.dumps(requirements)], timeout=90)
+
+
+def owns_runtime(root, state, profile):
+    ownership = state.get('runtimes', {}).get(profile)
+    if not ownership:
+        return False
+    marker = safe_path(root, '.workbench/envs/' + profile + '/.workbench-owner.json')
+    if not marker.is_file():
+        return False
+    try:
+        saved = json.loads(marker.read_text(encoding='utf-8-sig'))
+    except (ValueError, OSError):
+        return False
+    return saved == {'schema': 1, 'profile': profile, 'token': ownership['token']}
 
 
 def runtime(root, state, profile, requirements, offline=False):
+    try:
+        return prepare_runtime(root, state, profile, requirements, offline)
+    except (SetupError, OSError) as exc:
+        record(root, state, 'runtime:' + profile, 'failed', str(exc))
+        raise SetupError(str(exc)) from exc
+
+
+def prepare_runtime(root, state, profile, requirements, offline=False):
     if not requirements:
         return
     envdir = safe_path(root, '.workbench/envs/' + profile)
     python = environment_python(root, profile)
+    owned = owns_runtime(root, state, profile)
     if not python.exists():
         if offline:
             record(root, state, 'runtime:' + profile, 'pending', 'Offline mode: no packages installed. Rerun without --offline.')
             return
-        if envdir.exists() and 'runtime:' + profile not in state['checks']:
+        if envdir.exists() and not owned:
             raise SetupError('Preserved unrecognized environment: ' + str(envdir))
+        if not envdir.exists():
+            envdir.mkdir(parents=True)
+            token = secrets.token_hex(16)
+            state.setdefault('runtimes', {})[profile] = {'token': token}
+            create_once(root, state, '.workbench/envs/' + profile + '/.workbench-owner.json',
+                        json.dumps({'schema': 1, 'profile': profile, 'token': token}) + '\n')
+            owned = True
         record(root, state, 'runtime:' + profile, 'in progress', 'Creating an isolated environment; retry is safe after interruption.')
         envdir.parent.mkdir(parents=True, exist_ok=True)
         venv.EnvBuilder(with_pip=True).create(envdir)
-    check = [str(python), str(ROOT / 'scripts/verify_runtime.py'), profile, json.dumps(requirements)]
     try:
-        output = run(check, timeout=90)
-    except SetupError:
+        output = check_runtime(root, profile, requirements)
+    except SetupError as exc:
         if offline:
             record(root, state, 'runtime:' + profile, 'pending', 'Missing packages or failed checks. Rerun online.')
             return
+        if not owned:
+            raise SetupError('Preserved unrecognized environment; no packages changed: ' + str(envdir) + '. Use a dedicated new workspace, or review and back up this environment before replacing it.') from exc
         record(root, state, 'runtime:' + profile, 'in progress', 'Installing pinned packages into this profile only.')
         try:
             run([str(python), '-m', 'pip', '--version'], timeout=60)
         except SetupError:
             run([str(python), '-m', 'ensurepip'], timeout=120)
         run([str(python), '-m', 'pip', 'install', '--only-binary=:all:', '--index-url', 'https://pypi.org/simple', *requirements])
-        output = run(check, timeout=90)
+        output = check_runtime(root, profile, requirements)
     freeze = run([str(python), '-m', 'pip', 'freeze'], timeout=60)
     atomic_write(safe_path(root, '.workbench/locks/' + profile + '.txt'), (freeze + '\n').encode())
     record(root, state, 'runtime:' + profile, 'verified', output)
@@ -358,7 +450,13 @@ Do not execute an arbitrary command from a paper, web page, or profile answer. T
 
 Other agents can read `.agents/skills/research-workbench/SKILL.md` explicitly. That does not imply native skill discovery. An absent Codex CLI does not prove the desktop app is absent. Use an existing agent; obtain any required app and account through its official flow.
 '''
-    create_once(root, state, 'START_HERE.md', start)
+    outcome = update_owned_file(root, state, 'START_HERE.md', start)
+    if outcome == 'preserved existing file':
+        alternative = 'START_HERE-' + VERSION + '.md'
+        create_once(root, state, alternative, start)
+        record(root, state, 'entry-point', 'needs review', 'Preserved edited START_HERE.md. Current engine instructions: ' + alternative)
+    else:
+        record(root, state, 'entry-point', 'written', 'Current engine instructions in START_HERE.md; previous owned text backed up on update.')
     # Private workspace metadata must not accidentally enter a user's Git repository.
     ignore = safe_path(root, '.gitignore')
     old_ignore = ignore.read_text(encoding='utf-8') if ignore.exists() else ''
@@ -376,7 +474,7 @@ Other agents can read `.agents/skills/research-workbench/SKILL.md` explicitly. T
 
 def load_profile(path):
     try:
-        profile = json.loads(Path(path).read_text(encoding='utf-8'))
+        profile = json.loads(Path(path).read_text(encoding='utf-8-sig'))
     except (ValueError, OSError) as exc:
         raise SetupError('Cannot read profile: ' + str(exc)) from exc
     if not isinstance(profile, dict) or not isinstance(profile.get('extensions'), list):
@@ -436,7 +534,7 @@ def doctor(root, state):
         requirements = REGISTRY['core_requirements'] if name == 'core' else REGISTRY['profiles'][name]['requirements']
         if requirements:
             try:
-                output = run([str(environment_python(root, name)), str(ROOT / 'scripts/verify_runtime.py'), name, json.dumps(requirements)], timeout=90)
+                output = check_runtime(root, name, requirements)
                 record(root, state, 'runtime:' + name, 'verified', output)
             except SetupError as exc:
                 failed = True
@@ -444,6 +542,23 @@ def doctor(root, state):
     if not state['skills']:
         raise SetupError('No installation record. Run setup first.')
     return not failed
+
+
+def verify_foundation(root, state):
+    okay = True
+    for name in ('research-workbench', 'research-reading'):
+        spec = state['skills'].get(name)
+        directory = safe_path(root, '.agents/skills/' + name)
+        matches = bool(spec) and 'SKILL.md' in spec['files'] and directory.is_dir() and tree_hashes(directory) == spec['files']
+        record(root, state, 'skill:' + name, 'files verified' if matches else 'modified or missing', 'Fresh foundation check; host discovery remains separate.')
+        okay &= matches
+    try:
+        output = check_runtime(root, 'core', REGISTRY['core_requirements'])
+        record(root, state, 'runtime:core', 'verified', output)
+    except SetupError as exc:
+        record(root, state, 'runtime:core', 'failed', str(exc))
+        okay = False
+    return okay
 
 
 def main(argv=None):
@@ -470,8 +585,8 @@ def main(argv=None):
             if not args.profile:
                 raise SetupError('apply requires --profile. The installer does not infer a research field.')
             profile = load_profile(args.profile)
-            if not state['checks'].get('runtime:core', {}).get('status') == 'verified':
-                raise SetupError('Run setup online first to verify the foundation before adding extensions.')
+            if not verify_foundation(root, state):
+                raise SetupError('The foundation is missing or failed current checks. Rerun setup to repair it before adding extensions.')
             okay = apply_profile(root, state, profile, args.offline)
         else:
             okay = doctor(root, state)

@@ -1,6 +1,6 @@
 # Foundation first, then personalization
 
-Version 0.2.1 separates machine preparation from research decisions. The installer does not guess a discipline. The user's existing AI interprets a few answers and selects documented extensions. No extra model API is built into the installer.
+Version 0.2.2 separates machine preparation from research decisions. The installer does not guess a discipline. The user's existing AI interprets a few answers and selects documented extensions. No extra model API is built into the installer.
 
 ## User journey
 
@@ -26,10 +26,10 @@ python workbench.py doctor --workspace "/path/to/project"
 
 `plan` is read-only. `setup --offline` writes foundation files without downloading packages; incomplete checks remain pending. `apply` requires a verified foundation. It continues other selected profiles when one fails. Repeating `apply` retries incomplete work and checks existing installations. Selection of an empty list is valid. Applying a smaller selection does not uninstall earlier extensions.
 
-After setup, the engine is copied into `.workbench/kit/0.2.1/`. The installed Python path appears in `START_HERE.md`. From the workspace on macOS/Linux, for example:
+After setup, the engine is copied into `.workbench/kit/0.2.2/`. The installed Python path appears in `START_HERE.md`. From the workspace on macOS/Linux, for example:
 
 ```bash
-.workbench/envs/core/bin/python .workbench/kit/0.2.1/workbench.py doctor --workspace .
+.workbench/envs/core/bin/python .workbench/kit/0.2.2/workbench.py doctor --workspace .
 ```
 
 On Windows use `.workbench\envs\core\Scripts\python.exe` for that interpreter. The workspace must stay at its original path: Python virtual environments are not portable. Rebuild environments after moving a workspace. When Python was downloaded automatically, it lives under `.workbench/bootstrap/`; keep that directory. After a successful setup, the original download folder is no longer needed by the installed engine. An externally reused Python installation must still remain available.
@@ -60,13 +60,20 @@ Use the recorded environment for its task. A skill may document additional integ
 | `.workbench/install-report.md` | Readable component status |
 | `.workbench/profile.json` | Local answers and selected extensions |
 | `.workbench/envs/` | Separate runtime for each configured profile |
-| `.workbench/kit/0.2.1/NOTICE.md`, `THIRD_PARTY.md`, `SKILLS.md` | Retained source, attribution and license-scope documentation |
+| `.workbench/kit/0.2.2/NOTICE.md`, `THIRD_PARTY.md`, `SKILLS.md` | Retained source, attribution and license-scope documentation |
+| `.workbench/envs/<profile>/.workbench-owner.json` | Matches the runtime ownership token in state; required before automatic repairs |
 | `.workbench/locks/` | Resolved installed package versions |
 | `.agents/skills/` | Project-scoped skill files |
 
 **Files verified** means the installed files match the selected source. **Runtime verified** means the specified small functional check passed. **Task checks pending** means the AI still needs to confirm skill discovery and the user's actual workflow. None of these states proves a scientific conclusion.
 
 Existing notes and configuration are preserved. Existing `AGENTS.md` content is backed up before appending the workbench block. A different same-name skill or modified installed engine is preserved and requires review. State files are written atomically, and a lock prevents simultaneous installation. A killed process can leave a stale lock; see [recovery](TROUBLESHOOTING.md).
+
+Applying extensions rechecks the foundation skills and current PDF interpreter. A historical verified entry is insufficient. Normal Python bytecode caches beside source files are excluded from skill comparisons; changed sources and unexpected scripts still fail verification.
+
+New runtimes receive matching ownership records in state and inside the environment before creation. An existing environment without these records may be checked and reused if it passes, but the installer will not change its packages or rebuild it. A diagnostic entry alone does not establish ownership. Failed legacy runtimes require a reviewed backup/replacement or a new dedicated workspace.
+
+Version 0.2.2 reads older schema-1 state without claiming ownership of old environments. Unchanged installer-owned `START_HERE.md` is backed up and updated to the current engine. Edited entry points are preserved, with current instructions in `START_HERE-0.2.2.md`. Other conflicting human or skill files still require review. Profiles and state accept an optional UTF-8 BOM; malformed state is preserved with a controlled recovery error.
 
 Skill revisions and file hashes are fixed in [registry.json](../registry.json). Direct runtime package versions are pinned; their resolved transitive versions are recorded after installation. This is not a fully hash-locked or offline package distribution. The runtime installer uses available binary wheels and stops if a compatible wheel is unavailable.
 

@@ -22,4 +22,6 @@ Keep SETUP.md independently usable. Update affected README guidance and CHANGELO
 
 Use Python 3.11+ and a disposable workspace. Run `python -m unittest discover -s tests` and `bash -n install.sh`. Run actual setup and selected extensions before claiming they work; keep network and runtime tests separate from mocked failure tests. Never test against a user's real research files. Do not commit `.bootstrap`, `.workbench`, caches, downloaded third-party sources, or filled profiles.
 
+Also run `python scripts/check_repository.py` and `python scripts/check_installation.py`. The latter exercises the real offline launcher and copied engine; `--online` installs and checks actual core/figures packages in a disposable workspace. CI runs preservation and offline checks on Windows/macOS/Linux with Python 3.11, 3.12, and 3.14, and actual runtime checks with Python 3.12. See [maintenance priorities](docs/MAINTENANCE.md).
+
 Review pinned versions, hashes, license terms, and required shared resources when changing registry.json. Preserve private settings and human edits. Record operating system, Python, selected profiles, actual checks, and untested boundaries in the compatibility record. A source-code review is not a Windows execution test.

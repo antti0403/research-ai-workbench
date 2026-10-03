@@ -1,6 +1,12 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.2.1. Tests used temporary workspaces and synthetic or public inputs, separate from private research. Full runtime results below were obtained for 0.2.0; they are historical evidence, not a new full installation of 0.2.1.
+Updated: 2026-10-03 for repository 0.2.2. Tests used temporary workspaces and synthetic or public inputs, separate from private research. The earlier full runtime results below were obtained for 0.2.0 and remain historical evidence.
+
+The 0.2.2 Windows regression suite ran 38 tests on Python 3.12.14: 36 passed; two were skipped (privileged symbolic-link creation and a POSIX-only interpreter-link test). The suite exercised real Windows junctions, actual bytecode generation, fresh foundation checks, runtime ownership and simulated repair failures, BOM/invalid JSON, Unicode output, and legacy/edited entry-point preservation. Mocked repair tests do not prove a real dependency installation.
+
+On Windows with Python 3.12.14 and the existing PowerShell 7 shell, both actual launcher smoke checks passed: offline preparation/resume and online core/figures installation, PDF/PNG functional checks, copied-engine setup/doctor/apply, repeated apply, spaces/non-ASCII paths, and preservation of human instructions and notes. The computer's normal Windows PowerShell 5.1 policy blocked script execution; no policy was changed. CI includes a separate 5.1 launcher check under the runner's existing policy. These are isolated installer checks, not host discovery or research acceptance.
+
+The new [CI workflow](../.github/workflows/ci.yml) defines Windows/macOS/Linux preservation and offline-launcher checks on Python 3.11, 3.12, and 3.14, plus separate actual core/figures installation and resume checks on Python 3.12. Consult the [run results](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml) for each exact commit; configured coverage is not itself a passing result. Missing-Python bootstrap, other extension integrations, host discovery, and independent research acceptance remain outside these CI checks.
 
 The 0.2.1 attribution patch passed 16 automated tests and the Bash syntax check. The tests verify that source/license documents remain in the installed kit, root and nested notices survive skill extraction, and the figures profile keeps its plotting runtime without requesting the withheld skill. Internal documentation links and direct dependency/source coverage were checked. Runtime package pins and launchers are unchanged. No additional Windows/Linux or personal research acceptance test was performed.
 
@@ -20,7 +26,7 @@ The 0.2.1 attribution patch passed 16 automated tests and the Bash syntax check.
 | Failure and preservation tests | 15 automated tests passed: human-content preservation, repeated offline setup, modified skills, read-only planning, profile validation, prerequisite enforcement, path/archive checks, complete skill resources and licenses, corrupt state, concurrent installation, download integrity, partial profile failure, installed-engine operation, and honest doctor failure reporting. |
 | Original skill format | Both bundled skills passed the local skill format validator. Native invocation in a new host session remains unverified. |
 | Shell launcher | Bash syntax check and actual macOS execution passed. |
-| Windows and Linux | Launchers or shared engine provided; no runtime test in these operating systems was performed. PowerShell execution remains unverified. |
+| Windows and Linux (0.2.0 historical scope) | Launchers or shared engine were provided; no runtime test in these operating systems was performed for 0.2.0. Current Windows 0.2.2 results are above; current CI results are linked separately. |
 | Other AI agents | Explicit instruction-reading fallback documented; native skill discovery and permissions must be checked for each host. |
 | Complete setup for another user | No independent user acceptance trial recorded. |
 
