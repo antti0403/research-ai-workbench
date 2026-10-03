@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.3 — 2026-10-03
+
+- Shorten README around setup and the first task; group references by purpose.
+- Simplify the standalone guide as edition 1.5, preserving the foundation and seven-step workflow, source checks, authorization, evidence, and recovery.
+- Make AUTOMATION a command reference; separate current catalog, manual candidates, and historical checks in SKILLS.
+- Reduce wide configuration tables and duplicate release instructions. Keep directory paths and public source records.
+- Advance the kit version so revised bundled documents coexist with previous releases. Installer behavior, original skills, and dependency/source pins are unchanged.
+
 ## 0.2.2 — 2026-10-03
 
 - Reject Windows junctions and reparse points in managed paths, and confirm resolved paths stay inside the workspace. Protect interpreter parent directories while allowing POSIX venv interpreter links.

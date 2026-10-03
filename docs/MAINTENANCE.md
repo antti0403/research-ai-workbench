@@ -1,25 +1,20 @@
 # Maintenance priorities
 
-The project provides a small foundation-first installer and a complete standalone guide. Judge changes by whether users can safely prepare, resume, and verify a real task. Preserve human research files, keep licensing boundaries explicit, and report actual verification scope.
+Improve the path from setup to one verified research task before expanding the catalog. Preserve human files and report actual test scope.
 
-## Current priorities
+## Next evidence to collect
 
-1. Preserve workspace boundaries, existing environments, source files, and human configuration.
-2. Keep failure records actionable and installation resumable through the copied engine.
-3. Exercise launchers and supported runtimes across operating systems and Python versions.
-4. Improve the first successful task and handoff before expanding the optional catalog.
-5. Consider transitive dependency locking and smaller code modules when release requirements justify them.
+1. Missing-Python bootstrap tests in clean Windows and Linux environments.
+2. Native skill discovery and independent user acceptance, beyond installer checks.
+3. Task-specific literature, writing, and computation integrations.
+4. Transitive dependency locking and smaller code modules when release needs justify them.
 
-The 0.2.2 release addresses the first two priorities and adds CI and a [first-task walkthrough](FIRST_TASK.md). Missing-Python bootstrap, native host discovery, additional skill integrations, and independent user acceptance remain useful next evidence.
+The 0.2.2 reliability release added ownership checks, safer paths, resume fixes, and cross-platform CI. Version 0.2.3 simplifies documentation. See [compatibility](COMPATIBILITY.md) for recorded results and [first task](FIRST_TASK.md) for acceptance.
 
-## Change and release workflow
+## Releases
 
-- Start from the current main branch and keep each change on a descriptive branch. Review existing work before publishing.
-- Add regression tests for behavior changes involving preservation, recovery, or current verification. Run fast checks before network-dependent installation checks.
-- Use disposable synthetic workspaces. Keep private research, local profiles, credentials, caches, and diagnostic logs out of commits.
-- Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.py`, `bash -n install.sh`, and `python scripts/check_installation.py`. Use `--online` for an explicit actual core/figures test.
-- Check the exact proposed commit's CI results and diff before merging. Repair failures and record any untested boundary honestly.
-- Update engine/catalog release metadata, CHANGELOG.md, compatibility evidence, and affected instructions together. Record external components in THIRD_PARTY.md.
-- Preserve edited files during upgrades. Only update an installer-owned entry point whose recorded hash still matches its contents, and retain a backup.
+Use a descriptive branch from current main. Follow [Contributing](../CONTRIBUTING.md) for checks and third-party review; keep tests in disposable workspaces and personal data out of commits. Review the exact proposed commit's diff and CI before merging.
 
-Existing direct dependency and skill pins remain intentional. Updating a pin requires availability, integrity, license, and functional checks; a newer version alone is insufficient.
+Update engine/catalog metadata, affected instructions, and [CHANGELOG](../CHANGELOG.md) together. Bundled documentation changes need a new kit version: same-version conflicts are deliberately preserved. Keep compatibility entries tied to the release actually tested.
+
+A new pin requires availability, integrity, license, and functional checks. A newer version alone is not sufficient. Preserve edited files and back up unchanged owned entry points when upgrading.
