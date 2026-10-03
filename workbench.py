@@ -174,6 +174,7 @@ def update_owned_file(root, state, relative, content):
 
 
 def tree_hashes(directory):
+    directory = Path(directory).resolve()
     result = {}
     def visit(folder):
         for entry in sorted(folder.iterdir()):

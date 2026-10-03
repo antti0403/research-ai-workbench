@@ -207,6 +207,16 @@ class ReliabilityTests(unittest.TestCase):
             w.install_directory(self.root, self.state, 'example', {'SKILL.md': b'Example'}, {})
         self.assertTrue(extra.exists())
 
+    def test_skill_hashes_use_one_canonical_root_for_relative_inputs(self):
+        files = {'SKILL.md': b'Example', 'references/note.md': b'Evidence'}
+        w.install_directory(self.root, self.state, 'example', files, {})
+        original = Path.cwd()
+        try:
+            os.chdir(self.root)
+            self.assertEqual(w.tree_hashes(Path('.agents/skills/example')), self.state['skills']['example']['files'])
+        finally:
+            os.chdir(original)
+
     def test_bom_profile_and_state_are_accepted(self):
         profile = self.root / 'bom.json'
         profile.write_text('{"extensions":[]}', encoding='utf-8-sig')

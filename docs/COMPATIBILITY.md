@@ -2,7 +2,7 @@
 
 Updated: 2026-10-03 for repository 0.2.2. Tests used temporary workspaces and synthetic or public inputs, separate from private research. The earlier full runtime results below were obtained for 0.2.0 and remain historical evidence.
 
-The 0.2.2 Windows regression suite ran 38 tests on Python 3.12.14: 36 passed; two were skipped (privileged symbolic-link creation and a POSIX-only interpreter-link test). The suite exercised real Windows junctions, actual bytecode generation, fresh foundation checks, runtime ownership and simulated repair failures, BOM/invalid JSON, Unicode output, and legacy/edited entry-point preservation. Mocked repair tests do not prove a real dependency installation.
+The 0.2.2 Windows regression suite ran 39 tests on Python 3.12.14: 37 passed; two were skipped (privileged symbolic-link creation and a POSIX-only interpreter-link test). The suite exercised real Windows junctions, actual bytecode generation, canonical/relative skill paths, fresh foundation checks, runtime ownership and simulated repair failures, BOM/invalid JSON, Unicode output, and legacy/edited entry-point preservation. Mocked repair tests do not prove a real dependency installation.
 
 On Windows with Python 3.12.14 and the existing PowerShell 7 shell, both actual launcher smoke checks passed: offline preparation/resume and online core/figures installation, PDF/PNG functional checks, copied-engine setup/doctor/apply, repeated apply, spaces/non-ASCII paths, and preservation of human instructions and notes. The computer's normal Windows PowerShell 5.1 policy blocked script execution; no policy was changed. CI includes a separate 5.1 launcher check under the runner's existing policy. These are isolated installer checks, not host discovery or research acceptance.
 
