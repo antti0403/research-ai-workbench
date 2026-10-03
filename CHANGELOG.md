@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 — 2026-10-03
+
+- Preserve the revised bilingual README style; package its Chinese translation and check language-independent release markers. Publish a new immutable kit so both existing 0.3.0 variants can upgrade without replacing their old kit.
+- Read the installed version in first-PDF commands and execute those documented shell commands in online installation checks. Validate links inside copied kits, and add actual previous-release upgrade/resume/preservation checks to CI.
+- Declare Python 3.12+ for the current data/figures pins; reject an incompatible interpreter before creating a new profile or attempting package repair. Foundation remains Python 3.11+.
+- Add three first-task requests and a full-text claim example with source locators, assumptions, unsupported-claim handling, and an executable synthetic calculation. Add proposed PaperQA model-query acceptance cases; real model queries remain unperformed.
+- Clarify model-provider sharing/cost and verification scope in both READMEs; update standalone guide edition 1.7 and attribution.
+
 ## 0.3.0 — 2026-10-03
 
 - Add the optional PaperQA profile, pinned to paper-qa 2026.8.12, and an original research-paperqa skill. Default foundation installation remains light and does not install PaperQA.

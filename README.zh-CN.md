@@ -1,4 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
+<!-- workbench-release: 0.3.1 -->
 
 # Research AI Workbench
 
@@ -11,10 +12,12 @@
 ## 为什么做这个
 
 用 AI 辅助学术科研通常会遇到两个极端：
+
 1. **白板问题**：在空目录里直接和模型对话。模型没有本地文献检索工具，没有放阅读笔记的地方，读 PDF 容易出现幻觉，也没有规范的科研严谨性约束。
 2. **环境臃肿**：很多项目一上来就安装几十个庞大的第三方库，耗费大量磁盘空间，还容易引发本地 Python 依赖冲突。
 
 这个项目采用“渐进式配置”的思路：
+
 - **先搭核心骨架**：初始化一个干净的工作区目录（默认位于 `~/ResearchWorkbench`），配置独立的 PDF 解析与文献提取运行环境，并写入持久化的科研提示词与受控语言规约。
 - **Agent 按需补充**：在常用的编程助手（Codex、Claude Code、Cursor 等）中打开该目录。Agent 会主动询问你当前的研究方向与具体课题，只安装当前任务真正需要的扩展工具。
 
@@ -22,9 +25,9 @@
 
 ## 核心构成
 
-- **科研工作区结构**：预设清晰的目录分层，规范收纳原始文献、阅读笔记、中间数据与论文草稿。
+- **科研工作区结构**：提供阅读笔记、数据与代码、论文草稿目录，并优先复用已有文献库。
 - **独立 PDF 解析环境**：提供隔离的 Python 运行环境用于论文解析与文本提取，不污染全局环境。
-- **持久化科研准则**：内置关于证据等级、公式推导完整性、避免无根据推断的交互规范。参考了 ASD-STE100 航空标准与 Karpathy 的输出阶梯理念。
+- **持久化科研准则**：内置关于原文支持、公式保留、避免无根据推断的交互规范。参考了 ASD-STE100 航空标准与 Karpathy 的输出阶梯理念。
 - **可选学科扩展**：根据实际需要接入工具，包括 arXiv / Semantic Scholar 文献检索、PaperQA 循证问答、SymPy 符号推导、单位换算校验、MATLAB 联动指导与科研绘图等。
 
 ---
@@ -50,6 +53,8 @@ bash install.sh
 .\install.ps1
 ```
 
+启动脚本会复用 Python 3.11+；需要时在本地准备 Python 3.12。数据和绘图模块要求 Python 3.12+，创建环境前会检查；其他依赖也需要与平台兼容的安装包。
+
 默认工作区路径为 `~/ResearchWorkbench`。如果希望放在其他路径，可以传入参数 `--workspace "path/to/project"`。
 
 脚本安装完成后，在你的 AI Agent 中打开该工作区目录，发送以下提示词：
@@ -59,6 +64,10 @@ bash install.sh
 如果你希望跳过安装脚本、直接让 AI Agent 全程自主搭建工作区，只需把仓库里的 `SETUP.md` 发给它即可，该文件设计为完全独立可用。
 
 ---
+
+## 第一个任务
+
+从[三条任务请求](docs/FIRST_TASK.md)中选一个：读摘要、核对一个全文结论，或对选定论文提问。每条都说明预期产物。[完整操作示例](examples/attention-scaling.md)包含原文定位、公式核对和可复算的小型计算。
 
 ## 本地检查与体检命令
 
@@ -72,14 +81,14 @@ python workbench.py plan
 python workbench.py doctor --workspace "path/to/project"
 ```
 
-安装过程仅下载公开的开源依赖，不上传任何本地科研文件，也不强制要求额外的付费模型订阅。
+安装过程仅下载公开的开源依赖，不上传科研文件，也不调用模型。PaperQA 问答需要配置模型与 embedding 服务，可能向这些服务发送选定论文的内容并产生费用，详见 [PaperQA 使用说明](docs/PAPERQA.md)。
 
 ---
 
 ## 完整文档索引
 
 - [SETUP.md](SETUP.md)：面向 AI Agent 的单文件完整配置指南。
-- [SKILLS.md](SKILLS.md)：已验证的科研技能与可选候选清单。
+- [SKILLS.md](SKILLS.md)：科研技能目录、检查范围与可选候选清单。
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md)：从零开始完成第一个科研任务的上手演练。
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)：系统平台、Python 版本要求与兼容性边界。
 - [docs/AUTOMATION.md](docs/AUTOMATION.md)：自动化参数配置与 CLI 参考。
@@ -91,7 +100,10 @@ python workbench.py doctor --workspace "path/to/project"
 本项目原创代码与文档遵循 [MIT License](LICENSE)。
 
 致谢：
+
 - 技能原型与实现参考自 **袁一哲 / Yuan1z0825 (Nature Skills)** 与 **K-Dense Inc. (Scientific Agent Skills)**。
 - 渐进式工作流设计灵感来自 **艺雨YiLight**，并参考了 **sunweihunu** 整理的实践记录。
 - 交互与受控输出准则借鉴了 **ASD-STE100** 标准与 **Andrej Karpathy** 的技术表达建议。
 - 外部集成组件保留各自原始协议，详见 [NOTICE.md](NOTICE.md) 与 [THIRD_PARTY.md](THIRD_PARTY.md)。
+
+仓库版本 **0.3.1**，配置指南 **1.7**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。

@@ -9,7 +9,7 @@ Improve the path from setup to one verified research task before expanding the c
 3. Task-specific literature, writing, and computation integrations.
 4. Transitive dependency locking and smaller code modules when release needs justify them.
 
-The 0.2.2 reliability release added ownership checks, safer paths, resume fixes, and cross-platform CI. Version 0.2.3 simplifies documentation. See [compatibility](COMPATIBILITY.md) for recorded results and [first task](FIRST_TASK.md) for acceptance.
+The 0.2.2 reliability release added ownership checks, safer paths, resume fixes, and cross-platform CI. Version 0.3.1 adds bilingual kit checks, actual release upgrade checks, profile Python requirements, and a full-text claim example. See [compatibility](COMPATIBILITY.md) for recorded results and [first task](FIRST_TASK.md) for acceptance.
 
 ## Releases
 

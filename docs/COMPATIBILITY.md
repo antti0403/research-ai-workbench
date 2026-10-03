@@ -1,6 +1,16 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.3.0. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-03 for repository 0.3.1. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.1 release and first-task checks
+
+Local Windows checks on Python 3.12.14 passed 43 tests (41 passed, two platform-related skips), repository metadata/syntax/link checks, actual offline launcher and copied-engine preparation, and offline upgrade/resume from both the released 0.3.0 and the later bilingual README commit. Canonical snapshots retained previous kits, existing skill bytes, human instructions, configuration, and notes. The new copied kit contains both READMEs and passes its own repository/link checker.
+
+The data/figures profiles now declare Python 3.12+. Incompatible new environments are refused before creation or package installation; offline preparation remains pending. Existing environments are checked with their own interpreter and preserved for reviewed recovery if incompatible. CI's Python 3.11 release checks exercise the real refusal path; actual package runtime jobs still use Python 3.12. Platform wheel availability remains a separate requirement.
+
+The full-text example checks one selected methods passage and equation in arXiv:1706.03762v7, with PDF extraction and an HTML equation check. Its standard-library synthetic calculation passed for three dimensions and an equal-score case. This is a selected-claim demonstration, not reproduction of model training or a PaperQA model query. CI now executes the numerical example, previous-kit upgrade checks, installed bilingual links, and the actual first-PDF shell commands. Consult the exact run results for platform success; configured jobs alone are not evidence.
+
+The complete Windows online launcher/copied-engine check also passed: actual documented PowerShell PDF commands against a synthetic two-page PDF, core/figures/PaperQA installation, repeated apply, doctor, CLI invocation, and preservation. The blank-page tutorial fixture verifies page selection and the explicit no-text/OCR limitation; the separate core/PaperQA checks verify actual text extraction. No model services or private research were used.
 
 ## 0.3.0 optional PaperQA module
 
@@ -28,7 +38,7 @@ The 0.2.2 Windows regression suite ran 39 tests on Python 3.12.14: 37 passed; tw
 
 On Windows with Python 3.12.14 and the existing PowerShell 7 shell, both actual launcher smoke checks passed: offline preparation/resume and online core/figures installation, PDF/PNG functional checks, copied-engine setup/doctor/apply, repeated apply, spaces/non-ASCII paths, and preservation of human instructions and notes. The computer's normal Windows PowerShell 5.1 policy blocked script execution; no policy was changed. CI includes a separate 5.1 launcher check under the runner's existing policy. These are isolated installer checks, not host discovery or research acceptance.
 
-The new [CI workflow](../.github/workflows/ci.yml) defines Windows/macOS/Linux preservation and offline-launcher checks on Python 3.11, 3.12, and 3.14, plus separate actual core/figures installation and resume checks on Python 3.12. Consult the [run results](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml) for each exact commit; configured coverage is not itself a passing result. Missing-Python bootstrap, other extension integrations, host discovery, and independent research acceptance remain outside these CI checks.
+The new [CI workflow](https://github.com/antti0403/research-ai-workbench/blob/main/.github/workflows/ci.yml) defines Windows/macOS/Linux preservation and offline-launcher checks on Python 3.11, 3.12, and 3.14, plus separate actual core/figures installation and resume checks on Python 3.12. Consult the [run results](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml) for each exact commit; configured coverage is not itself a passing result. Missing-Python bootstrap, other extension integrations, host discovery, and independent research acceptance remain outside these CI checks.
 
 The 0.2.1 attribution patch passed 16 automated tests and the Bash syntax check. The tests verify that source/license documents remain in the installed kit, root and nested notices survive skill extraction, and the figures profile keeps its plotting runtime without requesting the withheld skill. Internal documentation links and direct dependency/source coverage were checked. Runtime package pins and launchers are unchanged. No additional Windows/Linux or personal research acceptance test was performed.
 

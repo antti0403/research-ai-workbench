@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "core_requirements": [
     "pypdf==6.19.0"
   ],
@@ -341,7 +341,8 @@
         "scipy==1.18.1",
         "matplotlib==3.11.2"
       ],
-      "limits": "Runtime checks do not validate the scientific method or user data."
+      "limits": "Runtime checks do not validate the scientific method or user data.",
+      "python_minimum": "3.12"
     },
     "figures": {
       "purpose": "Scientific plotting with Python tools",
@@ -350,7 +351,8 @@
         "numpy==2.5.3",
         "matplotlib==3.11.2"
       ],
-      "limits": "nature-figure is withheld because permission for its nested figures4papers assets is unresolved; see THIRD_PARTY.md. Plotting runtime remains available. Manuscript-specific formats need agent verification."
+      "limits": "nature-figure is withheld because permission for its nested figures4papers assets is unresolved; see THIRD_PARTY.md. Plotting runtime remains available. Manuscript-specific formats need agent verification.",
+      "python_minimum": "3.12"
     },
     "paperqa": {
       "purpose": "Questions over selected local papers with source-linked evidence",

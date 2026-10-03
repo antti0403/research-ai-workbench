@@ -1,6 +1,6 @@
 # Research AI Workbench Setup Guide
 
-Version **1.6**, 2026-10-03. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
+Version **1.7**, 2026-10-03. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
 
 This is a complete standalone guide. Give the AI this file for agent-driven setup, or the [repository](https://github.com/antti0403/research-ai-workbench) for its installer. This file alone does not contain the program, dependencies, accounts, models, or commercial licenses. Instructions are in English; conversation follows the user's language and deliverables follow their target requirements.
 
@@ -67,6 +67,8 @@ bash install.sh --workspace "/path/to/project"
 # Windows PowerShell
 .\install.ps1 --workspace "C:\path\to\project"
 ```
+
+The foundation accepts Python 3.11+. The current data/figures pins require Python 3.12+; plan includes their minimum version and apply checks before creating the profile environment. Use a compatible interpreter for apply; keep a working foundation interpreter intact. Dependency wheels still need platform checks.
 
 A suitable existing Python 3.11+ can run `python workbench.py setup --workspace <target>` directly. The public repository requires no collaborator invitation.
 
@@ -271,4 +273,4 @@ Later runs read configuration first, resume unfinished work, and skip unchanged 
 - [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) and [ASD FAQ](https://www.asd-ste100.org/STE_faq.html): terminology, sentences, procedures, descriptive writing, and rewriting; review included Rule 1.11, Sections 4–6, and Rule 9.1. Borrowed principles are not compliance certification.
 - [Karpathy's post](https://x.com/karpathy/status/2105819303471976479), read through a [public mirror](https://x.twstalker.com/karpathy/status/2105819303471976479) because X was inaccessible: loose STE style and presentation suggestions, not evidence that richer formats always work better.
 
-Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 1.6 adds optional PaperQA source-linked question answering; it retains the same foundation and research workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.
+Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 1.7 clarifies profile-specific Python requirements and separate installation/research acceptance; it retains the optional PaperQA workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.
