@@ -1,6 +1,14 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.2.2. Tests used temporary workspaces and synthetic or public inputs, separate from private research. The earlier full runtime results below were obtained for 0.2.0 and remain historical evidence.
+Updated: 2026-10-03 for repository 0.2.3. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.2.3 documentation release
+
+Local Windows checks on Python 3.12.14 passed repository syntax/link/version validation, 39 existing tests (37 passed, two platform-related skips), and actual offline launcher/copied-engine preparation. An isolated offline upgrade from canonical 0.2.2 sources to 0.2.3 retained both guide versions, preserved human notes, configuration, instructions and skill files, updated the owned entry point, and resumed successfully. Runtime dependencies remained honestly pending. This release changes documentation and kit metadata; runtime behavior and dependency pins are unchanged. See the CI results below for each exact commit's separate online checks.
+
+## Earlier release evidence
+
+The full runtime table below describes 0.2.0; later changes and their checks are recorded first.
 
 The 0.2.2 Windows regression suite ran 39 tests on Python 3.12.14: 37 passed; two were skipped (privileged symbolic-link creation and a POSIX-only interpreter-link test). The suite exercised real Windows junctions, actual bytecode generation, canonical/relative skill paths, fresh foundation checks, runtime ownership and simulated repair failures, BOM/invalid JSON, Unicode output, and legacy/edited entry-point preservation. Mocked repair tests do not prove a real dependency installation.
 

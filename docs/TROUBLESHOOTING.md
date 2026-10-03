@@ -4,7 +4,7 @@ Read `.workbench/install-report.md` and `workbench-config.md` in the target proj
 
 | Symptom | Meaning and next action |
 | --- | --- |
-| Cannot download the repository | While private, the GitHub account needs repository access. A public link alone does not grant it. |
+| Cannot download the repository | This repository is public. Check the URL, connection, or proxy, then retry Code → Download ZIP. No collaborator invitation is needed. |
 | Launcher cannot find Python | Online launchers can obtain a local Python through Astral uv. On macOS/Linux this requires Bash, curl, and a SHA-256 utility. Offline use requires Python 3.11+ already installed. |
 | PowerShell blocks the script | Follow the computer's normal software policy. Ask the administrator for an approved method, or have an authorized agent use an already installed Python to run `workbench.py setup`. The launcher does not bypass policy. |
 | Offline setup exits with code 2 | Files were prepared but dependencies are pending. Rerun the same setup online. |

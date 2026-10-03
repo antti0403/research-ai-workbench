@@ -1,50 +1,46 @@
 # Workbench configuration
 
-Copy this blank template into the user's project. Do not commit a filled personal record to this repository. Use states: not performed, performed, verified, awaiting user action, not applicable. Record failures with errors and next actions.
+Keep this record in the personal project; do not commit filled copies here. Use states: not performed, performed, verified, awaiting user action, not applicable. Record actual errors and next actions. Never store passwords, tokens, or API keys.
 
-## Goal and environment
+## Task and environment
 
-- Immediate task and expected output: unconfirmed.
-- Field, object, method, and stage: unconfirmed.
+- Next task and expected output: unconfirmed.
+- Research question, object, method, and stage: unconfirmed.
 - Conversation language and explanation depth: unconfirmed.
-- Deliverable language and submission requirements: unconfirmed.
-- Operating system, agent product, and version: not inspected.
-- Editor, runtime, and existing tools: not inspected.
-- Cost and data-processing limits: unconfirmed.
+- Deliverable language and requirements: unconfirmed.
+- Operating system, agent/version, editor, runtimes, and existing tools: not inspected.
+- Cost, access, and data-processing constraints: unconfirmed.
 
 ## Tools and skills
 
-| Item | Source and pinned version | Location and dependencies | Files | Host discovery | Functional check | Next action |
-| --- | --- | --- | --- | --- | --- | --- |
-| Fill from the actual selection | Unconfirmed | Not inspected | Not performed | Not performed | Not performed | Unconfirmed |
+| Item and purpose | Source, revision, location, dependencies | Separate checks | Gap and next action |
+| --- | --- | --- | --- |
+| Actual selection only | Not inspected | Files: not performed; host discovery: not performed; function: not performed | Unconfirmed |
 
-## Persistent rules
+## Rules and locations
 
-- Rule file and scope: not configured.
-- Language, explanation depth, and visual selection: not configured.
+- Effective instruction file and scope: not configured.
+- Language, explanation, and visual rules: not configured.
 - Current-session loading: not performed.
 - New-session loading: not performed.
 - Notes, data, and manuscript locations: unconfirmed.
-- Existing localized filenames and their mapping, if any: unconfirmed.
+- Existing localized filename mappings, if needed: unconfirmed.
 
-## Real task acceptance
+## Real task
 
-- Materials and sources: unconfirmed.
-- Performed steps, output locations, and results: not performed.
-- User understanding feedback: not received.
+- Materials and source scope: unconfirmed.
+- Steps, output locations, and results: not performed.
 - Unverified parts: record actual scope.
+- Understanding feedback: not received.
 
-## Skill usage
+## Usage
 
-| Purpose | Actual invocation name | Natural-language request | Required inputs | Output location |
-| --- | --- | --- | --- | --- |
-| Fill only for configured capabilities | Unconfirmed | Unconfirmed | Unconfirmed | Unconfirmed |
+| Purpose / invocation name | Example request | Inputs / output location |
+| --- | --- | --- |
+| Configured capabilities only | Unconfirmed | Unconfirmed |
 
-## Maintenance and recovery
+## Resume and recovery
 
-- Items added or changed: not performed.
-- Previous versions and backup locations: not recorded.
-- Recovery steps: fill from actual changes.
-- Last successful step and next action after interruption: not recorded.
-
-Do not store passwords, tokens, or API keys here.
+- Items changed, previous versions, and backups: not recorded.
+- Last successful step: not recorded.
+- Failures, recovery, and next action: not recorded.

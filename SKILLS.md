@@ -1,49 +1,55 @@
-# Skill sources and verification scope
+# Skills: catalog, candidates, and past checks
 
-See [SETUP.md](SETUP.md) for selection criteria. This file records known revisions and checks for maintenance. **A recorded version is neither a requirement to install an old release forever nor evidence that a newer release has been tested.** Review changes at installation time and record the chosen revision.
+Use [SETUP.md](SETUP.md) to select for a task and [Automation](docs/AUTOMATION.md) for profile IDs. This page separates what the installer offers from manual candidates and historical results.
 
-Track source review, file installation, runtime dependencies, host discovery, and real task execution separately. Passing one stage does not establish the next.
+## Current catalog
 
-## Automatic catalog in 0.2.2
+Repository 0.2.3 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
 
-The common foundation installs two original MIT-licensed skills: `research-workbench` for intake and setup, and `research-reading` for source-linked notes. The machine-readable [registry](registry.json) defines optional bundles. Initial automated bundles cover a subset of the candidates below; the rest require task-specific agent review.
-
-Nature bundles use the recorded root Apache-2.0 revision with its license retained; nested material may have separate terms. Creator and component-level credits are in [THIRD_PARTY.md](THIRD_PARTY.md). Scientific computation skills use the recorded MIT revision and individual file hashes, avoiding a download of the entire large collection. Writing includes nature-shared. `nature-figure` is withheld because its figures4papers assets have unresolved reuse permission. The figures profile retains NumPy and Matplotlib. This does not remove earlier installed skills. MATLAB is guidance only until the user provides a working licensed or otherwise authorized runtime.
-
-**ARS at the recorded revision uses CC BY-NC 4.0. It is not an automatic bundle.** Check intended use and license terms before a separate installation, particularly for paid setup services or commercial use. Installing a package does not change its license.
-
-Pinned top-level Python packages and resolved runtime versions are recorded separately. Optional skill files can be installed before task-specific dependencies and host invocation are verified; the report preserves that distinction.
-
-## Earlier local installation records
-
-These records come from a macOS maintenance environment on 2026-10-02. Setup was not repeated in another user's clean environment.
-
-| Skill | Repository and path | Recorded commit | Checks performed | Still unverified |
-| --- | --- | --- | --- | --- |
-| academic-research-suite | [ARS Codex](https://github.com/Imbad0202/academic-research-skills-codex), `skills/academic-research-suite` | `70b412fe69d3b5bf6b16adf64a96160bdd3c2d28` | Complete directory matched upstream file hashes | Effectiveness for the target research task; other agents |
-| matlab | [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills), `skills/matlab` | `154988403bb5a18e9d3c0ce4e6d5e2e4b184a298` | Complete directory matched upstream file hashes | MATLAB executable, license, toolboxes, and actual model execution |
-| sympy | Same repository, `skills/sympy` | `154988403bb5a18e9d3c0ce4e6d5e2e4b184a298` | File integrity and basic symbolic differentiation | User-specific assumptions, derivations, and task |
-| uncertainty-and-units | Same repository, `skills/uncertainty-and-units` | `154988403bb5a18e9d3c0ce4e6d5e2e4b184a298` | Integrity; power-unit calculation; rejection of incompatible units; simple uncertainty propagation | User data and uncertainty model |
-| codex-autoresearch | [codex-autoresearch](https://github.com/leo-lilinxiao/codex-autoresearch), repository root | `0f54c571707487f59486ba7c50d405edfc746c19` | Complete directory matched upstream file hashes | Host invocation and a constrained experiment workflow; no automatic experiment started |
-
-Recorded calculation environment: Python 3.14.4, SymPy 1.14.0, NumPy 2.4.4, SciPy 1.17.1, pint 0.26.1, uncertainties 3.2.3. These describe one environment, not universal requirements. Basic calculations are not acceptance of an entire skill workflow.
-
-## Candidate modules
-
-[Nature Skills](https://github.com/Yuan1z0825/nature-skills) directories and shared dependencies were reviewed on 2026-10-02 at reference commit `84880815fb37317b3766bff2c2abba395b8993c3`. A clean installation and full workflow test of all modules at that revision have not been completed for this repository.
-
-| Purpose | Subdirectories under `skills/` | Dependencies and limits |
+| Source | Automatic scope | Limits |
 | --- | --- | --- |
-| Search and full text | nature-academic-search, nature-downloader | Check database coverage, network access, and lawful full-text rights |
-| Reading and detailed analysis | nature-reader, nature-paper-card | Check nature-shared for reader; state partial access explicitly |
-| Writing and polishing | nature-writing, nature-polishing | Check nature-shared; preserve facts, terminology, and claim strength |
-| Citation verification | nature-ref-verifier | Correct bibliography does not prove support for a claim |
-| Figures and presentations | nature-figure, nature-paper2ppt | nature-figure is withheld pending nested-asset permissions; use the plotting runtime. Review paper2ppt separately and check nature-shared. |
+| Nature Skills | Literature search/reference checks; writing, polishing, and required shared files | Pinned Apache-2.0 root license; nested material may differ |
+| Scientific Agent Skills | MATLAB guidance, SymPy, units/uncertainty | Pinned MIT source and individual file hashes; MATLAB itself is not installed |
+| Python packages | Core PDF reading and selected computation/plotting environments | Direct versions pinned; resolved versions recorded per runtime |
 
-Use the README, SKILL.md, and cross-directory references from the selected revision when repositories change. Other agents need their own supported directories and installation methods.
+Source revisions, hashes, authors, and license evidence live in the registry and [third-party inventory](THIRD_PARTY.md). Automatic installation uses those pins; review and verification are required to update them.
 
-## Costs, access, and updates
+**Excluded:** ARS uses CC BY-NC 4.0 at the reviewed revision and needs intended-use review before manual installation. `nature-figure` is withheld pending permission for its nested `figures4papers` assets; `figures` installs only the plotting runtime. Earlier local installations are not removed.
 
-Skill files do not include model services, MATLAB licenses, institutional access, or third-party APIs. The setup AI must identify required accounts and current costs for selected workflows. Mark unknown costs unconfirmed rather than promising everything is free.
+Files matching a source, dependencies loading, host discovery, and a real task passing are separate checks. Skills do not supply accounts, MATLAB licenses, institutional access, model services, or every upstream optional integration.
 
-Before updating, inspect and back up local changes. Update modules the current task needs, then recheck affected functions. Record date, old and new versions, and results. Record platform tests in [compatibility and verification](docs/COMPATIBILITY.md).
+## Manual candidates
+
+The guide lists exact candidate paths. Nature modules were reviewed at `84880815fb37317b3766bff2c2abba395b8993c3` on 2026-10-02; a complete clean installation and workflow test of every module was not performed.
+
+| Need | Nature directories under `skills/` | Check |
+| --- | --- | --- |
+| Search / full text | `nature-academic-search`, `nature-downloader` | Coverage and lawful access |
+| Reading / paper analysis | `nature-reader`, `nature-paper-card` | Shared dependencies and actual source scope |
+| Writing / polishing | `nature-writing`, `nature-polishing` | `nature-shared`, evidence, terminology, claim strength |
+| Reference metadata | `nature-ref-verifier` | Metadata does not prove claim support |
+| Figures / presentations | `nature-figure`, `nature-paper2ppt` | Figure assets withheld; review presentation dependencies separately |
+
+Read the chosen revision's instructions and cross-directory references. A historical revision is not proof that a newer one works. Manual selections need their own source, license, dependency, cost, and host checks.
+
+## Historical local checks
+
+These results describe one macOS maintenance environment on 2026-10-02, not another user's clean setup. All listed skill directories matched upstream hashes.
+
+| Skill | Additional check | Still unverified |
+| --- | --- | --- |
+| `academic-research-suite` | Files only | Target-task effectiveness and other agents |
+| `matlab` | Files only | Executable, license, toolboxes, model execution |
+| `sympy` | Basic differentiation | User assumptions, derivation, and task |
+| `uncertainty-and-units` | Power units, incompatible-unit rejection, simple propagation | User data and uncertainty model |
+| `codex-autoresearch` | Files only; no experiment started | Host invocation and constrained experiment |
+
+Recorded sources and paths:
+
+- [ARS Codex](https://github.com/Imbad0202/academic-research-skills-codex), `skills/academic-research-suite`: `70b412fe69d3b5bf6b16adf64a96160bdd3c2d28`.
+- [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills), `skills/matlab`, `skills/sympy`, `skills/uncertainty-and-units`: `154988403bb5a18e9d3c0ce4e6d5e2e4b184a298`.
+- [Codex Autoresearch](https://github.com/leo-lilinxiao/codex-autoresearch), repository root: `0f54c571707487f59486ba7c50d405edfc746c19`.
+
+Calculation environment: Python 3.14.4, SymPy 1.14.0, NumPy 2.4.4, SciPy 1.17.1, Pint 0.26.1, uncertainties 3.2.3. These are historical facts, not universal requirements.
+
+For updates, inspect/back up local changes, check only the needed modules, and record old/new revisions, date, and results. Mark unknown costs unconfirmed. Add platform evidence to [compatibility](docs/COMPATIBILITY.md).
