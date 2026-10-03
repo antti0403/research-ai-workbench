@@ -1,12 +1,12 @@
 # Third-party sources, dependencies, and acknowledgements
 
-Reviewed on 2026-10-03 for repository 0.2.2 and guide 1.4. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
+Reviewed on 2026-10-03 for repository 0.3.0 and guide 1.6. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
 
 ## What this repository contains
 
 | Material | Relationship to this project |
 | --- | --- |
-| Installer, launchers, helpers, tests, `research-workbench`, `research-reading`, guide and templates | Developed for this project with AI assistance. The project's MIT license covers these original contributions. External ideas and APIs are credited below. |
+| Installer, launchers, helpers, tests, `research-workbench`, `research-reading`, `research-paperqa`, guide and templates | Developed for this project with AI assistance. The project's MIT license covers these original contributions. External ideas and APIs are credited below. |
 | Third-party skills | Not vendored here. The installer obtains selected files from upstream using catalog revisions and hashes. |
 | Python, uv, Python packages and their native libraries/fonts | Not bundled here. Obtained or reused during setup; their distributions keep their own licenses. |
 | Paper example | An attributed abstract paraphrase in `examples/attention-abstract.md`, not a reproduced paper, figure, or full-text review. |
@@ -100,6 +100,14 @@ These were resolved in the 2026-10-03 macOS arm64 verification environments. The
 | typing_extensions — Python typing contributors | [4.16.0](https://pypi.org/project/typing-extensions/4.16.0/) | PSF-2.0 |
 
 pip 26.0.1 was also observed. Native libraries, fonts and pip-vendored modules are not fully enumerated by this package table; their notices ship inside the distributions. This is not a complete cross-platform software bill of materials or permission to strip notices when repackaging.
+
+## Optional PaperQA integration
+
+[PaperQA](https://github.com/Future-House/paper-qa) is by FutureHouse and contributors. Reviewed release: [v2026.08.12](https://github.com/Future-House/paper-qa/releases/tag/v2026.08.12), commit `57e89f7223b0960d5ee5ea048c69e3c47e088572`; installed package: [paper-qa 2026.8.12](https://pypi.org/project/paper-qa/2026.8.12/), Python >=3.11. It is downloaded only for the selected `paperqa` profile, without optional model/document extras; no upstream code is vendored or modified. The installed wheel retains `paper_qa-2026.8.12.dist-info/licenses/LICENSE`: Apache-2.0, copyright 2024 FutureHouse. [Pinned upstream license](https://github.com/Future-House/paper-qa/blob/57e89f7223b0960d5ee5ea048c69e3c47e088572/LICENSE). The reviewed PyPI wheel SHA-256 is `4cdf007207dea58edf1c1f3507ca33e1e7737fd8d7a17cb1736a8a089463918c`; pip pins the direct version, but this installer does not enforce that wheel hash or hash-lock all transitive dependencies.
+
+Required dependencies include `paper-qa-pypdf`, `fhaviary`, `fhlmi`, LiteLLM and its provider clients, NumPy, Pydantic, tiktoken, tantivy, and HTTP/text/metadata utilities. Their individual distributions retain their licenses and notices in the isolated environment; resolved versions are recorded in `.workbench/locks/`. This is not a complete SBOM. Model weights, credentials, and remote services are not bundled or licensed by this project. Check dependency changes and provider/content terms before redistribution or querying private sources.
+
+`skills/research-paperqa/SKILL.md`, `docs/PAPERQA.md` and the synthetic ingestion/evidence checks are this project's original MIT-licensed integration. API/CLI behavior is informed by the pinned PaperQA source. The generated PDF fixture is wholly synthetic, not a scientific result or copied paper. Local smoke checks establish parsing and evidence serialization only; real retrieval/model answer quality and host discovery are unverified.
 
 ## Development-only CI dependencies
 

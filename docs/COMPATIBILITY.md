@@ -1,6 +1,16 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.2.4. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-03 for repository 0.3.0. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.0 optional PaperQA module
+
+Local Windows checks on Python 3.12.14 passed 41 tests (39 passed, two platform-related skips), repository syntax/link/version checks, actual offline launcher/copied-engine preparation, and canonical-source 0.2.4→0.3.0 offline upgrade/resume. The upgrade retained both kits and preserved human instructions, notes, configuration, and existing foundation skills. New tests cover optional bundled-skill installation through the copied engine, offline pending status, repeat apply, and preservation of an edited PaperQA skill.
+
+The pinned PaperQA package installed into an isolated Windows environment. Its local smoke check ingested an actual synthetic PDF, checked duplicate handling, retained page-linked evidence/citation/content hash, and round-tripped session JSON with outbound connections blocked and model adapters rejecting calls. The documented named settings also loaded through the actual `pqa --settings research view` CLI. No paper question was sent to a model.
+
+The complete copied-engine online test exercised core/figures/PaperQA installation, repeated apply, doctor, CLI invocation, and human-file preservation in a deep Windows path with spaces and Unicode. Initial ordinary pip installation failed on deeply nested LiteLLM files with system long-path support disabled. The PaperQA interpreter now uses Windows extended paths for pip and runtime checks, without changing system policy; actual installation/resume and CLI checks passed with that handling. Test cleanup also handles extended paths. Other architectures, UNC/network shares, and PaperQA on Python versions other than 3.12 remain unverified locally.
+
+The three-platform Python 3.12 runtime CI jobs now include PaperQA installation and these local evidence checks; use the [exact run results](https://github.com/antti0403/research-ai-workbench/actions/workflows/ci.yml) for cross-platform evidence. Configured coverage alone is not a passing result. Retrieval relevance, real model/provider connections, generated-answer quality, native host discovery, and scientific claim acceptance remain unverified.
 
 ## 0.2.4 project overview
 

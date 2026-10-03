@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-10-03
+
+- Add the optional PaperQA profile, pinned to paper-qa 2026.8.12, and an original research-paperqa skill. Default foundation installation remains light and does not install PaperQA.
+- Support installer-owned bundled skills in selected profiles, including offline file preparation and preservation of edited skills. Existing foundation skill bytes are unchanged.
+- Check real synthetic PDF ingestion, duplicate handling, page-linked source contexts, and JSON serialization with outbound connections blocked and no model calls. Add optional copied-engine installation/resume and CLI checks to the three-platform Python 3.12 runtime CI jobs.
+- Use extended Windows paths for PaperQA package installation and runtime checks to handle deeply nested LiteLLM files without changing system policy. Preserve existing runtime ownership and repair boundaries.
+- Add a concise PaperQA workflow and standalone guide edition 1.6, with explicit selected-paper/model scope, project-local state, credentials, provider cost, and cited-claim verification. Update attribution and release metadata.
+- Real model queries, retrieval relevance, host discovery, and scientific claim acceptance remain unverified.
+
 ## 0.2.4 — 2026-10-03
 
 - Present README as a project overview with features, quick start, usage, documentation, contributing, and license sections.

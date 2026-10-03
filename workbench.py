@@ -24,7 +24,7 @@ import venv
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.2.4'
+VERSION = '0.3.0'
 REGISTRY = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
 MAX_DOWNLOAD = 80 * 1024 * 1024
 MAX_EXPANDED = 200 * 1024 * 1024
@@ -245,7 +245,16 @@ def check_runtime(root, profile, requirements):
     python = environment_python(root, profile)
     if not python.is_file():
         raise SetupError('Missing runtime interpreter: ' + str(python))
-    return run([str(python), str(ROOT / 'scripts/verify_runtime.py'), profile, json.dumps(requirements)], timeout=90)
+    return run([runtime_command(python, profile), str(ROOT / 'scripts/verify_runtime.py'), profile, json.dumps(requirements)], timeout=90)
+
+
+def runtime_command(python, profile):
+    path = str(python)
+    # PaperQA's LiteLLM distribution includes deeply nested files. Explicit
+    # extended paths let pip install them without changing Windows system policy.
+    if os.name == 'nt' and profile == 'paperqa' and not path.startswith('\\\\?\\'):
+        return '\\\\?\\UNC\\' + path[2:] if path.startswith('\\\\') else '\\\\?\\' + path
+    return path
 
 
 def owns_runtime(root, state, profile):
@@ -301,13 +310,14 @@ def prepare_runtime(root, state, profile, requirements, offline=False):
         if not owned:
             raise SetupError('Preserved unrecognized environment; no packages changed: ' + str(envdir) + '. Use a dedicated new workspace, or review and back up this environment before replacing it.') from exc
         record(root, state, 'runtime:' + profile, 'in progress', 'Installing pinned packages into this profile only.')
+        executable = runtime_command(python, profile)
         try:
-            run([str(python), '-m', 'pip', '--version'], timeout=60)
+            run([executable, '-m', 'pip', '--version'], timeout=60)
         except SetupError:
-            run([str(python), '-m', 'ensurepip'], timeout=120)
-        run([str(python), '-m', 'pip', 'install', '--only-binary=:all:', '--index-url', 'https://pypi.org/simple', *requirements])
+            run([executable, '-m', 'ensurepip'], timeout=120)
+        run([executable, '-m', 'pip', 'install', '--only-binary=:all:', '--index-url', 'https://pypi.org/simple', *requirements])
         output = check_runtime(root, profile, requirements)
-    freeze = run([str(python), '-m', 'pip', 'freeze'], timeout=60)
+    freeze = run([runtime_command(python, profile), '-m', 'pip', 'freeze'], timeout=60)
     atomic_write(safe_path(root, '.workbench/locks/' + profile + '.txt'), (freeze + '\n').encode())
     record(root, state, 'runtime:' + profile, 'verified', output)
 
@@ -378,6 +388,11 @@ def archive_skill(archive, subpath):
 def remote_skill(root, state, name, offline):
     spec = REGISTRY['skills'][name]
     source = REGISTRY['sources'][spec['source']]
+    if source.get('type') == 'bundled':
+        folder = safe_path(ROOT, spec['path'])
+        files = {relative: safe_path(folder, relative).read_bytes() for relative in tree_hashes(folder)}
+        install_directory(root, state, name, files, {**source, 'version': VERSION, 'path': spec['path']})
+        return
     cache = safe_path(root, '.workbench/cache')
     if offline:
         record(root, state, 'skill:' + name, 'pending', 'Offline mode: third-party files not downloaded.')

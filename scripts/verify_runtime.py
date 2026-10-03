@@ -46,6 +46,9 @@ elif profile == 'units':
         raise AssertionError('Incompatible units were accepted.')
     assert abs((ufloat(2, .1) * 3).std_dev - .3) < 1e-12
     print('Power units, incompatible units, and uncertainty checks passed.')
+elif profile == 'paperqa':
+    from check_paperqa import check
+    check()
 elif profile in ('data', 'figures'):
     with tempfile.TemporaryDirectory() as temporary:
         os.environ['MPLCONFIGDIR'] = temporary
