@@ -1,6 +1,6 @@
 # Sources and third-party notices
 
-Research AI Workbench contains an installer, two bundled skills, a setup guide, and templates developed for this project. It also depends on other people's software and ideas. The [third-party inventory](THIRD_PARTY.md) identifies their authors or projects, sources, versions, purpose, license evidence, and inclusion status. [SKILLS.md](SKILLS.md) records installation and verification scope.
+Research AI Workbench contains an installer, foundation and optional bundled skills, a setup guide, and templates developed for this project. It also depends on other people's software and ideas. The [third-party inventory](THIRD_PARTY.md) identifies their authors or projects, sources, versions, purpose, license evidence, and inclusion status. [SKILLS.md](SKILLS.md) records installation and verification scope.
 
 - 艺雨YiLight's Codex research video informed the workflow. sunweihunu's transcript was the intermediary used to review its full sequence; original complete subtitles were not obtained. Neither the video nor transcript is bundled. Both sources are credited separately in the inventory.
 - ASD maintains ASD-STE100. This project borrows clear communication principles, does not package the standard, and does not certify compliance.
@@ -10,6 +10,7 @@ Research AI Workbench contains an installer, two bundled skills, a setup guide, 
 - ARS Codex, by Cheng-I Wu / Imbad0202, uses CC BY-NC 4.0 at the recorded revision. It is a separately reviewed candidate, not an automatic dependency. Codex Autoresearch, by Linxiao Li / leo-lilinxiao (copyright notice: LLLLLe), is also a candidate, under its own MIT license.
 - The recorded `nature-figure` contains scripts/images from ChenLiu-1996/figures4papers. Its own notice says reuse permission is unresolved. Version 0.2.1 excludes this skill from automatic selection; it does not remove earlier local installations or grant rights to those assets. The Python plotting runtime remains available.
 - The Python fallback uses Astral uv 0.12.22 from its official source after checking the installer SHA-256. uv and its managed Python distributions retain their licenses. See [Astral installation](https://docs.astral.sh/uv/getting-started/installation/) and [installer options](https://docs.astral.sh/uv/reference/installer/).
+- PaperQA is maintained by FutureHouse and contributors (copyright 2024 FutureHouse), under Apache-2.0. The optional profile downloads its pinned PyPI distribution with retained license files; our workflow skill and tests are original integration code. Paper and model-provider rights remain separate.
 - Python dependencies are downloaded from PyPI into project-specific environments. Crossref metadata search sends the query to Crossref; it does not fetch or grant full-text rights.
 - The example note is a short paraphrase of a public arXiv abstract. No full paper or original figure is included. Paper rights remain with their holders; this repository's license does not apply to linked papers.
 - Product names such as Codex, GitHub, Zotero, and MATLAB identify compatibility or dependencies. They do not imply endorsement.

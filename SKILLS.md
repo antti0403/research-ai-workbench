@@ -4,12 +4,13 @@ Use [SETUP.md](SETUP.md) to select for a task and [Automation](docs/AUTOMATION.m
 
 ## Current catalog
 
-Repository 0.2.4 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
+Repository 0.3.0 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
 
 | Source | Automatic scope | Limits |
 | --- | --- | --- |
 | Nature Skills | Literature search/reference checks; writing, polishing, and required shared files | Pinned Apache-2.0 root license; nested material may differ |
 | Scientific Agent Skills | MATLAB guidance, SymPy, units/uncertainty | Pinned MIT source and individual file hashes; MATLAB itself is not installed |
+| PaperQA | Optional local-paper question answering runtime and original research-paperqa skill | Model/embedding services, data-sharing scope, cost, and cited-claim support need task checks; see [workflow](docs/PAPERQA.md) |
 | Python packages | Core PDF reading and selected computation/plotting environments | Direct versions pinned; resolved versions recorded per runtime |
 
 Source revisions, hashes, authors, and license evidence live in the registry and [third-party inventory](THIRD_PARTY.md). Automatic installation uses those pins; review and verification are required to update them.

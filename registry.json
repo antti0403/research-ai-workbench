@@ -1,5 +1,5 @@
 {
-  "version": "0.2.4",
+  "version": "0.3.0",
   "core_requirements": [
     "pypdf==6.19.0"
   ],
@@ -18,6 +18,10 @@
         "path": "LICENSE.md",
         "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
       }
+    },
+    "workbench": {
+      "type": "bundled",
+      "license": "MIT"
     }
   },
   "skills": {
@@ -273,6 +277,10 @@
     "nature-shared": {
       "source": "nature",
       "path": "skills/nature-shared"
+    },
+    "research-paperqa": {
+      "source": "workbench",
+      "path": "skills/research-paperqa"
     }
   },
   "profiles": {
@@ -343,6 +351,16 @@
         "matplotlib==3.11.2"
       ],
       "limits": "nature-figure is withheld because permission for its nested figures4papers assets is unresolved; see THIRD_PARTY.md. Plotting runtime remains available. Manuscript-specific formats need agent verification."
+    },
+    "paperqa": {
+      "purpose": "Questions over selected local papers with source-linked evidence",
+      "skills": [
+        "research-paperqa"
+      ],
+      "requirements": [
+        "paper-qa==2026.8.12"
+      ],
+      "limits": "Local PDF ingestion and evidence serialization are checked without model calls. Requires explicit model/embedding configuration and authorized source sharing/cost. Host discovery, actual queries, and claim support remain task checks."
     }
   }
 }

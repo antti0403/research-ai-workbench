@@ -9,7 +9,7 @@ It prepares a workspace for reading, notes, and research outputs. Your existing 
 ## Features
 
 - **Research foundation:** project folders, persistent instructions, two original research skills, and an isolated PDF-reading runtime.
-- **Optional extensions:** literature search, writing, symbolic mathematics, units, MATLAB guidance, data analysis, and plotting.
+- **Optional extensions:** literature search, [PaperQA evidence questions](docs/PAPERQA.md), writing, symbolic mathematics, units, MATLAB guidance, data analysis, and plotting.
 - **Resumable setup:** recorded checks, isolated environments, and preservation of existing files and settings.
 - **Agent-led configuration:** reuse your tools and add capabilities for a concrete task. The installer requires no additional model API subscription.
 
@@ -55,7 +55,7 @@ python workbench.py doctor --workspace "path/to/project"
 
 Start with the [first-task walkthrough](docs/FIRST_TASK.md), then select extensions for actual gaps. See the [installer reference](docs/AUTOMATION.md) for profiles, apply/resume commands, and installed interpreter paths.
 
-The installer downloads public dependencies and does not upload research files or request credentials. Search queries go to their provider; your agent's data policies still apply. AI applications and any required MATLAB runtimes, accounts, commercial licenses, or institutional access are provided separately.
+The installer downloads public dependencies and does not upload research files or request credentials. Search queries go to their provider; PaperQA may send selected paper passages to configured model/embedding services; your agent's data policies still apply. AI applications and any required MATLAB runtimes, accounts, commercial licenses, or institutional access are provided separately.
 
 ## Documentation
 
@@ -64,7 +64,7 @@ The installer downloads public dependencies and does not upload research files o
 - [Compatibility](docs/COMPATIBILITY.md) — tested environments and limits.
 - [Templates](templates/workbench-config.md) — personal configuration and [project rules](templates/project-instructions.md).
 
-Repository **0.2.4**, guide **1.5**. Changes are recorded in the [changelog](CHANGELOG.md).
+Repository **0.3.0**, guide **1.6**. Changes are recorded in the [changelog](CHANGELOG.md).
 
 ## Contributing
 

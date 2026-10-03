@@ -47,6 +47,35 @@ class WorkbenchTests(unittest.TestCase):
             w.main(['setup', '--workspace', str(self.root), '--offline'])
         self.assertEqual(skill.read_text(), 'Human modified skill')
 
+    def test_paperqa_is_optional_and_copied_engine_can_install_its_skill_offline(self):
+        w.main(['setup', '--workspace', str(self.root), '--offline'])
+        destination = self.root / '.agents/skills/research-paperqa/SKILL.md'
+        self.assertFalse(destination.exists())
+        engine = self.root / '.workbench/kit' / w.VERSION / 'workbench.py'
+        spec = importlib.util.spec_from_file_location('copied_paperqa_engine', engine)
+        copied = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(copied)
+        state = copied.read_state(self.root)
+        with patch.object(copied, 'download', side_effect=AssertionError('Bundled skill used network')):
+            self.assertFalse(copied.apply_profile(self.root, state, {'extensions': ['paperqa']}, True))
+            before = destination.read_bytes()
+            self.assertFalse(copied.apply_profile(self.root, state, {'extensions': ['paperqa']}, True))
+        self.assertEqual(before, destination.read_bytes())
+        self.assertEqual(before, (w.ROOT / 'skills/research-paperqa/SKILL.md').read_bytes())
+        self.assertEqual(state['checks']['runtime:paperqa']['status'], 'pending')
+        self.assertEqual(state['skills']['research-paperqa']['host_discovery'], 'not verified')
+        self.assertFalse((self.root / '.workbench/envs').exists())
+
+    def test_paperqa_apply_preserves_edited_optional_skill_and_reports_failure(self):
+        w.main(['setup', '--workspace', str(self.root), '--offline'])
+        state = w.read_state(self.root)
+        self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['paperqa']}, True))
+        destination = self.root / '.agents/skills/research-paperqa/SKILL.md'
+        destination.write_text('Human paper workflow', encoding='utf-8')
+        self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['paperqa']}, True))
+        self.assertEqual(destination.read_text(encoding='utf-8'), 'Human paper workflow')
+        self.assertEqual(state['profiles']['paperqa']['status'], 'failed')
+
     def test_unknown_profile_cannot_become_command(self):
         p = self.root / 'profile.json'
         p.write_text(json.dumps({'extensions': ['symbolic; touch outside']}))
