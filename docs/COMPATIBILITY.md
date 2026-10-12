@@ -1,6 +1,14 @@
 # Compatibility and verification
 
-Updated: 2026-10-03 for repository 0.3.1. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-12 for repository 0.3.2. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.2 optional literature workflow
+
+This release adds original integration instructions for a connected Undermind service, generated entry-point routing, and kit/guide metadata. Foundation skill bytes, profile selection, and runtime dependency pins remain unchanged. No hosted service, model, subscription, or institutional access is installed by this release.
+
+Local macOS arm64 checks on Python 3.14.4 passed the 43-test suite (42 passed, one Windows-only skip), source syntax/version/link checks, Bash syntax, the synthetic example, actual offline launcher/copied-engine preparation, and three previous-release upgrade/resume cases including canonical 0.3.1. These retained old kits, existing foundation skills, human instructions, configuration, and notes. Runtime pins are unchanged; local online dependency installation was not repeated.
+
+Prior platform results retain their original release scope. Current-commit CI and real Undermind connection/search/full-text acceptance are separate evidence; adding instructions does not prove every user's account or full research workflow works.
 
 ## 0.3.1 release and first-task checks
 
