@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.1 -->
+<!-- workbench-release: 0.3.2 -->
 
 # Research AI Workbench
 
@@ -69,6 +69,8 @@ If you prefer to let an AI agent handle the whole setup without running shell sc
 
 Start with the [three task requests](docs/FIRST_TASK.md): read an abstract, check one full-text claim, or ask across selected papers. Each specifies its expected output. The [worked example](examples/attention-scaling.md) includes original-source locators, a checked formula, and a reproducible numerical illustration.
 
+For literature discovery, a connected **Undermind** plugin can find candidates, follow citation relationships, and analyze available PDFs. Keep selected original PDFs and citation records in Zotero or your reference manager, and verified understanding in Obsidian or your existing notes. See the optional [literature workflow](docs/LITERATURE.md); the installer does not install the service, sign in, or buy a subscription.
+
 ## CLI checks and maintenance
 
 The repository includes a Python utility (`workbench.py`) to inspect or check your setup:
@@ -92,6 +94,7 @@ The installer only fetches public open-source packages. It does not upload resea
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md): Step-by-step walkthrough of your first research task.
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md): Tested operating systems, Python versions, and limits.
 - [docs/AUTOMATION.md](docs/AUTOMATION.md): Reference for unattended profiles and CLI arguments.
+- [docs/LITERATURE.md](docs/LITERATURE.md): Undermind discovery, verified reference-manager PDFs, and source-linked notes.
 
 ---
 
@@ -106,4 +109,4 @@ Acknowledgements:
 - Communication principles borrow from **ASD-STE100** and **Andrej Karpathy**'s technical presentation notes.
 - Third-party components retain their respective licenses. See [NOTICE.md](NOTICE.md) and [THIRD_PARTY.md](THIRD_PARTY.md) for full attribution.
 
-Release **0.3.1**, setup guide **1.7**. See the [changelog](CHANGELOG.md).
+Release **0.3.2**, setup guide **1.8**. See the [changelog](CHANGELOG.md).
