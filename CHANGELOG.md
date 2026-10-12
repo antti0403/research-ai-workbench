@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2 — 2026-10-12
+
+- Add an optional Undermind workflow for discovery, citation expansion, available-PDF analysis, and handoff to the user's existing reference manager and notes.
+- Distinguish DOI metadata from a verified stored PDF; keep workspace-specific cite keys and original-source checks explicit.
+- Add the workflow to generated START_HERE, the standalone guide, both READMEs, configuration checks, and service attribution. Keep existing foundation skill bytes unchanged so earlier installations retain their upgrade path.
+- Advance the immutable kit to 0.3.2 and standalone guide to 1.8. The installer does not install the service, buy a plan, upload a library, or schedule searches; runtime dependencies and profile selection are unchanged.
+
 ## 0.3.1 — 2026-10-03
 
 - Preserve the revised bilingual README style; package its Chinese translation and check language-independent release markers. Publish a new immutable kit so both existing 0.3.0 variants can upgrade without replacing their old kit.
