@@ -4,7 +4,7 @@ Use [SETUP.md](SETUP.md) to select for a task and [Automation](docs/AUTOMATION.m
 
 ## Current catalog
 
-Repository 0.3.1 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
+Repository 0.3.2 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
 
 | Source | Automatic scope | Limits |
 | --- | --- | --- |
@@ -18,6 +18,10 @@ Source revisions, hashes, authors, and license evidence live in the registry and
 **Excluded:** ARS uses CC BY-NC 4.0 at the reviewed revision and needs intended-use review before manual installation. `nature-figure` is withheld pending permission for its nested `figures4papers` assets; `figures` installs only the plotting runtime. Earlier local installations are not removed.
 
 Files matching a source, dependencies loading, host discovery, and a real task passing are separate checks. Skills do not supply accounts, MATLAB licenses, institutional access, model services, or every upstream optional integration.
+
+## Optional hosted literature service
+
+[Undermind](https://www.undermind.ai/) is an optional connected provider, not a skill package or automatic `registry.json` bundle. Its exposed tools support paper lookup, semantic and citation-related search, deep searches, available-PDF reading, and workspace organization. Host availability and account connection must be checked separately. Use the [literature workflow](docs/LITERATURE.md) with the user's existing reference manager and notes; there is no direct Zotero-write tool in the reviewed interface. No vendor code or service credentials are bundled. Service access, paper rights, plan limits, and uploads retain their own terms; see [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Manual candidates
 
