@@ -17,6 +17,21 @@ Keep this record in the personal project; do not commit filled copies here. Use 
 | --- | --- | --- | --- |
 | Actual selection only | Not inspected | Files: not performed; host discovery: not performed; function: not performed | Unconfirmed |
 
+## Optional literature service
+
+- Provider and actual host tools: not inspected.
+- Connection check and date: not performed.
+- Selected workspace name, ID, and link: not selected; keep a filled record local.
+- Reference-manager and note-system roles: unconfirmed.
+- Public-paper DOI/title lookup: not performed.
+- Search and citation-expansion acceptance: not performed.
+- Provider-reported PDF availability / independently checked full text: not performed / not performed.
+- Stored PDF under the correct reference record: not performed.
+- Source-linked note and original-source check: not performed.
+- Plan limits, paid actions, and upload authorization: unconfirmed; follow existing constraints.
+
+Connection, metadata lookup, and PDF availability are separate from full-text analysis and an end-to-end research task. See the installed kit's `docs/LITERATURE.md` when this route is selected.
+
 ## Rules and locations
 
 - Effective instruction file and scope: not configured.

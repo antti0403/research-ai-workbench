@@ -1,6 +1,6 @@
 # Research AI Workbench Setup Guide
 
-Version **1.7**, 2026-10-03. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
+Version **1.8**, 2026-10-12. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
 
 This is a complete standalone guide. Give the AI this file for agent-driven setup, or the [repository](https://github.com/antti0403/research-ai-workbench) for its installer. This file alone does not contain the program, dependencies, accounts, models, or commercial licenses. Instructions are in English; conversation follows the user's language and deliverables follow their target requirements.
 
@@ -173,6 +173,16 @@ Select by method: literature work can start with reading/search; derivations may
 
 Digests, monitoring, and scheduled tasks need an explicit topic, schedule, and notification preference. Setup alone does not authorize them.
 
+### Optional literature route: Undermind, a reference manager, and notes
+
+When the next task needs new literature and the host exposes a connected Undermind plugin, reuse it before installing another search tool. Undermind is a hosted service; the installer does not bundle it, sign in, buy a plan, or grant access to paywalled papers. Confirm the connection with its orientation tool, list workspaces, and select the intended workspace; create one only within the user's requested scope. Keep personal workspace IDs and connection evidence in the user's configuration, outside the shared distribution.
+
+Start from existing materials and an evidence gap. Use title/DOI lookup for a known paper, semantic search for a few candidates, references/citations for expansion from a seed, and deep search when a broader review is needed. Reference/citation search applies semantic selection and is not proof of a complete citation list. Reuse existing deep searches before launching another. Current tool availability, service limits, upload permissions, and costs remain separate checks.
+
+Screen candidates by the research question, state abstract versus full-text access, and check decisive claims in the original. Save selected bibliography records and actual PDFs through the user's reference manager. Undermind has no direct Zotero-write tool in the reviewed interface. Check existing DOI/title records first and verify that each saved PDF is readable, matches the paper, and belongs to the correct record. Importing a DOI does not by itself prove that the PDF was saved.
+
+Write concise source-linked notes in the user's chosen note system, preserve AI first-pass status, and revisit the same note after discussion. Search again when a specific gap remains. Record connection, DOI lookup, search, PDF availability, full-text analysis, reference-manager attachment, and note verification as separate states. A successful metadata lookup does not verify the whole workflow. These instructions are sufficient for standalone use; the repository's [literature workflow](https://github.com/antti0403/research-ai-workbench/blob/main/docs/LITERATURE.md) adds tool routing and acceptance details.
+
 ### Optional PaperQA workflow
 
 For questions across selected papers, the repository's `paperqa` profile installs `paper-qa==2026.8.12` and the original `research-paperqa` skill. Add it to the existing extension selection and use the recorded engine's plan/apply commands. With this guide alone, inspect [PaperQA's pinned release](https://github.com/Future-House/paper-qa/releases/tag/v2026.08.12), Apache-2.0 license, dependencies, and platform wheels before installing the same package in an isolated Python 3.11+ environment. No model extras are required for the initial text-only workflow.
@@ -273,4 +283,4 @@ Later runs read configuration first, resume unfinished work, and skip unchanged 
 - [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) and [ASD FAQ](https://www.asd-ste100.org/STE_faq.html): terminology, sentences, procedures, descriptive writing, and rewriting; review included Rule 1.11, Sections 4–6, and Rule 9.1. Borrowed principles are not compliance certification.
 - [Karpathy's post](https://x.com/karpathy/status/2105819303471976479), read through a [public mirror](https://x.twstalker.com/karpathy/status/2105819303471976479) because X was inaccessible: loose STE style and presentation suggestions, not evidence that richer formats always work better.
 
-Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 1.7 clarifies profile-specific Python requirements and separate installation/research acceptance; it retains the optional PaperQA workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.
+Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 1.8 adds optional Undermind discovery and verified reference-manager PDF handoff, while retaining the profile-specific Python requirements, separate installation/research acceptance, and optional PaperQA workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.
