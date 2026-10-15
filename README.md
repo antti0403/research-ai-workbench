@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.3 -->
+<!-- workbench-release: 0.3.4 -->
 
 # Research AI Workbench
 
@@ -73,6 +73,8 @@ For literature discovery, a connected **Undermind** plugin can find candidates, 
 
 For academic drafting and revision, the **writing** profile adds **Anti Defensive Writing**, adapted from Adkid-Zephyr: organize prose around supported contributions, remove redundant defensive wording, and preserve material findings and qualifications. See the [writing workflow](docs/WRITING.md).
 
+For statistical text-watermark reduction, the optional **watermarks** profile installs the full **watermarks-remover** service and its client. It runs a Layer B paraphrase pass through your configured model API, after the academic writing pass. See [setup and use](docs/WATERMARKS.md); backend configuration, actual model execution, and vendor-key verification are separate checks.
+
 ## CLI checks and maintenance
 
 The repository includes a Python utility (`workbench.py`) to inspect or check your setup:
@@ -96,6 +98,7 @@ The installer only fetches public open-source packages. It does not upload resea
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md): Step-by-step walkthrough of your first research task.
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md): Tested operating systems, Python versions, and limits.
 - [docs/AUTOMATION.md](docs/AUTOMATION.md): Reference for unattended profiles and CLI arguments.
+- [docs/WATERMARKS.md](docs/WATERMARKS.md): Full Layer B statistical text-watermark reduction service and API setup.
 - [docs/WRITING.md](docs/WRITING.md): Contribution-first drafting and revision with Anti Defensive Writing.
 - [docs/LITERATURE.md](docs/LITERATURE.md): Undermind discovery, verified reference-manager PDFs, and source-linked notes.
 
@@ -108,9 +111,10 @@ Original code and documentation are released under the [MIT License](LICENSE).
 Acknowledgements:
 
 - Skill sources and patterns from **袁一哲 / Yuan1z0825 (Nature Skills)** and **K-Dense Inc. (Scientific Agent Skills)**.
+- **Guillaume Meyer and contributors** authored watermarks-remover; selected client and service files are downloaded unchanged with their MIT license.
 - **Adkid-Zephyr** authored the MIT-licensed Anti-Defensive Writing source; the bundled skill is an explicitly modified adaptation.
 - Workflow design inspired by **艺雨YiLight** and reviewed through **sunweihunu's transcript**.
 - Communication principles borrow from **ASD-STE100** and **Andrej Karpathy**'s technical presentation notes.
 - Third-party components retain their respective licenses. See [NOTICE.md](NOTICE.md) and [THIRD_PARTY.md](THIRD_PARTY.md) for full attribution.
 
-Release **0.3.3**, setup guide **1.9**. See the [changelog](CHANGELOG.md).
+Release **0.3.4**, setup guide **2.0**. See the [changelog](CHANGELOG.md).

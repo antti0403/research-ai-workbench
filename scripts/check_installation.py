@@ -71,7 +71,7 @@ def main():
             print('Passed: actual documented first-PDF commands through the current installed kit.')
             command([interpreter, str(engine), 'doctor', '--workspace', str(root)])
             profile = root / '.workbench/selected.json'
-            selected = ['figures', 'paperqa'] if args.paperqa else ['figures']
+            selected = ['figures', 'watermarks', 'paperqa'] if args.paperqa else ['figures', 'watermarks']
             profile.write_text(json.dumps({'extensions': selected}), encoding='utf-8-sig')
             command([interpreter, str(engine), 'apply', '--workspace', str(root), '--profile', str(profile)])
             command([interpreter, str(engine), 'apply', '--workspace', str(root), '--profile', str(profile)])
@@ -79,6 +79,10 @@ def main():
             state = json.loads((root / '.workbench/state.json').read_text(encoding='utf-8'))
             assert state['checks']['runtime:core']['status'] == 'verified'
             assert state['checks']['runtime:figures']['status'] == 'verified'
+            assert 'remove-ai-marks' in state['skills']
+            assert 'research-watermarks' in state['skills']
+            command([interpreter, str(engine.parent / 'scripts/check_watermarks.py'), '--workspace', str(root)])
+            print('Passed: full watermarks-remover installation/resume and Layer B API wiring; real model/detection pending.')
             if args.paperqa:
                 assert state['checks']['runtime:paperqa']['status'] == 'verified'
                 assert 'research-paperqa' in state['skills']

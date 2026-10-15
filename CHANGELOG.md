@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.4 — 2026-10-15
+
+- Add the optional `watermarks` profile with the full watermarks-remover HTTP client and service, pinned source paths/file hashes and retained MIT license, plus an original research integration skill.
+- Add project-local API configuration, loopback service startup, and a Layer B paraphrase client that preserves the original and writes a candidate/report. A configured authorized model API is required for real rewriting; Unicode cleanup alone is not treated as this operation.
+- Route the workflow after academic drafting/polishing and Anti Defensive Writing. Track source integrity, service wiring, real model execution, and vendor-key detection separately.
+- Advance the immutable kit to 0.3.4 and standalone guide to 2.0. Preserve foundation skill bytes and runtime dependency pins; optional model/media/detector backends remain separately configured.
+
 ## 0.3.3 — 2026-10-15
 
 - Add Anti Defensive Writing to the optional writing profile as a bundled MIT adaptation of Adkid-Zephyr's pinned Chinese/English skill source, retaining its license, source hashes, and explicit modification notice.

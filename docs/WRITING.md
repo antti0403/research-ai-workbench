@@ -30,6 +30,16 @@ For an existing writing installation, rerun apply with the new kit. Existing
 different or edited skills are preserved for review. Setup does not silently
 rewrite an edited project instruction file.
 
+## Statistical text-watermark reduction
+
+When the user requests watermark reduction, select the optional `watermarks`
+profile and follow [the full service workflow](WATERMARKS.md). It installs the
+upstream HTTP service/client and runs an actual Layer B rewrite through the
+user’s configured model API. Unicode cleanup alone does not fulfill this task.
+Keep the source and compare the candidate with evidence, formulas, citations,
+and necessary qualifications. Model execution and vendor-key detection have
+separate verification states.
+
 ## Example request
 
 > Use Anti Defensive Writing to revise this abstract. State the main contribution

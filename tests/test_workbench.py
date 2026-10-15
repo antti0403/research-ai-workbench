@@ -116,6 +116,59 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual((self.root / 'AGENTS.md').read_bytes(), agents_before)
         self.assertEqual(state['profiles']['writing']['status'], 'failed')
 
+    def test_watermarks_offline_prepares_integration_without_claiming_service_download(self):
+        w.main(['setup', '--workspace', str(self.root), '--offline'])
+        state = w.read_state(self.root)
+        with patch.object(w, 'download', side_effect=AssertionError('Offline apply used network')):
+            self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['watermarks']}, True))
+        self.assertTrue((self.root / '.agents/skills/research-watermarks/scripts/watermarks.py').is_file())
+        self.assertFalse((self.root / '.agents/skills/remove-ai-marks').exists())
+        self.assertEqual(state['checks']['skill:remove-ai-marks']['status'], 'pending')
+        self.assertEqual(state['profiles']['watermarks']['status'], 'pending')
+        self.assertFalse((self.root / '.workbench/envs').exists())
+
+    def test_pinned_source_mapping_installs_full_runtime_and_retained_license(self):
+        data = {'SKILL.md': b'---\nname: test-client\ndescription: Test.\n---\n',
+                'service/scripts/server.py': b'print("synthetic service")\n',
+                'LICENSE': b'Synthetic test license notice\n'}
+        source = {'repo': 'example/synthetic', 'commit': 'a' * 40,
+                  'license_file': {'path': 'LICENSE', 'sha256': w.digest(data['LICENSE'])}}
+        spec = {'source': 'synthetic', 'path': 'skills/test-client', 'files': [
+            {'path': 'SKILL.md', 'sha256': w.digest(data['SKILL.md'])},
+            {'path': 'runtime/service/scripts/server.py', 'source_path': 'service/scripts/server.py',
+             'sha256': w.digest(data['service/scripts/server.py'])}]}
+
+        class Response:
+            def __init__(self, content): self.content = content
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def read(self, count): return self.content
+
+        def fetch(request, **kwargs):
+            relative = request.full_url.split('/' + source['commit'] + '/')[1]
+            if relative == 'skills/test-client/SKILL.md': relative = 'SKILL.md'
+            return Response(data[relative])
+
+        state = w.read_state(self.root)
+        with patch.dict(w.REGISTRY['sources'], {'synthetic': source}), patch.dict(w.REGISTRY['skills'], {'test-client': spec}), patch.object(w.urllib.request, 'urlopen', side_effect=fetch):
+            w.remote_skill(self.root, state, 'test-client', False)
+            destination = self.root / '.agents/skills/test-client'
+            self.assertEqual((destination / 'runtime/service/scripts/server.py').read_bytes(), data['service/scripts/server.py'])
+            self.assertEqual((destination / 'UPSTREAM_LICENSE.md').read_bytes(), data['LICENSE'])
+            (destination / 'runtime/service/scripts/server.py').write_bytes(b'Human changes')
+            with self.assertRaises(w.SetupError):
+                w.remote_skill(self.root, state, 'test-client', False)
+            self.assertEqual((destination / 'runtime/service/scripts/server.py').read_bytes(), b'Human changes')
+
+    def test_source_mapping_refuses_parent_traversal_before_download(self):
+        spec = {'source': 'watermarks-remover', 'path': 'skills/test-client',
+                'files': [{'path': 'SKILL.md', 'source_path': '../escape', 'sha256': '0' * 64}]}
+        with patch.dict(w.REGISTRY['skills'], {'test-client': spec}), patch.object(w, 'download') as download:
+            with self.assertRaises(w.SetupError):
+                w.remote_skill(self.root, w.read_state(self.root), 'test-client', False)
+        download.assert_not_called()
+        self.assertFalse((self.root / '.agents/skills/test-client').exists())
+
     def test_unknown_profile_cannot_become_command(self):
         p = self.root / 'profile.json'
         p.write_text(json.dumps({'extensions': ['symbolic; touch outside']}))

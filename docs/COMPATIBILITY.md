@@ -1,6 +1,25 @@
 # Compatibility and verification
 
-Updated: 2026-10-12 for repository 0.3.2. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-15 for repository 0.3.4. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.4 full watermarks-remover integration
+
+Local macOS checks on 2026-10-15 passed 48 unit tests (47 passed, one
+Windows-only skip), skill-format and repository syntax/link/version checks,
+offline launcher/copied-engine preparation, and five previous-release upgrades.
+The selected full upstream client/service sources were downloaded and checked
+against per-file and license hashes. The installed full HTTP service executed
+a Layer B paraphrase request against a controlled loopback API responder,
+retained the original, wrote a candidate/report, refused existing outputs,
+and rejected missing backend configuration. This checks real service/API
+wiring with synthetic inputs, not an actual language model or watermark result.
+
+The optional profile is included in copied-engine online runtime CI checks.
+Use the exact PR commit's job results for platform evidence. The maintainer's
+chosen real model API is not yet configured; real provider execution, factual
+revision quality, native host discovery, and vendor-key watermark verification
+remain separate pending checks. No paid model call or local model download
+was made for this integration.
 
 ## 0.3.3 writing-profile integration
 

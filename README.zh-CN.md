@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.3 -->
+<!-- workbench-release: 0.3.4 -->
 
 # Research AI Workbench
 
@@ -73,6 +73,8 @@ bash install.sh
 
 写论文或修改正文时，**writing** 模块会加入基于 Adkid-Zephyr 原作改编的 **Anti Defensive Writing 学术写作原则**：围绕有证据的贡献组织文章、减少重复辩解，同时保留影响结论的结果和必要限定。详见[写作工作流](docs/WRITING.md)。
 
+需要弱化文字中的统计水印时，**watermarks** 模块会安装完整 **watermarks-remover** 服务与客户端，并通过你配置的模型 API 执行 Layer B 改写。它接在学术写作流程之后。详见[配置与使用](docs/WATERMARKS.md)；模型调用和厂商水印检测分别验收。
+
 ## 本地检查与体检命令
 
 仓库附带了 `workbench.py` 工具，用于检查与维护工作区状态：
@@ -96,6 +98,7 @@ python workbench.py doctor --workspace "path/to/project"
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md)：从零开始完成第一个科研任务的上手演练。
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)：系统平台、Python 版本要求与兼容性边界。
 - [docs/AUTOMATION.md](docs/AUTOMATION.md)：自动化参数配置与 CLI 参考。
+- [docs/WATERMARKS.md](docs/WATERMARKS.md)：完整去水印改写服务、模型 API 配置和科研写作衔接。
 - [docs/WRITING.md](docs/WRITING.md)：Anti Defensive Writing 与论文起草、润色的衔接。
 - [docs/LITERATURE.md](docs/LITERATURE.md)：Undermind 检索、文献库 PDF 验收与有出处的笔记。
 
@@ -108,9 +111,10 @@ python workbench.py doctor --workspace "path/to/project"
 致谢：
 
 - 技能原型与实现参考自 **袁一哲 / Yuan1z0825 (Nature Skills)** 与 **K-Dense Inc. (Scientific Agent Skills)**。
+- **Guillaume Meyer 及贡献者** 提供了 watermarks-remover；选定的客户端与服务源码按固定版本下载，并保留 MIT 许可证。
 - **Adkid-Zephyr** 提供了 MIT 许可的 Anti-Defensive Writing 原作；工作台内置的是明确标注修改的改编版。
 - 渐进式工作流设计灵感来自 **艺雨YiLight**，并参考了 **sunweihunu** 整理的实践记录。
 - 交互与受控输出准则借鉴了 **ASD-STE100** 标准与 **Andrej Karpathy** 的技术表达建议。
 - 外部集成组件保留各自原始协议，详见 [NOTICE.md](NOTICE.md) 与 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
-仓库版本 **0.3.3**，配置指南 **1.9**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。
+仓库版本 **0.3.4**，配置指南 **2.0**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。

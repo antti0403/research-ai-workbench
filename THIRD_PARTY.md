@@ -41,6 +41,16 @@ Existing component reviews are retained from 2026-10-03; the Undermind interoper
 - **Integration:** Download individual files and the license with the hashes in `registry.json`. Skill contents remain unchanged; `UPSTREAM_LICENSE.md` carries the upstream license. We select and connect these skills; we did not author them.
 - **Redistribution:** Retain the copyright and MIT permission/disclaimer text with copies or substantial portions. A MATLAB skill does not include MATLAB or grant a MathWorks license.
 
+### watermarks-remover
+
+- **Creator:** Guillaume Meyer and contributors, Copyright (c) 2026 Guillaume Meyer and contributors.
+- **Revision:** [c5297e9e69fec0779c29127c7892427e673fafd9](https://github.com/guillaumemeyer/watermarks-remover/tree/c5297e9e69fec0779c29127c7892427e673fafd9), reviewed on 2026-10-15 for repository 0.3.4 and guide 2.0.
+- **License:** [Pinned MIT](https://github.com/guillaumemeyer/watermarks-remover/blob/c5297e9e69fec0779c29127c7892427e673fafd9/LICENSE), retained unchanged with the installed package as `UPSTREAM_LICENSE.md`.
+- **Selected files:** Complete `skills/remove-ai-marks`, `service/scripts`, and `config/clean_strategy.json`. Individual hashes and upstream-to-install paths are recorded in `registry.json`. The service scripts/config are placed under the installed client's `runtime/` so they remain available after the source checkout is gone. Upstream files remain unchanged; no upstream plugin hooks are activated.
+- **Original integration:** The bundled `research-watermarks` skill and helper create project-local API configuration, start a loopback service, and submit selected prose to the full Layer B rewrite endpoint using the reviewed `paraphrase@0.8` strategy. A new candidate and operation report preserve the source. They are workbench-authored integration, not an upstream release.
+- **Dependencies:** The selected service/rewrite path uses Python's standard library and the user's configured compatible model API. Optional requirement files and setup scripts arrive as source but are not executed automatically. No Ollama, Docker, model weights, media libraries, stealer, MarkLLM, or MarkDiffusion backend is installed by the profile. Review those components and their own licenses separately before enabling them.
+- **Verification:** File checks, live service/API wiring, real model execution, and vendor-key watermark detection are distinct. A controlled local test responder validates integration without proving any reduction of a real watermark. Preserve disclosures and keep endpoint credentials outside the public repository.
+
 ## Nested sources and exceptions
 
 | Source / attribution | Upstream location and use boundary |
