@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3 — 2026-10-15
+
+- Add Anti Defensive Writing to the optional writing profile as a bundled MIT adaptation of Adkid-Zephyr's pinned Chinese/English skill source, retaining its license, source hashes, and explicit modification notice.
+- Connect the skill to generated START_HERE, the standalone guide, project-rule template, and bilingual documentation. Use it after drafting/polishing to clarify supported contributions while preserving material unfavorable findings, evaluation conditions, and necessary qualifications.
+- Advance the immutable kit to 0.3.3 and standalone guide to 1.9. Preserve existing foundation skill bytes and runtime/source dependency pins. New framing skill files can be prepared offline; other writing downloads and host discovery remain separate checks.
+
 ## 0.3.2 — 2026-10-12
 
 - Add an optional Undermind workflow for discovery, citation expansion, available-PDF analysis, and handoff to the user's existing reference manager and notes.

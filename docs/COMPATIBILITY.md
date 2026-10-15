@@ -2,6 +2,19 @@
 
 Updated: 2026-10-12 for repository 0.3.2. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
 
+## 0.3.3 writing-profile integration
+
+Local macOS checks on 2026-10-15 passed skill-format validation, repository
+syntax/link/version checks, 45 unit tests (44 passed, one Windows-only skip),
+offline launcher/copied-engine preparation, and the synthetic numerical example.
+Four previous-release upgrade/resume checks, including 0.3.2, preserved old kits,
+foundation skills, and human files. New tests exercise writing-profile selection,
+offline copied-engine installation and repeat apply of the adapted skill and its
+MIT license, pending upstream downloads, and preservation of edited writing
+principles and research notes. Runtime dependencies and foundation skill bytes
+are unchanged. These local checks do not establish native host discovery or
+manuscript quality; inspect the exact PR commit's CI for other platform results.
+
 ## 0.3.2 optional literature workflow
 
 This release adds original integration instructions for a connected Undermind service, generated entry-point routing, and kit/guide metadata. Foundation skill bytes, profile selection, and runtime dependency pins remain unchanged. No hosted service, model, subscription, or institutional access is installed by this release.

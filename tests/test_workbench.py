@@ -76,6 +76,46 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(destination.read_text(encoding='utf-8'), 'Human paper workflow')
         self.assertEqual(state['profiles']['paperqa']['status'], 'failed')
 
+    def test_writing_copied_engine_installs_adaptation_and_license_offline(self):
+        w.main(['setup', '--workspace', str(self.root), '--offline'])
+        destination = self.root / '.agents/skills/anti-defensive-writing'
+        self.assertFalse(destination.exists())
+        engine = self.root / '.workbench/kit' / w.VERSION / 'workbench.py'
+        spec = importlib.util.spec_from_file_location('copied_writing_engine', engine)
+        copied = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(copied)
+        state = copied.read_state(self.root)
+        with patch.object(copied, 'download', side_effect=AssertionError('Offline apply used network')):
+            self.assertFalse(copied.apply_profile(self.root, state, {'extensions': ['writing']}, True))
+            before = copied.tree_hashes(destination)
+            self.assertFalse(copied.apply_profile(self.root, state, {'extensions': ['writing']}, True))
+        self.assertEqual(before, copied.tree_hashes(destination))
+        self.assertEqual(before, w.tree_hashes(w.ROOT / 'skills/anti-defensive-writing'))
+        self.assertTrue((destination / 'UPSTREAM_LICENSE').is_file())
+        source = state['skills']['anti-defensive-writing']['source']
+        self.assertEqual(source['repo'], 'Adkid-Zephyr/anti-defensive-writing-Skill')
+        self.assertTrue(source['modified'])
+        self.assertEqual(source['version'], w.VERSION)
+        self.assertEqual(state['skills']['anti-defensive-writing']['host_discovery'], 'not verified')
+        self.assertEqual(state['checks']['skill:nature-writing']['status'], 'pending')
+        self.assertEqual(state['profiles']['writing']['status'], 'pending')
+        self.assertFalse((self.root / '.workbench/envs').exists())
+
+    def test_writing_apply_preserves_local_edits_and_unrelated_research(self):
+        w.main(['setup', '--workspace', str(self.root), '--offline'])
+        state = w.read_state(self.root)
+        self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['writing']}, True))
+        skill = self.root / '.agents/skills/anti-defensive-writing/SKILL.md'
+        skill.write_text('Human writing principles', encoding='utf-8')
+        note = self.root / 'wiki/results.md'
+        note.write_text('Human results and limitations', encoding='utf-8')
+        agents_before = (self.root / 'AGENTS.md').read_bytes()
+        self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['writing']}, True))
+        self.assertEqual(skill.read_text(encoding='utf-8'), 'Human writing principles')
+        self.assertEqual(note.read_text(encoding='utf-8'), 'Human results and limitations')
+        self.assertEqual((self.root / 'AGENTS.md').read_bytes(), agents_before)
+        self.assertEqual(state['profiles']['writing']['status'], 'failed')
+
     def test_unknown_profile_cannot_become_command(self):
         p = self.root / 'profile.json'
         p.write_text(json.dumps({'extensions': ['symbolic; touch outside']}))

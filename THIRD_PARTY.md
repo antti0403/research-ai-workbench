@@ -1,13 +1,13 @@
 # Third-party sources, dependencies, and acknowledgements
 
-Existing component reviews are retained from 2026-10-03; the Undermind interoperability entry was added on 2026-10-12 for repository 0.3.2 and guide 1.8. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
+Existing component reviews are retained from 2026-10-03; the Undermind interoperability entry was added on 2026-10-12 for repository 0.3.2 and guide 1.8. Anti Defensive Writing was reviewed and adapted on 2026-10-15 for repository 0.3.3 and guide 1.9. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
 
 ## What this repository contains
 
 | Material | Relationship to this project |
 | --- | --- |
 | Installer, launchers, helpers, tests, `research-workbench`, `research-reading`, `research-paperqa`, guide and templates | Developed for this project with AI assistance. The project's MIT license covers these original contributions. External ideas and APIs are credited below. |
-| Third-party skills | Not vendored here. The installer obtains selected files from upstream using catalog revisions and hashes. |
+| Third-party skills | The modified Anti Defensive Writing skill is bundled with its upstream MIT license. Other selected third-party skills are downloaded using catalog revisions and hashes. |
 | Python, uv, Python packages and their native libraries/fonts | Not bundled here. Obtained or reused during setup; their distributions keep their own licenses. |
 | Paper example | An attributed abstract paraphrase in `examples/attention-abstract.md`, not a reproduced paper, figure, or full-text review. |
 | Video, transcript, social post, ASD-STE100 and product documentation | Linked sources of ideas or technical guidance. Their distributions are not included or relicensed. |
@@ -22,6 +22,15 @@ Existing component reviews are retained from 2026-10-03; the Undermind interoper
 - **Use:** `literature` selects `skills/nature-academic-search` and `skills/nature-ref-verifier`; `writing` selects `skills/nature-shared`, `skills/nature-writing`, and `skills/nature-polishing`.
 - **Integration:** Download the pinned archive, verify SHA-256, and extract the selected directories without changing their contents. Any root `LICENSE`/`NOTICE` is retained as `UPSTREAM_LICENSE`/`UPSTREAM_NOTICE`; in-directory notices are retained. The cache contains the full archive, including unselected material; it is not a distributable package owned by this project.
 - **Redistribution:** Preserve the license and relevant copyright, attribution and NOTICE texts for covered files; mark modified files. Check nested material independently. Our MIT license does not apply to these skills.
+
+### Anti Defensive Writing
+
+- **Creator:** [Adkid-Zephyr](https://github.com/Adkid-Zephyr), Copyright (c) 2026 Adkid-Zephyr.
+- **Source/revision:** [anti-defensive-writing-Skill at 82d31402caa0db1790026824399044538483171b](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill/tree/82d31402caa0db1790026824399044538483171b), reviewed on 2026-10-15. Reviewed inputs: `skills/anti-defensive-writing-en/SKILL.md`, `skills/anti-defensive-writing/SKILL.md`, and root `LICENSE`; SHA-256 values are recorded in `registry.json`.
+- **License:** [Pinned MIT](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill/blob/82d31402caa0db1790026824399044538483171b/LICENSE); complete notice retained unchanged in [UPSTREAM_LICENSE](skills/anti-defensive-writing/UPSTREAM_LICENSE).
+- **Use:** Optional `writing` profile installs the bundled `anti-defensive-writing` adaptation. It requires no additional runtime or service and complements drafting/polishing tools.
+- **Modifications:** Condensed into one canonical English skill with multilingual output. Retains contribution-first organization and removal of redundant defensive wording. Replaces unconditional instructions about never admitting losses, suppressing weaknesses, or changing evaluation frames with material-result disclosure, transparent evaluation changes, necessary nearby qualifications, and evidence-matched claims. Adds local-edit scope and reviewer-response handling. It is not an unchanged upstream installation.
+- **Included material:** Adapted `SKILL.md` and complete root MIT license only. Upstream plugins, installers, scripts, images, and prompt packs are not bundled or executed. Preserve the original copyright/license and the modification notice with redistributed adaptations.
 
 ### Scientific Agent Skills
 

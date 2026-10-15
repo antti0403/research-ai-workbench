@@ -4,11 +4,12 @@ Use [SETUP.md](SETUP.md) to select for a task and [Automation](docs/AUTOMATION.m
 
 ## Current catalog
 
-Repository 0.3.2 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
+Repository 0.3.3 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
 
 | Source | Automatic scope | Limits |
 | --- | --- | --- |
 | Nature Skills | Literature search/reference checks; writing, polishing, and required shared files | Pinned Apache-2.0 root license; nested material may differ |
+| Anti Defensive Writing | Adapted academic framing skill in the optional `writing` profile | Bundled MIT adaptation of Adkid-Zephyr at `82d31402caa0db1790026824399044538483171b`; retains material unfavorable findings and necessary qualifications; see [workflow](docs/WRITING.md) |
 | Scientific Agent Skills | MATLAB guidance, SymPy, units/uncertainty | Pinned MIT source and individual file hashes; MATLAB itself is not installed |
 | PaperQA | Optional local-paper question answering runtime and original research-paperqa skill | Model/embedding services, data-sharing scope, cost, and cited-claim support need task checks; see [workflow](docs/PAPERQA.md) |
 | Python packages | Core PDF reading and selected computation/plotting environments | Direct versions pinned; resolved versions recorded per runtime |

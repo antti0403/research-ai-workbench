@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.2 -->
+<!-- workbench-release: 0.3.3 -->
 
 # Research AI Workbench
 
@@ -71,6 +71,8 @@ Start with the [three task requests](docs/FIRST_TASK.md): read an abstract, chec
 
 For literature discovery, a connected **Undermind** plugin can find candidates, follow citation relationships, and analyze available PDFs. Keep selected original PDFs and citation records in Zotero or your reference manager, and verified understanding in Obsidian or your existing notes. See the optional [literature workflow](docs/LITERATURE.md); the installer does not install the service, sign in, or buy a subscription.
 
+For academic drafting and revision, the **writing** profile adds **Anti Defensive Writing**, adapted from Adkid-Zephyr: organize prose around supported contributions, remove redundant defensive wording, and preserve material findings and qualifications. See the [writing workflow](docs/WRITING.md).
+
 ## CLI checks and maintenance
 
 The repository includes a Python utility (`workbench.py`) to inspect or check your setup:
@@ -94,6 +96,7 @@ The installer only fetches public open-source packages. It does not upload resea
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md): Step-by-step walkthrough of your first research task.
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md): Tested operating systems, Python versions, and limits.
 - [docs/AUTOMATION.md](docs/AUTOMATION.md): Reference for unattended profiles and CLI arguments.
+- [docs/WRITING.md](docs/WRITING.md): Contribution-first drafting and revision with Anti Defensive Writing.
 - [docs/LITERATURE.md](docs/LITERATURE.md): Undermind discovery, verified reference-manager PDFs, and source-linked notes.
 
 ---
@@ -105,8 +108,9 @@ Original code and documentation are released under the [MIT License](LICENSE).
 Acknowledgements:
 
 - Skill sources and patterns from **袁一哲 / Yuan1z0825 (Nature Skills)** and **K-Dense Inc. (Scientific Agent Skills)**.
+- **Adkid-Zephyr** authored the MIT-licensed Anti-Defensive Writing source; the bundled skill is an explicitly modified adaptation.
 - Workflow design inspired by **艺雨YiLight** and reviewed through **sunweihunu's transcript**.
 - Communication principles borrow from **ASD-STE100** and **Andrej Karpathy**'s technical presentation notes.
 - Third-party components retain their respective licenses. See [NOTICE.md](NOTICE.md) and [THIRD_PARTY.md](THIRD_PARTY.md) for full attribution.
 
-Release **0.3.2**, setup guide **1.8**. See the [changelog](CHANGELOG.md).
+Release **0.3.3**, setup guide **1.9**. See the [changelog](CHANGELOG.md).

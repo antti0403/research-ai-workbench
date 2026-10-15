@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.2 -->
+<!-- workbench-release: 0.3.3 -->
 
 # Research AI Workbench
 
@@ -71,6 +71,8 @@ bash install.sh
 
 需要补充文献时，可复用已连接的 **Undermind** 插件找候选论文、追踪引用关系和分析可用 PDF。选中的原文与书目继续保存在 Zotero 或已有文献库，核实后的理解写入 Obsidian 或现有笔记。详见可选的[文献工作流](docs/LITERATURE.md)；安装器不负责安装该服务、登录账号或购买订阅。
 
+写论文或修改正文时，**writing** 模块会加入基于 Adkid-Zephyr 原作改编的 **Anti Defensive Writing 学术写作原则**：围绕有证据的贡献组织文章、减少重复辩解，同时保留影响结论的结果和必要限定。详见[写作工作流](docs/WRITING.md)。
+
 ## 本地检查与体检命令
 
 仓库附带了 `workbench.py` 工具，用于检查与维护工作区状态：
@@ -94,6 +96,7 @@ python workbench.py doctor --workspace "path/to/project"
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md)：从零开始完成第一个科研任务的上手演练。
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)：系统平台、Python 版本要求与兼容性边界。
 - [docs/AUTOMATION.md](docs/AUTOMATION.md)：自动化参数配置与 CLI 参考。
+- [docs/WRITING.md](docs/WRITING.md)：Anti Defensive Writing 与论文起草、润色的衔接。
 - [docs/LITERATURE.md](docs/LITERATURE.md)：Undermind 检索、文献库 PDF 验收与有出处的笔记。
 
 ---
@@ -105,8 +108,9 @@ python workbench.py doctor --workspace "path/to/project"
 致谢：
 
 - 技能原型与实现参考自 **袁一哲 / Yuan1z0825 (Nature Skills)** 与 **K-Dense Inc. (Scientific Agent Skills)**。
+- **Adkid-Zephyr** 提供了 MIT 许可的 Anti-Defensive Writing 原作；工作台内置的是明确标注修改的改编版。
 - 渐进式工作流设计灵感来自 **艺雨YiLight**，并参考了 **sunweihunu** 整理的实践记录。
 - 交互与受控输出准则借鉴了 **ASD-STE100** 标准与 **Andrej Karpathy** 的技术表达建议。
 - 外部集成组件保留各自原始协议，详见 [NOTICE.md](NOTICE.md) 与 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
-仓库版本 **0.3.2**，配置指南 **1.8**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。
+仓库版本 **0.3.3**，配置指南 **1.9**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。

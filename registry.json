@@ -1,5 +1,5 @@
 {
-  "version": "0.3.2",
+  "version": "0.3.3",
   "core_requirements": [
     "pypdf==6.19.0"
   ],
@@ -22,6 +22,27 @@
     "workbench": {
       "type": "bundled",
       "license": "MIT"
+    },
+    "anti-defensive-writing": {
+      "type": "bundled",
+      "repo": "Adkid-Zephyr/anti-defensive-writing-Skill",
+      "commit": "82d31402caa0db1790026824399044538483171b",
+      "license": "MIT",
+      "modified": true,
+      "upstream_files": [
+        {
+          "path": "skills/anti-defensive-writing-en/SKILL.md",
+          "sha256": "49705a92677d06b1be9f78be5be4f966b1d30c4ed72a3b97c86a973d06683b9b"
+        },
+        {
+          "path": "skills/anti-defensive-writing/SKILL.md",
+          "sha256": "6f072e66f6adf813bc1b4291754f2bc07ed4e65a398359844e97bfa215a1c28e"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "fdf440e5214588d9edcdc1ec315cddbd8525fe509242c24989a8472d283325f4"
+        }
+      ]
     }
   },
   "skills": {
@@ -281,6 +302,10 @@
     "research-paperqa": {
       "source": "workbench",
       "path": "skills/research-paperqa"
+    },
+    "anti-defensive-writing": {
+      "source": "anti-defensive-writing",
+      "path": "skills/anti-defensive-writing"
     }
   },
   "profiles": {
@@ -298,10 +323,11 @@
       "skills": [
         "nature-shared",
         "nature-writing",
-        "nature-polishing"
+        "nature-polishing",
+        "anti-defensive-writing"
       ],
       "requirements": [],
-      "limits": "Prefer existing document plugins. Source evidence, output language, and format-specific tools need task checks."
+      "limits": "Use Anti Defensive Writing for contribution-first framing with evidence and material findings preserved. Prefer existing document tools. Source evidence, output language, and host invocation need task checks."
     },
     "symbolic": {
       "purpose": "Exact mathematical derivations",
