@@ -24,7 +24,7 @@ import venv
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.3.5'
+VERSION = '0.3.6'
 REGISTRY = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
 MAX_DOWNLOAD = 80 * 1024 * 1024
 MAX_EXPANDED = 200 * 1024 * 1024

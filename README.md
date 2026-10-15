@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.5 -->
+<!-- workbench-release: 0.3.6 -->
 
 # Research AI Workbench
 
@@ -117,4 +117,4 @@ Acknowledgements:
 - Communication principles borrow from **ASD-STE100** and **Andrej Karpathy**'s technical presentation notes.
 - Third-party components retain their respective licenses. See [NOTICE.md](NOTICE.md) and [THIRD_PARTY.md](THIRD_PARTY.md) for full attribution.
 
-Release **0.3.5**, setup guide **2.1**. See the [changelog](CHANGELOG.md).
+Release **0.3.6**, setup guide **2.2**. See the [changelog](CHANGELOG.md).

@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import runpy
 import ssl
 import sys
 import urllib.error
@@ -113,9 +114,13 @@ def serve(workspace, config):
     if env.get('WATERMARKS_REWRITE_BASE_URL', '').rstrip('/').endswith('/v1'):
         env['WATERMARKS_REWRITE_BASE_URL'] = env['WATERMARKS_REWRITE_BASE_URL'].rstrip('/')[:-3]
     os.chdir(runtime)
-    # Replace the launcher so Ctrl+C/termination also stops the actual service.
-    os.execve(sys.executable, [sys.executable, '-u', str(server), '--host', '127.0.0.1',
-                             '--port', str(config['port']), '--strategy-config', str(strategy)], env)
+    # Run the service in this process: Windows execve splits unquoted paths
+    # containing spaces, and a child server would outlive a terminated launcher.
+    os.environ.clear()
+    os.environ.update(env)
+    sys.argv = [str(server), '--host', '127.0.0.1', '--port', str(config['port']),
+                '--strategy-config', str(strategy)]
+    runpy.run_path(str(server), run_name='__main__')
 
 
 def rewrite(workspace, config, source, output):

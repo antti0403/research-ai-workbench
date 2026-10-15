@@ -1,6 +1,16 @@
 # Compatibility and verification
 
-Updated: 2026-10-15 for repository 0.3.5. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-15 for repository 0.3.6. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.6 service launch and CI repair
+
+The 0.3.5 Windows runtime job failed because `execve` split a path containing
+spaces. The 0.3.4 macOS runtime job exceeded the 15-second startup allowance.
+The launcher now runs the unchanged upstream service in its own process,
+keeping argument boundaries and process termination consistent across platforms.
+The fixture uses spaces and Unicode, checks that shutdown closes the listener,
+and reports service diagnostics if the 60-second readiness deadline is exceeded.
+Exact commit CI results determine platform verification.
 
 ## 0.3.5 service credential scope and macOS trust
 

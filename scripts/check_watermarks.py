@@ -33,7 +33,7 @@ def free_port():
 
 
 def wait_service(url, process):
-    deadline = time.monotonic() + 15
+    deadline = time.monotonic() + 60
     while time.monotonic() < deadline:
         if process.poll() is not None:
             raise RuntimeError('Service exited: ' + process.stderr.read().decode('utf-8'))
@@ -42,16 +42,19 @@ def wait_service(url, process):
                 return json.load(response)
         except (urllib.error.URLError, TimeoutError):
             time.sleep(0.1)
-    raise RuntimeError('Local service did not become ready.')
+    _, diagnostic = stop(process)
+    raise RuntimeError('Local service did not become ready within 60 seconds: '
+                       + diagnostic.decode('utf-8', errors='replace'))
 
 
 def stop(process):
-    process.terminate()
+    if process.poll() is None:
+        process.terminate()
     try:
-        process.communicate(timeout=5)
+        return process.communicate(timeout=5)
     except subprocess.TimeoutExpired:
         process.kill()
-        process.communicate()
+        return process.communicate()
 
 
 def check(workspace):
@@ -83,7 +86,7 @@ def check(workspace):
     thread.start()
     try:
         with tempfile.TemporaryDirectory(prefix='watermarks-wiring-') as temporary:
-            root = Path(temporary)
+            root = Path(temporary) / 'research spaces \u7814\u7a76'
             for name in ('remove-ai-marks', 'research-watermarks'):
                 shutil.copytree(skills / name, root / '.agents/skills' / name,
                                 ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
@@ -117,7 +120,8 @@ def check(workspace):
                 command(helper, 'rewrite', '--workspace', root, '--input', source,
                         '--output', output, env=client_env)
                 report = json.loads(output.with_name(output.name + '.watermarks.json').read_text())
-                if output.read_text() != candidate or source.read_text() != original:
+                if (output.read_text(encoding='utf-8') != candidate
+                        or source.read_text(encoding='utf-8') != original):
                     raise RuntimeError('Candidate or source preservation failed.')
                 if len(calls) != 1 or calls[0][0] != '/v1/chat/completions':
                     raise RuntimeError('The service did not call the configured compatible API.')
@@ -133,6 +137,13 @@ def check(workspace):
                     raise RuntimeError('Existing output was overwritten or another model call was made.')
             finally:
                 stop(process)
+            # Terminating the launcher must stop the actual listening service.
+            try:
+                urllib.request.urlopen(url + '/health', timeout=1)
+            except urllib.error.URLError:
+                pass
+            else:
+                raise RuntimeError('Terminated launcher left an orphan service running.')
             # A live service without a configured backend must reject /clean.
             config.update({'base_url': None, 'model': None})
             config_path.write_text(json.dumps(config))

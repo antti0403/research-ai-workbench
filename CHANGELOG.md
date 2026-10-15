@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.6 — 2026-10-15
+
+- Run the watermark service in the launcher process on every platform, fixing Windows path splitting when an interpreter or project path contains spaces. Terminating the launcher stops the actual service. Pinned upstream files remain unchanged.
+- Exercise spaces and Unicode in the service fixture, use explicit UTF-8 for fixture comparisons, verify shutdown, and allow up to 60 seconds for cold startup with captured diagnostics on failure.
+- Advance the immutable kit to 0.3.6 and guide to 2.2; dependency pins and model configuration are unchanged.
+
 ## 0.3.5 — 2026-10-15
 
 - Keep the model-provider API key on the service side. Local status/rewrite clients no longer require a duplicate provider key in their own environment.
