@@ -1,6 +1,58 @@
 # Compatibility and verification
 
-Updated: 2026-10-12 for repository 0.3.2. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-15 for repository 0.3.6. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.6 service launch and CI repair
+
+The 0.3.5 Windows runtime job failed because `execve` split a path containing
+spaces. The 0.3.4 macOS runtime job exceeded the 15-second startup allowance.
+The launcher now runs the unchanged upstream service in its own process,
+keeping argument boundaries and process termination consistent across platforms.
+The fixture uses spaces and Unicode, checks that shutdown closes the listener,
+and reports service diagnostics if the 60-second readiness deadline is exceeded.
+Exact commit CI results determine platform verification.
+
+## 0.3.5 service credential scope and macOS trust
+
+The live service/API-wiring fixture passes with the provider key absent from
+the local client's environment. Only the service process needs that key.
+Local unit, repository, and release-preservation checks pass. On a macOS
+Python.org build with no configured CA file, HTTPS certificate verification
+failed before provider authentication. The macOS system CA bundle verifies the
+provider's TLS connection; the service uses it only when no bundle is configured.
+No TLS verification is disabled and no global trust setting is changed.
+
+## 0.3.4 full watermarks-remover integration
+
+Local macOS checks on 2026-10-15 passed 48 unit tests (47 passed, one
+Windows-only skip), skill-format and repository syntax/link/version checks,
+offline launcher/copied-engine preparation, and five previous-release upgrades.
+The selected full upstream client/service sources were downloaded and checked
+against per-file and license hashes. The installed full HTTP service executed
+a Layer B paraphrase request against a controlled loopback API responder,
+retained the original, wrote a candidate/report, refused existing outputs,
+and rejected missing backend configuration. This checks real service/API
+wiring with synthetic inputs, not an actual language model or watermark result.
+
+The optional profile is included in copied-engine online runtime CI checks.
+Use the exact PR commit's job results for platform evidence. The maintainer's
+chosen real model API is not yet configured; real provider execution, factual
+revision quality, native host discovery, and vendor-key watermark verification
+remain separate pending checks. No paid model call or local model download
+was made for this integration.
+
+## 0.3.3 writing-profile integration
+
+Local macOS checks on 2026-10-15 passed skill-format validation, repository
+syntax/link/version checks, 45 unit tests (44 passed, one Windows-only skip),
+offline launcher/copied-engine preparation, and the synthetic numerical example.
+Four previous-release upgrade/resume checks, including 0.3.2, preserved old kits,
+foundation skills, and human files. New tests exercise writing-profile selection,
+offline copied-engine installation and repeat apply of the adapted skill and its
+MIT license, pending upstream downloads, and preservation of edited writing
+principles and research notes. Runtime dependencies and foundation skill bytes
+are unchanged. These local checks do not establish native host discovery or
+manuscript quality; inspect the exact PR commit's CI for other platform results.
 
 ## 0.3.2 optional literature workflow
 

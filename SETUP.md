@@ -1,6 +1,6 @@
 # Research AI Workbench Setup Guide
 
-Version **1.8**, 2026-10-12. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
+Version **2.2**, 2026-10-15. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
 
 This is a complete standalone guide. Give the AI this file for agent-driven setup, or the [repository](https://github.com/antti0403/research-ai-workbench) for its installer. This file alone does not contain the program, dependencies, accounts, models, or commercial licenses. Instructions are in English; conversation follows the user's language and deliverables follow their target requirements.
 
@@ -248,6 +248,74 @@ Discuss the user's questions, explaining assumptions and causal steps. Use a dia
 
 Before writing, map claims to source passages, derivations, or actual outputs. Return to reading/testing when evidence is missing. This is workflow guidance, not an institution's formal requirement.
 
+### Academic writing and Anti Defensive Writing
+
+When academic drafting or revision is the next task, the optional `writing` profile
+combines Nature writing/polishing and shared resources with the bundled
+`anti-defensive-writing` skill. Use existing document tools for the target format.
+Draft from the available evidence, then apply the framing pass: state the central
+supported contribution, connect each result to its claim, and remove apologies,
+repeated disclaimers, and hedges that add no information. Keep local edits local
+and use the draft's language unless the user requests another language.
+
+Preserve material unfavorable findings, quantitative values, baselines, evaluation
+conditions, uncertainty, and citations. Do not change success criteria to hide an
+unfavorable comparison. Report a justified change of analysis explicitly. Keep a
+qualification beside a claim whenever separation would mislead, including in an
+abstract or conclusion. For reviewer responses, address the actual comment and
+identify the evidence and manuscript change. Verify the revision against its inputs.
+
+The skill is an MIT-licensed adaptation of Adkid-Zephyr's
+[Anti-Defensive Writing](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill/tree/82d31402caa0db1790026824399044538483171b),
+reviewed on 2026-10-15. It replaces upstream rules about avoiding admissions of
+loss or changing comparison frames with the reporting requirements above. The
+skill and retained upstream license are copied with the selected writing profile,
+including offline file preparation; other writing downloads may remain pending.
+No new runtime or service is needed by this skill. Invoke `$anti-defensive-writing`,
+or read `.agents/skills/anti-defensive-writing/SKILL.md` when native discovery is
+unavailable. Verify a real revision separately from file installation.
+
+### Statistical text-watermark reduction with watermarks-remover
+
+When the user requests statistical text-watermark reduction, select the optional
+`watermarks` profile. It installs the full `remove-ai-marks` HTTP client and
+reviewed service scripts from [Guillaume Meyer and contributors](https://github.com/guillaumemeyer/watermarks-remover/tree/c5297e9e69fec0779c29127c7892427e673fafd9),
+plus the original `research-watermarks` integration. Catalog commit and per-file
+SHA-256 pins cover the selected source files and retained root MIT license.
+The upstream service files remain unchanged under the installed client's
+`runtime/` directory. Optional media tools, model weights, and detector backends
+remain separate dependencies.
+
+Use the current engine's `plan`/`apply` with profile ID `watermarks`, keeping other
+selections. Invoke `$research-watermarks`, which locates the upstream runtime
+and its helper at `.agents/skills/research-watermarks/scripts/watermarks.py`.
+Run the helper's `init --workspace <project>` to create local config without
+replacing existing values. Set the user's compatible model API `base_url` and
+`model`, and `allow_remote: true` for an authorized HTTPS endpoint. Supply its
+key only through `WATERMARKS_REWRITE_API_KEY`; keep keys out of chat/Git/config.
+`serve --workspace <project>` runs the service on loopback with strategy
+`paraphrase@0.8`, an actual Layer B paraphrase path requiring no local model
+weights. If configuration is absent, service setup can complete but real model
+rewriting must remain pending. Installation alone authorizes no paid model call.
+
+After drafting/polishing and Anti Defensive Writing, export the selected prose
+to a text file while retaining protected formulas, citations, exact quotations,
+values, and required disclosures. Run `rewrite --workspace <project> --input
+<selected-prose.txt> --output <new-candidate.txt>` through the helper. It requires
+a completed Layer B service report and preserves the original. Compare the
+candidate's factual meaning and protected spans before accepting it. A Unicode
+cleanup or local style score does not fulfill the requested statistical-watermark
+operation or verify its outcome.
+
+Record file/source checks, service health, model API execution, and vendor-key
+watermark detection separately. Check the configured API on a public authorized
+fixture first; an unconfigured backend must fail visibly. A controlled test
+backend verifies wiring, not a real model or watermark removal. Use an authorized
+appropriate detector for vendor verification when available; otherwise mark it
+unperformed and do not claim a removal rate or undetectability. Rewriting can
+introduce a new provider signal. See the upstream client instructions for HTTP
+requests; keep optional service/media capabilities distinct from this prose path.
+
 ## Step 6: Verify a real task
 
 Use an authorized paper, dataset, or code sample. Test configured functions only; mark others not applicable. Public examples can check technical functions but cannot establish personal workflow acceptance.
@@ -283,4 +351,4 @@ Later runs read configuration first, resume unfinished work, and skip unchanged 
 - [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) and [ASD FAQ](https://www.asd-ste100.org/STE_faq.html): terminology, sentences, procedures, descriptive writing, and rewriting; review included Rule 1.11, Sections 4–6, and Rule 9.1. Borrowed principles are not compliance certification.
 - [Karpathy's post](https://x.com/karpathy/status/2105819303471976479), read through a [public mirror](https://x.twstalker.com/karpathy/status/2105819303471976479) because X was inaccessible: loose STE style and presentation suggestions, not evidence that richer formats always work better.
 
-Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 1.8 adds optional Undermind discovery and verified reference-manager PDF handoff, while retaining the profile-specific Python requirements, separate installation/research acceptance, and optional PaperQA workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.
+Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 2.2 retains the full watermarks-remover Layer B service workflow alongside the adapted Anti Defensive Writing skill and preserves the optional Undermind discovery and verified reference-manager PDF handoff, while retaining the profile-specific Python requirements, separate installation/research acceptance, and optional PaperQA workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.

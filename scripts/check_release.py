@@ -11,7 +11,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASELINES = ('b0c579325163833ec0571c319986b51785446329',
              '7df78332739f432b1b4d7eae79ef9a1f311ecadb',
-             'dfc7cb9c0c724f9fee7cab5728943d44d4d65448')
+             'dfc7cb9c0c724f9fee7cab5728943d44d4d65448',
+             'bfcba49db8aa5c420b2fe0d54fcacc540a6a4a86')
 
 
 def load(path, name):

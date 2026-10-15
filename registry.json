@@ -1,5 +1,5 @@
 {
-  "version": "0.3.2",
+  "version": "0.3.6",
   "core_requirements": [
     "pypdf==6.19.0"
   ],
@@ -22,6 +22,36 @@
     "workbench": {
       "type": "bundled",
       "license": "MIT"
+    },
+    "anti-defensive-writing": {
+      "type": "bundled",
+      "repo": "Adkid-Zephyr/anti-defensive-writing-Skill",
+      "commit": "82d31402caa0db1790026824399044538483171b",
+      "license": "MIT",
+      "modified": true,
+      "upstream_files": [
+        {
+          "path": "skills/anti-defensive-writing-en/SKILL.md",
+          "sha256": "49705a92677d06b1be9f78be5be4f966b1d30c4ed72a3b97c86a973d06683b9b"
+        },
+        {
+          "path": "skills/anti-defensive-writing/SKILL.md",
+          "sha256": "6f072e66f6adf813bc1b4291754f2bc07ed4e65a398359844e97bfa215a1c28e"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "fdf440e5214588d9edcdc1ec315cddbd8525fe509242c24989a8472d283325f4"
+        }
+      ]
+    },
+    "watermarks-remover": {
+      "repo": "guillaumemeyer/watermarks-remover",
+      "commit": "c5297e9e69fec0779c29127c7892427e673fafd9",
+      "license": "MIT",
+      "license_file": {
+        "path": "LICENSE",
+        "sha256": "7b238ac3774945dae85fad6e83819b43f7d5f48c181ecb4d005e5e91fe7e0ec1"
+      }
     }
   },
   "skills": {
@@ -281,6 +311,331 @@
     "research-paperqa": {
       "source": "workbench",
       "path": "skills/research-paperqa"
+    },
+    "anti-defensive-writing": {
+      "source": "anti-defensive-writing",
+      "path": "skills/anti-defensive-writing"
+    },
+    "remove-ai-marks": {
+      "source": "watermarks-remover",
+      "path": "skills/remove-ai-marks",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "b83e5d953c9cab48230b3b6969498285403185b8c4feddd757b319a02b5a749c",
+          "size": 19682
+        },
+        {
+          "path": "references/ethics.md",
+          "sha256": "062afecad799b81a250000ac46ce4a5644ef9adb4d9da35609f6bbe49c8109bc",
+          "size": 1868
+        },
+        {
+          "path": "references/how-claude-marks.md",
+          "sha256": "356eadd9f2141847342c83c526d8e1362e4b6673fac6eb036982e0ced580fcab",
+          "size": 1645
+        },
+        {
+          "path": "references/mark-classes.md",
+          "sha256": "7068cbed56a197b1a6e4c0cc6429a772fabec97ce26177a06ef9d97f77b10d3c",
+          "size": 4349
+        },
+        {
+          "path": "references/markdiffusion.md",
+          "sha256": "16b02ee5b3d130d418c17e3394fa616dca897ab64f839ee1c2e97bbfacb75c5b",
+          "size": 3635
+        },
+        {
+          "path": "references/removal-matrix.md",
+          "sha256": "bb8ef39f5ac3a2d4e955ff4d863581936b4bdc93d6aca544e080bb0937b30819",
+          "size": 7321
+        },
+        {
+          "path": "references/vendor-notes.md",
+          "sha256": "0aa3e818722be8bf07b2cd187d813e6fbf5d37318abba79f8e5e17e81a9e3eb4",
+          "size": 5883
+        },
+        {
+          "path": "runtime/service/scripts/audit_dir.py",
+          "source_path": "service/scripts/audit_dir.py",
+          "sha256": "ec58975c770f4cfe6930ceabd738439ba12bfb7d2cec182e8b5de861443b2a25",
+          "size": 5003
+        },
+        {
+          "path": "runtime/service/scripts/audit_lib.py",
+          "source_path": "service/scripts/audit_lib.py",
+          "sha256": "e9c6e4430916088a4b66bc17680eabf3975e30233c344f6c3d1f28f816163b6f",
+          "size": 13387
+        },
+        {
+          "path": "runtime/service/scripts/audit_website.py",
+          "source_path": "service/scripts/audit_website.py",
+          "sha256": "52e5cbf919595164473eaf9d578cdfbf208036edfadd63b51634fecf9c57003e",
+          "size": 20308
+        },
+        {
+          "path": "runtime/service/scripts/av_meta.py",
+          "source_path": "service/scripts/av_meta.py",
+          "sha256": "f012ed17276c1749884e051f70d0fea6d94b33f9db0d2c3cdae23a8f739a31a5",
+          "size": 21493
+        },
+        {
+          "path": "runtime/service/scripts/bench_synthid_text.py",
+          "source_path": "service/scripts/bench_synthid_text.py",
+          "sha256": "f1bee1d530985823b2262040ad55eff49eda45c583fc30bbb69f27393acf6801",
+          "size": 158769
+        },
+        {
+          "path": "runtime/service/scripts/check_staged.py",
+          "source_path": "service/scripts/check_staged.py",
+          "sha256": "18404f5e0aa573e4ee2e156e5c805bf7d2d19609532770a60bf6e5e85a5815b3",
+          "size": 3108
+        },
+        {
+          "path": "runtime/service/scripts/clean_audio.py",
+          "source_path": "service/scripts/clean_audio.py",
+          "sha256": "a6c62e09928bf4dce4265f1d7978b8e436d0a40063d755267a34f0175988cd02",
+          "size": 10671
+        },
+        {
+          "path": "runtime/service/scripts/clean_ctrlregen.py",
+          "source_path": "service/scripts/clean_ctrlregen.py",
+          "sha256": "21e80d794f279b274cc43d5d3270f3650232029a43b99ad95503a3321cd20bd7",
+          "size": 6408
+        },
+        {
+          "path": "runtime/service/scripts/clean_file.py",
+          "source_path": "service/scripts/clean_file.py",
+          "sha256": "3490b97477e0b32146b856c910777e48181951518a8491f9ef8917eb5502f251",
+          "size": 10532
+        },
+        {
+          "path": "runtime/service/scripts/clean_image.py",
+          "source_path": "service/scripts/clean_image.py",
+          "sha256": "73077847913a521bd350fa3cd82a0863708246163ee30bef9b53953a0f5928b5",
+          "size": 7132
+        },
+        {
+          "path": "runtime/service/scripts/clean_staged.py",
+          "source_path": "service/scripts/clean_staged.py",
+          "sha256": "bd2d8116d84211f3e0b6853c3bcb935af629541677a31705bc6b4d4073178727",
+          "size": 7635
+        },
+        {
+          "path": "runtime/service/scripts/clean_text.py",
+          "source_path": "service/scripts/clean_text.py",
+          "sha256": "9f78d6e4eaaebbff42fdf3f7024456e96e986f0cc8f7a7c82c26e51ab37556a0",
+          "size": 3109
+        },
+        {
+          "path": "runtime/service/scripts/clean_video.py",
+          "source_path": "service/scripts/clean_video.py",
+          "sha256": "33ccb4096138dcefae9218fb2bfcb5e3f471af8283ef78f7e687406d9cbb9053",
+          "size": 17362
+        },
+        {
+          "path": "runtime/service/scripts/common.py",
+          "source_path": "service/scripts/common.py",
+          "sha256": "8af6dbea2e1f4bfa6cc5e3ff527305a3fb5a8186d45ad432207887b4dd5df75e",
+          "size": 21247
+        },
+        {
+          "path": "runtime/service/scripts/container_meta.py",
+          "source_path": "service/scripts/container_meta.py",
+          "sha256": "80df62f035179d9ecda76a43a1cdd98bab6d3b92bc94055940b1b5414b5afa6f",
+          "size": 176521
+        },
+        {
+          "path": "runtime/service/scripts/detect_gumbel.py",
+          "source_path": "service/scripts/detect_gumbel.py",
+          "sha256": "f908272084cd6783a2daa015d51cd1348f56e4bb45fe69168bd85f57b62cd4c1",
+          "size": 10812
+        },
+        {
+          "path": "runtime/service/scripts/detect_text_watermark.py",
+          "source_path": "service/scripts/detect_text_watermark.py",
+          "sha256": "989a6da3d4cb64c64748abb78948251c4e0714ecc49a433852ad3982e909c182",
+          "size": 23200
+        },
+        {
+          "path": "runtime/service/scripts/format_dispatch.py",
+          "source_path": "service/scripts/format_dispatch.py",
+          "sha256": "2670d47c69e5e45dce604dcdc6093db9ee2b11d4c3d0c62e66cfc87860677216",
+          "size": 5036
+        },
+        {
+          "path": "runtime/service/scripts/hook_written_file.py",
+          "source_path": "service/scripts/hook_written_file.py",
+          "sha256": "6ff0a7eda96712ee153c3f7f168a59a8e562c8ce87b1e13fb5722feb72bc5e04",
+          "size": 10589
+        },
+        {
+          "path": "runtime/service/scripts/humanize_pass.py",
+          "source_path": "service/scripts/humanize_pass.py",
+          "sha256": "097297ba2831215601968e65e850334c2cc86561559e6b2abc4c0ff425a5f916",
+          "size": 4138
+        },
+        {
+          "path": "runtime/service/scripts/image_meta.py",
+          "source_path": "service/scripts/image_meta.py",
+          "sha256": "8616bd818e7b95347f65df4d3883b61a0505ab6a62592e678441cfa471da6ff8",
+          "size": 86849
+        },
+        {
+          "path": "runtime/service/scripts/inspect_file.py",
+          "source_path": "service/scripts/inspect_file.py",
+          "sha256": "26cdb22bc00ca813a0a09e1fe5d6f3fa2e4207d61314e570daa1adc9223662f8",
+          "size": 4813
+        },
+        {
+          "path": "runtime/service/scripts/inspect_image.py",
+          "source_path": "service/scripts/inspect_image.py",
+          "sha256": "46e52c25c868f98f2b0fed20a41274543615b912cd04944a87353c1ee8d8634b",
+          "size": 2791
+        },
+        {
+          "path": "runtime/service/scripts/inspect_text.py",
+          "source_path": "service/scripts/inspect_text.py",
+          "sha256": "2459fafa7b142634f98f72c126ed7ec24f42547ba7891c7439b902b7871c63aa",
+          "size": 4551
+        },
+        {
+          "path": "runtime/service/scripts/markdiffusion_harness.py",
+          "source_path": "service/scripts/markdiffusion_harness.py",
+          "sha256": "c126e60d5f6ee8560849092d1672c0555511c3cc62462cc25950bf574538a781",
+          "size": 18496
+        },
+        {
+          "path": "runtime/service/scripts/requirements-ctrlregen.txt",
+          "source_path": "service/scripts/requirements-ctrlregen.txt",
+          "sha256": "38f953a36f6bedb1ab8b991617afaa0408e39917d847e2df7183c15c14717640",
+          "size": 1552
+        },
+        {
+          "path": "runtime/service/scripts/requirements-markdiffusion.txt",
+          "source_path": "service/scripts/requirements-markdiffusion.txt",
+          "sha256": "de1a8063873ddfc319992201fe00c79573a6ba76f79348b1dafd71e2c94cbac3",
+          "size": 455
+        },
+        {
+          "path": "runtime/service/scripts/requirements-markllm.txt",
+          "source_path": "service/scripts/requirements-markllm.txt",
+          "sha256": "58869bda1f0e29178b7b3f9a3e47f2dd3a45880d5c8e2224ad5e7247f20466ee",
+          "size": 1489
+        },
+        {
+          "path": "runtime/service/scripts/requirements-semantic.txt",
+          "source_path": "service/scripts/requirements-semantic.txt",
+          "sha256": "bd306ade6a871ef90643fdb5d4421ada483bdaa8ddbcaae71c0432915adfdb46",
+          "size": 674
+        },
+        {
+          "path": "runtime/service/scripts/requirements-synthid-scorer.txt",
+          "source_path": "service/scripts/requirements-synthid-scorer.txt",
+          "sha256": "12b970d17bb131fef041cbea3675cecebd0ddb24d9a85af0e8920864577af2b1",
+          "size": 754
+        },
+        {
+          "path": "runtime/service/scripts/rewrite_text.py",
+          "source_path": "service/scripts/rewrite_text.py",
+          "sha256": "2858b6c582ab283b9867c377444f62c1bd0cf164e0e78709c337f5a0cf47773f",
+          "size": 56822
+        },
+        {
+          "path": "runtime/service/scripts/score_stylometry.py",
+          "source_path": "service/scripts/score_stylometry.py",
+          "sha256": "57dcbd2cb1ec30a12d44ba47dac29998bf1f0f139703e0921b4642d83b0e774f",
+          "size": 19955
+        },
+        {
+          "path": "runtime/service/scripts/score_synthid.py",
+          "source_path": "service/scripts/score_synthid.py",
+          "sha256": "b43174beeacc6b691335aeb000dce98df5e86e362da243d546947d5922e100ad",
+          "size": 5647
+        },
+        {
+          "path": "runtime/service/scripts/server.py",
+          "source_path": "service/scripts/server.py",
+          "sha256": "30682bcfe12cef7c757371640ebdda45e1a7f5359226484ce691d381ef4a4453",
+          "size": 70584
+        },
+        {
+          "path": "runtime/service/scripts/setup_ctrlregen.ps1",
+          "source_path": "service/scripts/setup_ctrlregen.ps1",
+          "sha256": "4e9c074f93ef18c6c57609351ae2723cd85e7722202eb80d3130142df65ce312",
+          "size": 10672
+        },
+        {
+          "path": "runtime/service/scripts/setup_ctrlregen.sh",
+          "source_path": "service/scripts/setup_ctrlregen.sh",
+          "sha256": "92dd59515cbe5fba534e9cfe7ef8ec0ed63ba95114fc89ec4486393ab2df1aa6",
+          "size": 4253
+        },
+        {
+          "path": "runtime/service/scripts/setup_markdiffusion.sh",
+          "source_path": "service/scripts/setup_markdiffusion.sh",
+          "sha256": "74ae9724fa991e7bae69bc4e1b45aba716a35e253d47ba06c3a81f10ee2edb10",
+          "size": 4476
+        },
+        {
+          "path": "runtime/service/scripts/setup_markllm.sh",
+          "source_path": "service/scripts/setup_markllm.sh",
+          "sha256": "e44fa435d109ce40bec8d429e09edd6ab352ef67ae1197ee676e5426abf3eedf",
+          "size": 4180
+        },
+        {
+          "path": "runtime/service/scripts/setup_synthid.ps1",
+          "source_path": "service/scripts/setup_synthid.ps1",
+          "sha256": "2ec7ac9406ebded4f02997e5d0c08f550af416c116848fae35fd652af0511962",
+          "size": 4608
+        },
+        {
+          "path": "runtime/service/scripts/setup_synthid.sh",
+          "source_path": "service/scripts/setup_synthid.sh",
+          "sha256": "39372fbe84a47931df4d20dab053a25c5ecf93f8962544b24d3f12782b29b877",
+          "size": 4313
+        },
+        {
+          "path": "runtime/service/scripts/synthid_score_server.py",
+          "source_path": "service/scripts/synthid_score_server.py",
+          "sha256": "d6a3dd4c233cc940bcb3f58f097ffbf1c1ec2b5ed16e39970b3d8b2782700107",
+          "size": 6785
+        },
+        {
+          "path": "runtime/service/scripts/synthid_text_server.py",
+          "source_path": "service/scripts/synthid_text_server.py",
+          "sha256": "ffa83d9f8d7da716015add81b62c84e25b7c427df50cf4217ce85ae814be7c3c",
+          "size": 12506
+        },
+        {
+          "path": "runtime/service/scripts/text_detectors.py",
+          "source_path": "service/scripts/text_detectors.py",
+          "sha256": "15209d090a1888aa2dea1c92ba41fc9498fc295750bbdcadbde0dee060e2a331",
+          "size": 15171
+        },
+        {
+          "path": "runtime/service/scripts/text_unicode.py",
+          "source_path": "service/scripts/text_unicode.py",
+          "sha256": "ed86ed9715f40e306371731f97bf6f2a63f6a7719674630afac89eb3741bc6fd",
+          "size": 25110
+        },
+        {
+          "path": "runtime/service/scripts/text_watermark.py",
+          "source_path": "service/scripts/text_watermark.py",
+          "sha256": "740c7e5300a3cea9dae40aa57408074a627c427cc4abb07e1c274f0eb4b1c226",
+          "size": 18405
+        },
+        {
+          "path": "runtime/config/clean_strategy.json",
+          "source_path": "config/clean_strategy.json",
+          "sha256": "15bc1c3cb7fc403e75cee7a670deaf1e17f6ea2e9aa4a8348a14348ec238d3e4",
+          "size": 51
+        }
+      ]
+    },
+    "research-watermarks": {
+      "source": "workbench",
+      "path": "skills/research-watermarks"
     }
   },
   "profiles": {
@@ -298,10 +653,11 @@
       "skills": [
         "nature-shared",
         "nature-writing",
-        "nature-polishing"
+        "nature-polishing",
+        "anti-defensive-writing"
       ],
       "requirements": [],
-      "limits": "Prefer existing document plugins. Source evidence, output language, and format-specific tools need task checks."
+      "limits": "Use Anti Defensive Writing for contribution-first framing with evidence and material findings preserved. Prefer existing document tools. Source evidence, output language, and host invocation need task checks."
     },
     "symbolic": {
       "purpose": "Exact mathematical derivations",
@@ -363,6 +719,15 @@
         "paper-qa==2026.8.12"
       ],
       "limits": "Local PDF ingestion and evidence serialization are checked without model calls. Requires explicit model/embedding configuration and authorized source sharing/cost. Host discovery, actual queries, and claim support remain task checks."
+    },
+    "watermarks": {
+      "purpose": "Reduce statistical text watermarks through full watermarks-remover Layer B model rewriting",
+      "skills": [
+        "research-watermarks",
+        "remove-ai-marks"
+      ],
+      "requirements": [],
+      "limits": "Installs full HTTP service sources and client, with a paraphrase strategy and API configuration entry point. User supplies an authorized compatible model endpoint and key. File/service checks are separate from actual model execution and vendor-key watermark verification; optional media/detector backends are not installed."
     }
   }
 }
