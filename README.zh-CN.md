@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.4 -->
+<!-- workbench-release: 0.3.5 -->
 
 # Research AI Workbench
 
@@ -117,4 +117,4 @@ python workbench.py doctor --workspace "path/to/project"
 - 交互与受控输出准则借鉴了 **ASD-STE100** 标准与 **Andrej Karpathy** 的技术表达建议。
 - 外部集成组件保留各自原始协议，详见 [NOTICE.md](NOTICE.md) 与 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
-仓库版本 **0.3.4**，配置指南 **2.0**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。
+仓库版本 **0.3.5**，配置指南 **2.1**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。

@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import ssl
 import sys
 import urllib.error
 import urllib.request
@@ -55,9 +56,9 @@ def settings(workspace):
     return config
 
 
-def missing(config):
+def missing(config, include_key=True):
     fields = [name for name in ('base_url', 'model') if not config.get(name)]
-    if not os.environ.get('WATERMARKS_REWRITE_API_KEY'):
+    if include_key and not os.environ.get('WATERMARKS_REWRITE_API_KEY'):
         fields.append('WATERMARKS_REWRITE_API_KEY environment variable')
     return fields
 
@@ -98,6 +99,12 @@ def serve(workspace, config):
                 'WATERMARKS_REWRITE_ALLOW_REMOTE': '1' if config.get('allow_remote') is True else '0',
                 'WATERMARKS_REWRITE_REASONING_EFFORT': 'off',
                 'WATERMARKS_SERVER_VERSION': 'workbench-c5297e9'})
+    # Some macOS Python.org builds have no configured CA bundle. Use the
+    # system trust bundle for this service only, retaining TLS verification.
+    if (sys.platform == 'darwin' and not env.get('SSL_CERT_FILE')
+            and not ssl.get_default_verify_paths().cafile
+            and Path('/etc/ssl/cert.pem').is_file()):
+        env['SSL_CERT_FILE'] = '/etc/ssl/cert.pem'
     for key, variable in (('base_url', 'WATERMARKS_REWRITE_BASE_URL'), ('model', 'WATERMARKS_REWRITE_MODEL')):
         if config.get(key):
             env[variable] = config[key]
@@ -112,7 +119,8 @@ def serve(workspace, config):
 
 
 def rewrite(workspace, config, source, output):
-    gap = missing(config)
+    # Only the service needs the provider key; the local client talks to it.
+    gap = missing(config, include_key=False)
     if gap:
         raise ValueError('Rewrite pending: ' + ', '.join(gap))
     source, output = source.resolve(), output.resolve()
@@ -166,7 +174,7 @@ def main():
         return serve(workspace, config)
     if args.command == 'status':
         print(json.dumps({'service': request(config, '/health'),
-                          'rewrite_configuration_pending': missing(config),
+                          'rewrite_configuration_pending': missing(config, include_key=False),
                           'capabilities': request(config, '/capabilities')}, indent=2))
         return 0
     if not args.input or not args.output:

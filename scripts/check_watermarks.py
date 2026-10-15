@@ -111,9 +111,11 @@ def check(workspace):
             try:
                 url = f"http://127.0.0.1:{config['port']}"
                 wait_service(url, process)
-                command(helper, 'status', '--workspace', root, env=env)
+                client_env = dict(env)
+                client_env.pop('WATERMARKS_REWRITE_API_KEY')
+                command(helper, 'status', '--workspace', root, env=client_env)
                 command(helper, 'rewrite', '--workspace', root, '--input', source,
-                        '--output', output, env=env)
+                        '--output', output, env=client_env)
                 report = json.loads(output.with_name(output.name + '.watermarks.json').read_text())
                 if output.read_text() != candidate or source.read_text() != original:
                     raise RuntimeError('Candidate or source preservation failed.')

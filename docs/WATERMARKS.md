@@ -50,7 +50,7 @@ its own watermark. Actual removal must be assessed separately from API success.
 
 ## Start and use
 
-Run this command in a local terminal with the key available in its environment:
+Run this command in a local terminal with the provider key available in its environment. Only the service needs that provider key; local status/rewrite clients do not need a second copy:
 
 ```bash
 python .agents/skills/research-watermarks/scripts/watermarks.py serve --workspace .

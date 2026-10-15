@@ -1,6 +1,16 @@
 # Compatibility and verification
 
-Updated: 2026-10-15 for repository 0.3.4. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-15 for repository 0.3.5. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.5 service credential scope and macOS trust
+
+The live service/API-wiring fixture passes with the provider key absent from
+the local client's environment. Only the service process needs that key.
+Local unit, repository, and release-preservation checks pass. On a macOS
+Python.org build with no configured CA file, HTTPS certificate verification
+failed before provider authentication. The macOS system CA bundle verifies the
+provider's TLS connection; the service uses it only when no bundle is configured.
+No TLS verification is disabled and no global trust setting is changed.
 
 ## 0.3.4 full watermarks-remover integration
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.5 — 2026-10-15
+
+- Keep the model-provider API key on the service side. Local status/rewrite clients no longer require a duplicate provider key in their own environment.
+- Test the real Layer B service request with the provider key absent from the client environment; keep source preservation and explicit unconfigured-service failures.
+- Use the macOS system CA bundle for the service when a Python build has no configured bundle; retain HTTPS verification.
+- Advance the immutable kit to 0.3.5 and guide to 2.1; runtime dependencies and selected upstream sources are unchanged.
+
 ## 0.3.4 — 2026-10-15
 
 - Add the optional `watermarks` profile with the full watermarks-remover HTTP client and service, pinned source paths/file hashes and retained MIT license, plus an original research integration skill.
