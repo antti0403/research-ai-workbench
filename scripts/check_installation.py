@@ -71,7 +71,7 @@ def main():
             print('Passed: actual documented first-PDF commands through the current installed kit.')
             command([interpreter, str(engine), 'doctor', '--workspace', str(root)])
             profile = root / '.workbench/selected.json'
-            selected = ['figures', 'watermarks', 'paperqa'] if args.paperqa else ['figures', 'watermarks']
+            selected = ['figures', 'watermarks', 'watermarks-api', 'paperqa'] if args.paperqa else ['figures', 'watermarks', 'watermarks-api']
             profile.write_text(json.dumps({'extensions': selected}), encoding='utf-8-sig')
             command([interpreter, str(engine), 'apply', '--workspace', str(root), '--profile', str(profile)])
             command([interpreter, str(engine), 'apply', '--workspace', str(root), '--profile', str(profile)])

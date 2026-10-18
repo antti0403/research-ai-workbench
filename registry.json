@@ -1,5 +1,5 @@
 {
-  "version": "0.3.6",
+  "version": "0.3.7",
   "core_requirements": [
     "pypdf==6.19.0"
   ],
@@ -721,13 +721,21 @@
       "limits": "Local PDF ingestion and evidence serialization are checked without model calls. Requires explicit model/embedding configuration and authorized source sharing/cost. Host discovery, actual queries, and claim support remain task checks."
     },
     "watermarks": {
-      "purpose": "Reduce statistical text watermarks through full watermarks-remover Layer B model rewriting",
+      "purpose": "Rewrite selected research prose with the current conversation model",
+      "skills": [
+        "research-watermarks"
+      ],
+      "requirements": [],
+      "limits": "Use the active conversation model directly; no separate API, key, service, or backend setup. Preserve the source and verify factual equivalence. Vendor-watermark reduction requires a separate appropriate detector and is otherwise unverified."
+    },
+    "watermarks-api": {
+      "purpose": "Optional standalone watermarks-remover service for explicitly requested API-driven automation",
       "skills": [
         "research-watermarks",
         "remove-ai-marks"
       ],
       "requirements": [],
-      "limits": "Installs full HTTP service sources and client, with a paraphrase strategy and API configuration entry point. User supplies an authorized compatible model endpoint and key. File/service checks are separate from actual model execution and vendor-key watermark verification; optional media/detector backends are not installed."
+      "limits": "Select only for an explicit standalone-service or API-driven batch request. Requires an authorized compatible model API and key. Service/API execution is separate from vendor-key watermark verification; optional media/detector backends are not installed."
     }
   }
 }

@@ -116,16 +116,30 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual((self.root / 'AGENTS.md').read_bytes(), agents_before)
         self.assertEqual(state['profiles']['writing']['status'], 'failed')
 
-    def test_watermarks_offline_prepares_integration_without_claiming_service_download(self):
+    def test_watermarks_default_prepares_offline_without_backend_or_download(self):
+        w.main(['setup', '--workspace', str(self.root), '--offline'])
+        state = w.read_state(self.root)
+        with patch.object(w, 'download', side_effect=AssertionError('Default rewrite downloaded a service')):
+            self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['watermarks']}, True))
+            self.assertTrue(w.apply_profile(self.root, state, {'extensions': ['watermarks']}, False))
+            self.assertTrue(w.apply_profile(self.root, state, {'extensions': ['watermarks']}, False))
+        self.assertTrue((self.root / '.agents/skills/research-watermarks/SKILL.md').is_file())
+        self.assertTrue((self.root / '.agents/skills/research-watermarks/references/api-service.md').is_file())
+        self.assertFalse((self.root / '.agents/skills/remove-ai-marks').exists())
+        self.assertNotIn('skill:remove-ai-marks', state['checks'])
+        self.assertEqual(state['profiles']['watermarks']['status'], 'installed; task checks pending')
+        self.assertFalse((self.root / '.workbench/watermarks').exists())
+        self.assertFalse((self.root / '.workbench/envs').exists())
+
+    def test_watermarks_api_offline_leaves_only_optional_runtime_pending(self):
         w.main(['setup', '--workspace', str(self.root), '--offline'])
         state = w.read_state(self.root)
         with patch.object(w, 'download', side_effect=AssertionError('Offline apply used network')):
-            self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['watermarks']}, True))
-        self.assertTrue((self.root / '.agents/skills/research-watermarks/scripts/watermarks.py').is_file())
+            self.assertFalse(w.apply_profile(self.root, state, {'extensions': ['watermarks-api']}, True))
         self.assertFalse((self.root / '.agents/skills/remove-ai-marks').exists())
         self.assertEqual(state['checks']['skill:remove-ai-marks']['status'], 'pending')
-        self.assertEqual(state['profiles']['watermarks']['status'], 'pending')
-        self.assertFalse((self.root / '.workbench/envs').exists())
+        self.assertEqual(state['profiles']['watermarks-api']['status'], 'pending')
+        self.assertFalse((self.root / '.workbench/watermarks').exists())
 
     def test_pinned_source_mapping_installs_full_runtime_and_retained_license(self):
         data = {'SKILL.md': b'---\nname: test-client\ndescription: Test.\n---\n',

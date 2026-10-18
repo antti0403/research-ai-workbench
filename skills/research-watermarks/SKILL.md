@@ -1,57 +1,40 @@
 ---
 name: research-watermarks
-description: Run watermarks-remover's full text-watermark reduction service on selected research prose using a configured model API. Use when the user asks to remove or weaken statistical text watermarks, configure the rewrite backend, or resume the watermarks workflow.
+description: Rewrite selected research prose with the current conversation model to vary wording and sentence structure while preserving evidence. Use for requested text-watermark reduction or related prose rewriting; separate detector verification from the rewrite.
 ---
 
-# Research text-watermark reduction
+# Research text-watermark rewriting
 
-Use the installed `remove-ai-marks` skill and its full HTTP service for Layer B
-model rewriting. This workflow is for the user's selected manuscript prose.
-Unicode cleanup alone does not satisfy a statistical-watermark reduction request.
+Use the model already serving this conversation to rewrite the selected prose.
+This is a writing task in the current agent: no separate API, key, model choice,
+local server, or script execution is required. Existing API configuration does
+not change this default. Do not ask the user to configure another model.
 
-Locate `scripts/watermarks.py` beside this entry point. Read the project's
-`START_HERE.md`, effective instructions, and local watermarks configuration.
-Keep original drafts, equations, citations, exact quotations, numerical values,
-comparison conditions, and required disclosures. Process selected prose into a
-new candidate and review factual equivalence after rewriting. Do not run a
-manuscript-wide metadata strip, rewrite code, or modify source-paper attachments
-merely because this text workflow was selected.
+## Rewrite in the conversation
 
-## Configure and start
+- Reuse the selected passage, target language, and revision scope. Keep the source
+  intact. Return the candidate directly in chat, or save a separate candidate
+  when the user requests a file.
+- Rebuild sentences from their meaning rather than replacing words mechanically.
+  Vary clause order, sentence boundaries, and phrasing where the argument allows;
+  retain established technical terminology and the author's intended emphasis.
+- Preserve facts, numbers, units, equations, citations, exact quotations,
+  comparison conditions, unfavorable findings, uncertainty, and claim strength.
+  Keep protected spans unchanged. Add no new evidence or references.
+- Compare the candidate with the source before delivery and repair factual drift.
+  Keep necessary academic qualifications. Use Anti Defensive Writing when it is
+  already part of the selected writing workflow.
+- Return the revised text with only material changes or unresolved issues noted.
+  No setup report or operation JSON is needed for an ordinary chat revision.
 
-Run `python scripts/watermarks.py init --workspace <project>` using this skill's
-actual script path. It creates `.workbench/watermarks/config.json` if absent.
-Reuse existing configuration. Configure the user's API base URL, model name,
-and `allow_remote` choice. Keep the API key only in the local environment as
-`WATERMARKS_REWRITE_API_KEY`. Do not copy keys into chat, config, logs, or Git.
-No new subscription, local model, or paid request follows from file installation.
-Use the user's chosen endpoint and authorization for actual requests.
+Changed wording is not proof that a statistical watermark was removed. If no
+appropriate detector was run, leave that result unverified. Do not invent a
+removal rate, detector score, or guarantee of undetectability. Direct rewriting
+is not execution of the upstream HTTP service or its numerical intensity setting.
+Unicode cleanup alone is a separate operation and does not replace rewriting.
 
-The strategy is `paraphrase@0.8`: a real rewrite pass intended to weaken
-token-sampling patterns. It does not depend on optional masked-language models.
-Start `watermarks.py serve --workspace <project>` in a local terminal. It serves
-on loopback and uses the installed upstream runtime. Check `status` and the
-upstream `/capabilities` endpoint. Read `remove-ai-marks/SKILL.md` for HTTP usage.
-If the backend configuration or API key is missing, complete installation and
-report the exact pending fields; do not call the rewrite function operational.
+## Optional standalone automation
 
-## Rewrite and verify the result
-
-Use `watermarks.py rewrite --workspace <project> --input <selected-prose.txt>
---output <new-candidate.txt>`. The wrapper sends plain text through `/clean`
-with Layer B required, preserves the source, rejects an existing output, and
-writes a local operation report. Use a real authorized public fixture first
-when configuring the API, then process the user's selected material within its
-sharing and cost authorization. Compare content, units, citations, and protected
-spans. Use the writing and Anti Defensive Writing workflows for the argument.
-
-Record actual API/model execution separately from vendor-watermark detection.
-An HTTP success or changed wording does not establish removal of a secret-key
-watermark. Use an appropriate authorized detector when available; otherwise
-label vendor verification unperformed. Do not substitute a stylometry score
-for that test, invent a removal percentage, or claim undetectability. A rewrite
-backend can introduce its own signal; keep this uncertainty explicit.
-
-The full installed runtime includes optional media and detector entry points;
-the selected profile configures the text rewrite path only. Inspect capabilities
-and separately review dependencies before using other backends.
+Only when the user explicitly requests a standalone service or API-driven batch
+processing, read [the API service instructions](references/api-service.md).
+Do not select that route merely because its scripts or old configuration exist.

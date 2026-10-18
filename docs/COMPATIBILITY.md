@@ -1,6 +1,15 @@
 # Compatibility and verification
 
-Updated: 2026-10-15 for repository 0.3.6. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-18 for repository 0.3.7. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.7 current-conversation default
+
+The `watermarks` profile prepares its bundled Skill without downloading a
+service, creating API configuration, or requesting another model. The active
+conversation performs ordinary revisions. `watermarks-api` explicitly opts in
+to the retained standalone service; its existing API-wiring check remains in
+online CI. Offline preparation/resume and exact-head CI are checked separately
+from actual passage revision quality and vendor-watermark detection.
 
 ## 0.3.6 service launch and CI repair
 

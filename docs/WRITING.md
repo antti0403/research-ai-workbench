@@ -32,13 +32,12 @@ rewrite an edited project instruction file.
 
 ## Statistical text-watermark reduction
 
-When the user requests watermark reduction, select the optional `watermarks`
-profile and follow [the full service workflow](WATERMARKS.md). It installs the
-upstream HTTP service/client and runs an actual Layer B rewrite through the
-user’s configured model API. Unicode cleanup alone does not fulfill this task.
-Keep the source and compare the candidate with evidence, formulas, citations,
-and necessary qualifications. Model execution and vendor-key detection have
-separate verification states.
+When the user requests watermark-related rewriting, select `watermarks` and
+follow [the current-model workflow](WATERMARKS.md). The model already serving
+the conversation rewrites the selected prose directly. No separate API, key,
+model, or local service is required. Keep the source and compare factual meaning,
+formulas, citations, numbers, and necessary qualifications. Wording changes
+alone do not verify removal. Standalone API automation is an explicit opt-in.
 
 ## Example request
 

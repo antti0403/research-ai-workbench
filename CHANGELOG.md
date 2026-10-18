@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.7 — 2026-10-18
+
+- Default research-watermarks to direct rewriting with the active conversation model. Remove separate model/API/service setup from normal Skill use; existing API configuration does not override this route.
+- Make `watermarks` a bundled-only profile that prepares offline without service downloads or backend configuration. Retain the unchanged standalone helper and pinned upstream runtime under the explicit opt-in `watermarks-api` profile.
+- Align the standalone guide, bilingual entry points, generated project instructions, provenance and validation paths. Preserve originals, protected spans, existing installations, configuration, and separate watermark-detection verification. Advance the kit to 0.3.7 and guide to 2.3.
+
 ## 0.3.6 — 2026-10-15
 
 - Run the watermark service in the launcher process on every platform, fixing Windows path splitting when an interpreter or project path contains spaces. Terminating the launcher stops the actual service. Pinned upstream files remain unchanged.
