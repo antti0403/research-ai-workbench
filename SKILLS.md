@@ -4,7 +4,7 @@ Use [SETUP.md](SETUP.md) to select for a task and [Automation](docs/AUTOMATION.m
 
 ## Current catalog
 
-Repository 0.3.7 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
+Repository 0.3.8 installs two original MIT-licensed foundation skills: `research-workbench` for setup and research continuation, and `research-reading` for progressive source-linked reading and comparisons. Optional bundles are defined in [registry.json](registry.json).
 
 | Source | Automatic scope | Limits |
 | --- | --- | --- |
@@ -20,6 +20,8 @@ Source revisions, hashes, authors, and license evidence live in the registry and
 **Excluded:** ARS uses CC BY-NC 4.0 at the reviewed revision and needs intended-use review before manual installation. `nature-figure` is withheld pending permission for its nested `figures4papers` assets; `figures` installs only the plotting runtime. Earlier local installations are not removed.
 
 Files matching a source, dependencies loading, host discovery, and a real task passing are separate checks. Skills do not supply accounts, MATLAB licenses, institutional access, model services, or every upstream optional integration.
+
+The [reading workflow](docs/READING.md) distinguishes overviews, local questions, mechanism explanations, and comparison/reproduction work. Continue through the existing research index rather than duplicating progress files. [Synthetic acceptance cases](docs/RESEARCH_ACCEPTANCE.md) check observable outputs without requiring an extra model service. Pristine tracked foundation skills can upgrade with a whole-directory backup; edited or unowned skills require review.
 
 ## Optional hosted literature service
 

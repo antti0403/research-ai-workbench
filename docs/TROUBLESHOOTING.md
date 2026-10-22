@@ -17,7 +17,7 @@ Read `.workbench/install-report.md` and `workbench-config.md` in the target proj
 | Installed engine differs | A same-version engine was changed locally. Preserve it and use a reviewed new release or a separate workspace. No silent overwrite occurs. |
 | State file is unreadable | Preserve `.workbench/state.json` for recovery. Restore a known-good copy or inspect existing outputs before rebuilding the record; do not assume nothing was installed. |
 | Unrecognized runtime is preserved | There is no matching ownership record. A working runtime can be checked and reused; repairs require reviewing and backing it up before replacement, or choosing a new workspace. Do not manufacture a marker or treat an old check as ownership. |
-| apply reports failed current foundation checks | Inspect the new core/skill results, rerun setup for the affected foundation, and then retry apply. Old verified records do not bypass missing files or a broken interpreter. |
+| apply reports failed current foundation checks | Inspect the core/skill results. An older pristine foundation is also incomplete for the new engine; run the new distribution's setup, then retry apply. A global state version does not prove each skill upgraded. |
 | START_HERE.md still refers to an old engine | If the file was edited, setup preserves it and writes versioned instructions. Read the entry-point row in the report and reconcile the new file with your notes. |
 | Managed destination is a junction or link | It is preserved and refused to prevent writes to another location. Select a dedicated directory or reconcile the existing link before setup. |
 | Skill files exist but are not visible | Check the actual host's discovery path and disabled state. Reload or start a new session if needed, then invoke the skill. File integrity alone does not prove discovery. |
@@ -42,6 +42,6 @@ Run only the command needed for the current failure. If the distribution was rem
 
 ## Update or remove
 
-Record the old version, location, and local modifications. Back up affected files privately. Recheck affected skills and tasks after an update. This release preserves conflicting files and does not offer an automatic cross-version upgrade or universal uninstall command.
+Record the old version, location, and local modifications. Back up affected files privately. Recheck affected skills and tasks after an update. The new distribution's setup upgrades only unmodified, tracked first-party foundation skills from an older version, retaining their complete previous trees under `.workbench/backups/skills/` and keeping old kits. Edited or unowned skills remain for review; optional/third-party replacements and uninstall are not automatic. Compare the preserved skill with the new kit's source, then explicitly choose how to reconcile it. Do not alter saved hashes to claim an edited tree is pristine. An edited entry point is preserved alongside versioned current instructions.
 
 Identify what the workbench added and what is pre-existing or shared. Follow the user's authorization for deletion. Preserve research sources, notes, results, and shared applications. Restore the recorded configuration if a reviewed update fails.

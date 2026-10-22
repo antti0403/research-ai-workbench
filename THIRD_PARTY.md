@@ -166,3 +166,7 @@ The foundation-first installer, question grouping, catalog integration, verifica
 ## Maintaining this inventory
 
 For each new component, record the original creator, source, version, use location, bundled/downloaded/reference-only status, license, retained notices and local changes. Follow [CONTRIBUTING.md](CONTRIBUTING.md). Keep credit next to copied/adapted material where appropriate as well as here. New versions and platforms require checking their actual distributions.
+
+## Original reading-workflow fixtures
+
+`docs/READING.md`, `docs/RESEARCH_ACCEPTANCE.md`, and `examples/reading-workflow-fixture.md` are original workbench instructions and synthetic material developed with AI assistance. The fixture is not a published paper, real experiment, or copied scientific result. No private research, third-party figures, or new external dependency is included; these files retain this project's MIT license.

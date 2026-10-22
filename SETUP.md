@@ -1,6 +1,6 @@
 # Research AI Workbench Setup Guide
 
-Version **2.3**, 2026-10-18. Prepare a common foundation, select tools for the user's next research task, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
+Version **2.4**, 2026-10-22. Prepare a common foundation, continue existing research, select tools for an actual gap, and verify the result. Use Codex by default if no suitable agent is selected; adapt to an existing agent when possible.
 
 This is a complete standalone guide. Give the AI this file for agent-driven setup, or the [repository](https://github.com/antti0403/research-ai-workbench) for its installer. This file alone does not contain the program, dependencies, accounts, models, or commercial licenses. Instructions are in English; conversation follows the user's language and deliverables follow their target requirements.
 
@@ -91,6 +91,8 @@ Use existing host tools for equivalent authorized preparation: a selected projec
 Continue with the steps below. Downloaded files and base runtime checks do not prove host discovery, research acceptance, or scientific correctness.
 
 ## Step 1: Define the next task
+
+For an existing project, read its effective instructions, research index, and relevant note first. Recover the current question, established evidence, unresolved issue, and next output. Continue with working tools; repeat setup or capability checks only for a relevant failure or gap. Keep the user's reading status separate from AI drafts and actual project validation. A user saying the current reading depth is sufficient permits moving on while retaining deferred details.
 
 Reuse known information and inspect what tools can establish. Ask only missing details, grouped into at most three short questions:
 
@@ -222,7 +224,7 @@ Reuse the current structure and localized filenames. If none exists, create only
 - `wiki/`: papers, concepts, questions, and discussion notes.
 - `data/`: code, parameters, data, results, and figures.
 - `manuscript/`: manuscripts, reports, and presentations.
-- `research-overview.md`: objective, status, source links, and next question.
+- An existing research index, or `research-overview.md` if needed: objective, status, source links, and next question.
 - `workbench-config.md`: tools, versions, checks, and unfinished work.
 
 Do not move existing materials or pre-create many empty categories. Record the chosen layout and any filename mapping.
@@ -240,11 +242,15 @@ Merge the communication rules and the research rules below into instructions the
 
 Record rule path/scope and current-session loading. Check later-session loading separately; saved does not mean loaded. Prefer project rules over bulk edits to external skills.
 
-### Reading without a specialist skill
+### Read and discuss a paper
 
-Identify full text, excerpt, or abstract. Save one concise **AI first-pass draft** with the question, approach, key evidence and source locations, limits, and two or three close-reading questions. Locate figures, formulas, and results only when available.
+Verify the selected paper's identity, version, and available scope: full text, excerpt, or abstract. Reuse the reference library and existing note. For an overview, explain the problem, core idea, contribution, decisive evidence, and boundaries. When a whole-paper note is requested or part of the agreed workflow, save a concise **AI first-pass draft** with source locations and a few useful unresolved questions. A question about one paragraph, figure, or formula can be answered directly without creating a whole-paper note.
 
-Discuss the user's questions, explaining assumptions and causal steps. Use a diagram for difficult structure or an interactive example with a credible model. Improve the same note after discussion; an AI summary does not establish understanding. Compare papers under compatible conditions and expand search from a specific evidence gap.
+For a mechanism question, establish the objects and connections, explain the relevant change and intermediate responses, and retain feedback, assumptions, and limits. Inspect source figures when layout or arrows matter. Use formulas or examples only to resolve the current gap; label teaching examples as illustrative. For comparison or reproduction, examine the necessary definitions, derivations, parameters, and implementation separately. Summary requests do not require exhaustive derivation.
+
+For each central claim, connect it to original evidence and a concrete locator, its conditions, and its support scope. Preserve the distinction between proof, simulation, experiment, and the project's own execution. Identify the actual comparator and whether the evidence is a complete-method benchmark, an ablation, a condition contrast, or functional coverage; mixed evidence can have multiple labels. State unequal conditions or missing metrics before drawing a ranking. A capability demonstration alone does not prove superiority.
+
+After substantive discussion, improve the same note with useful corrections and remaining questions. Keep it concise, preserve human writing, and avoid a transcript of repeated explanations. Optional bilingual discussion summaries follow the user's preferences. Record user-confirmed reading and deferred implementation honestly; an AI summary does not establish understanding. Update the existing research index when the current question or next action changes. Expand literature search only from a defined evidence gap.
 
 Before writing, map claims to source passages, derivations, or actual outputs. Return to reading/testing when evidence is missing. This is workflow guidance, not an institution's formal requirement.
 
@@ -315,6 +321,8 @@ vendor-watermark detection are separate checks.
 
 Use an authorized paper, dataset, or code sample. Test configured functions only; mark others not applicable. Public examples can check technical functions but cannot establish personal workflow acceptance.
 
+For a small reading check, ask the agent to explain a supplied diagram, check a conditional conclusion against its source version, or assess an unequal comparison. Inspect the answer and any saved note for correct source locations, complete mechanism steps, preserved conditions, and supported conclusions. Repeat the same source and question when evaluating a skill revision. Synthetic practice cases do not establish scientific correctness, independent user acceptance, or improved reading quality by themselves.
+
 | Check | Pass criterion |
 | --- | --- |
 | Rules and communication | Correct scope/locations; defined terms, complete steps and conditions, traceable conclusions. Record understanding feedback separately |
@@ -335,7 +343,7 @@ State what works, how to start, remaining gaps, and the next action. Link actual
 
 Retain environment/agent versions, provenance, locations, runtimes, connections, rule scope/loading, checks, backups, and recovery in `workbench-config.md`. Keep secrets and unrelated personal information out.
 
-Later runs read configuration first, resume unfinished work, and skip unchanged verified steps. Recheck affected workflows after updates. Automatic updates and monitoring require an explicit request. Share generic instructions rather than filled personal records.
+Later runs follow configuration links to the existing research index and current note. Resume from the current question, established evidence, unresolved issue, and next output; do not duplicate progress across new files. Preserve the user's actual reading status and deferred details. Skip unchanged verified setup steps and recheck affected workflows after updates. Automatic updates and monitoring require an explicit request. Share generic instructions rather than filled personal records.
 
 ## Sources and verification scope
 
@@ -346,4 +354,4 @@ Later runs read configuration first, resume unfinished work, and skip unchanged 
 - [ASD-STE100 Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) and [ASD FAQ](https://www.asd-ste100.org/STE_faq.html): terminology, sentences, procedures, descriptive writing, and rewriting; review included Rule 1.11, Sections 4–6, and Rule 9.1. Borrowed principles are not compliance certification.
 - [Karpathy's post](https://x.com/karpathy/status/2105819303471976479), read through a [public mirror](https://x.twstalker.com/karpathy/status/2105819303471976479) because X was inaccessible: loose STE style and presentation suggestions, not evidence that richer formats always work better.
 
-Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 2.3 defaults watermark-related rewriting to the current conversation model and keeps the standalone API service optional alongside the adapted Anti Defensive Writing skill and preserves the optional Undermind discovery and verified reference-manager PDF handoff, while retaining the profile-specific Python requirements, separate installation/research acceptance, and optional PaperQA workflow. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's Windows, macOS, or Linux computer remains unverified; actual support depends on target checks. This guide is not a vendor deployment promise.
+Skill sources were reviewed on 2026-10-02; communication and persistent-instruction sources on 2026-10-03. Edition 2.4 adds progressive paper reading, explicit comparison evidence, continuation through an existing research index, and scoped research-output acceptance. Existing current-model revision, optional API automation, Undermind, and PaperQA routes retain their separate authorization and verification boundaries. No new domain runtime is required. Installer checks are documented separately in the repository compatibility record. Complete setup for another user's computer remains subject to target checks; this guide is not a vendor deployment promise.

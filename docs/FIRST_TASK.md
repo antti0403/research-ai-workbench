@@ -10,9 +10,11 @@ Use START_HERE.md as the project entry point, then give the agent one request:
 | --- | --- | --- |
 | Start reading | Read one selected abstract, explain its question and approach, and mark full-text gaps. Save a source-linked note. | One note under `wiki/` or your existing system |
 | Check a claim | Check one selected full-text claim against its passage or equation. Retain assumptions, run a small calculation when useful, and label unsupported conclusions. | A claim-to-evidence table and actual check output; see [worked example](../examples/attention-scaling.md) |
-| Compare papers | Use research-paperqa on my selected papers within my existing model/data/cost authorization. Save evidence, check central citations, and record unanswered questions. | A comparison note and local session/evidence; [configuration and acceptance](PAPERQA.md) |
+| Compare papers | Compare my selected papers using available originals and existing tools. Identify the comparator, evidence type, unequal conditions, and unanswered questions; use research-paperqa only if needed within my model/data/cost authorization. | A comparison note with source locations; [reading workflow](READING.md). Optional [PaperQA configuration](PAPERQA.md) |
 
 Record file installation, host invocation, real task execution, and claim support separately in workbench-config.md. A model answer is an input to verification.
+
+For mechanism, conditional-claim, and comparison practice without an external service, use the original [synthetic acceptance cases](RESEARCH_ACCEPTANCE.md). Treat those checks separately from real scientific validation and user understanding.
 
 ## Read one public abstract
 

@@ -1,6 +1,48 @@
 # Compatibility and verification
 
-Updated: 2026-10-18 for repository 0.3.7. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+Updated: 2026-10-22 for repository 0.3.8. Tests use temporary workspaces and synthetic or public inputs, separate from private research. Results below retain the release actually tested.
+
+## 0.3.8 progressive reading and research continuation
+
+Local checks on macOS arm64 / Python 3.14.4 passed the 55-test suite (54 passed,
+one Windows-only skip), repository syntax/link/version checks, both changed
+skill-format checks, Bash syntax, the numerical example, and the actual offline
+launcher/copied-engine preparation. Five real historical snapshots (both 0.3.0
+variants, 0.3.1, 0.3.2, and 0.3.7) upgraded and repeated successfully in disposable
+workspaces. Checks retained old kits and human rules/configuration/notes, verified
+new foundation bytes and whole-tree backups, and refused edited old skills.
+
+New regression cases exercise refusal of missing/extra/edited or unowned files,
+invalid provenance, same-version changes and downgrades, directory-replacement
+rollback, state-write retry, and partial upgrades. Current foundation checks do
+not accept an old pristine skill merely because the global state version changed.
+Dependency pins, profiles, and upstream source records are unchanged. Local online
+package installation was not repeated; use the [PR's exact current-commit CI](https://github.com/antti0403/research-ai-workbench/pull/7/checks)
+for Windows/macOS/Linux preservation and online-runtime evidence.
+
+Controlled forward attempts used only the changed reading skill, original raw
+synthetic fixture, and case requests; the answering agents were not given the
+acceptance criteria. Inspection found:
+
+- The mechanism answer preserved the feedback signs, combined process input,
+  equilibrium, nonzero error, source locations, and scope. Source provenance was
+  partial: it identified a toy, dimensionless source but did not explicitly call
+  it a synthetic text diagram. It made no unsupported image/PDF inspection claim.
+- The correction used draft 1.1, withdrew the old zero-error claim, retained the
+  human comment, and edited the existing note/index without another tracker.
+  The follow-up stopped deeper reading, deferred stability work, and recorded
+  the next comparison task without claiming execution or complete understanding.
+- The comparison answer distinguished all four evidence kinds, preserved the
+  numerical differences, and rejected a ranking from unequal conditions.
+- A fresh agent given only the saved note and index recovered the next task,
+  deferred work, and performed algebraic check. It explicitly retained the gap
+  that the underlying source excerpt had not been opened in that fresh session.
+
+These are maintainer-controlled synthetic observations, not independent user
+acceptance, native host-discovery testing, a before/after quality comparison, or
+validation of a real scientific conclusion. Responses stayed outside the source
+repository. The [case protocol](RESEARCH_ACCEPTANCE.md) supplies reproducible
+requests and criteria for further checks.
 
 ## 0.3.7 current-conversation default
 

@@ -22,18 +22,18 @@ python workbench.py doctor --workspace "/path/to/project"
 | `apply` | Recheck foundation, install selected extensions, continue unaffected profiles after failure |
 | `doctor` | Check installation and report current failures |
 
-Repeat setup/apply to resume. Empty extension lists are valid; a smaller list does not uninstall earlier profiles.
+Repeat setup/apply to resume installation. For ordinary research continuation, use START_HERE and the existing research index; no installer command is needed. Empty extension lists are valid; a smaller list does not uninstall earlier profiles.
 
-After setup, use the interpreter and engine paths recorded in `START_HERE.md`. For repository 0.3.7, from the workspace:
+After setup, use the interpreter and engine paths recorded in `START_HERE.md`. For repository 0.3.8, from the workspace:
 
 ```bash
 # macOS / Linux
-.workbench/envs/core/bin/python .workbench/kit/0.3.7/workbench.py doctor --workspace .
+.workbench/envs/core/bin/python .workbench/kit/0.3.8/workbench.py doctor --workspace .
 ```
 
 ```powershell
 # Windows PowerShell
-& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.3.7\workbench.py doctor --workspace .
+& .\.workbench\envs\core\Scripts\python.exe .\.workbench\kit\0.3.8\workbench.py doctor --workspace .
 ```
 
 Keep the workspace at its original path; virtual environments need rebuilding after a move. Keep `.workbench/bootstrap/` if Python was downloaded there, or the reused external Python installation. The original source download is unnecessary once setup succeeds.
@@ -66,7 +66,7 @@ Use each profile's recorded interpreter. Optional integrations mentioned by upst
 | `workbench-config.md` | Research context, task results, remaining gaps |
 | `.workbench/profile.json` | Private answers and selected extensions |
 | `.workbench/state.json`, `.workbench/install-report.md` | Machine history/hashes and readable status |
-| `.workbench/kit/0.3.7/` | Copied engine, guide, source/license records |
+| `.workbench/kit/0.3.8/` | Copied engine, guide, source/license records |
 | `.workbench/envs/`, `.workbench/locks/` | Profile runtimes and resolved package versions |
 | `.agents/skills/` | Project skill files |
 
@@ -80,7 +80,7 @@ Before apply, the engine rechecks foundation files and the current PDF interpret
 
 Automatic runtime repairs require matching ownership tokens in state and `.workbench/envs/<profile>/.workbench-owner.json`. A working unowned legacy environment can be checked/reused; its packages are not changed and it is not adopted. Failed unowned runtimes need reviewed replacement or a new workspace.
 
-Unchanged installer-owned `START_HERE.md` is backed up and updated for the current kit. Human edits are preserved; current instructions go to `START_HERE-0.3.7.md`. Older schema-1 state remains readable without granting runtime ownership. State/profile JSON accepts a UTF-8 BOM; malformed state is preserved for recovery.
+Unchanged installer-owned `START_HERE.md` is backed up and updated for the current kit. Human edits are preserved; current instructions go to `START_HERE-0.3.8.md`. Older schema-1 state remains readable without granting runtime ownership. State/profile JSON accepts a UTF-8 BOM; malformed state is preserved for recovery.
 
 Skill revisions/hashes and direct package versions are pinned in [registry.json](../registry.json); transitive versions are recorded after installation. This is not a fully hash-locked offline distribution. Missing compatible binary wheels stop installation.
 
@@ -91,3 +91,7 @@ Downloads use public GitHub, PyPI, and Astral sources. The installer does not up
 The user handles login, institutional authorization, and paid choices. AI apps, commercial MATLAB, native office apps, large models, and a full local TeX distribution are not bundled. Reuse existing host capabilities first.
 
 Codex project discovery uses `.agents/skills/`; verify invocation in the target host. Other agents may read instructions explicitly, but native discovery needs checking. See the [Codex skills guide](https://learn.chatgpt.com/docs/build-skills) and [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/).
+
+## Foundation upgrades
+
+Run the new distribution's `setup` against the chosen workspace to update the foundation. Only pristine tracked `research-workbench` and `research-reading` trees from an older version of this repository are replaced. The whole previous tree is retained under `.workbench/backups/skills/`; prior kits remain immutable. Edited, unowned, same-version conflicting, and newer-version skills are preserved for review. Optional or third-party skill replacement is unchanged. After a partial update, `doctor` and `apply` require the foundation bytes supplied by the executing release, rather than trusting the global state version.

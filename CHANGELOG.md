@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.8 — 2026-10-22
+
+- Add progressive paper reading with focused mechanism explanations, explicit claim/evidence/condition boundaries, and comparator-aware method assessment. Keep user-confirmed reading and deferred implementation distinct from AI drafts and actual project validation.
+- Route START_HERE and the workbench skill between research continuation and tool configuration. Reuse the current research index, sources, notes, and working tools without repeating onboarding or creating duplicate progress records.
+- Add original synthetic research-acceptance cases for a diagram, a versioned conditional claim, and an unequal comparison. Retain the standalone guide and bilingual entry points; no new specialist runtime or service is required.
+- Upgrade only pristine tracked first-party foundation skills from older versions, retain whole-directory backups and immutable old kits, and preserve edited/unowned skills and human files. Reject stale foundation files during doctor/apply after a partial upgrade. Advance the kit to 0.3.8 and guide to 2.4; dependency and upstream pins are unchanged.
+
 ## 0.3.7 — 2026-10-18
 
 - Default research-watermarks to direct rewriting with the active conversation model. Remove separate model/API/service setup from normal Skill use; existing API configuration does not override this route.
