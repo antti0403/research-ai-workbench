@@ -4,11 +4,13 @@ Use [SETUP.md](SETUP.md) to select for a task and [Automation](docs/AUTOMATION.m
 
 ## Current catalog
 
-Repository 0.3.2 installs two original MIT-licensed foundation skills: `research-workbench` for setup and `research-reading` for source-linked notes. Optional bundles are defined in [registry.json](registry.json).
+Repository 0.3.8 installs two original MIT-licensed foundation skills: `research-workbench` for setup and research continuation, and `research-reading` for progressive source-linked reading and comparisons. Optional bundles are defined in [registry.json](registry.json).
 
 | Source | Automatic scope | Limits |
 | --- | --- | --- |
 | Nature Skills | Literature search/reference checks; writing, polishing, and required shared files | Pinned Apache-2.0 root license; nested material may differ |
+| Text-watermark rewriting | `watermarks` prepares `research-watermarks` for direct rewriting with the current conversation model | No extra API or service; [default workflow](docs/WATERMARKS.md). The opt-in `watermarks-api` profile retains the pinned MIT upstream client/runtime for standalone automation. |
+| Anti Defensive Writing | Adapted academic framing skill in the optional `writing` profile | Bundled MIT adaptation of Adkid-Zephyr at `82d31402caa0db1790026824399044538483171b`; retains material unfavorable findings and necessary qualifications; see [workflow](docs/WRITING.md) |
 | Scientific Agent Skills | MATLAB guidance, SymPy, units/uncertainty | Pinned MIT source and individual file hashes; MATLAB itself is not installed |
 | PaperQA | Optional local-paper question answering runtime and original research-paperqa skill | Model/embedding services, data-sharing scope, cost, and cited-claim support need task checks; see [workflow](docs/PAPERQA.md) |
 | Python packages | Core PDF reading and selected computation/plotting environments | Direct versions pinned; resolved versions recorded per runtime |
@@ -18,6 +20,8 @@ Source revisions, hashes, authors, and license evidence live in the registry and
 **Excluded:** ARS uses CC BY-NC 4.0 at the reviewed revision and needs intended-use review before manual installation. `nature-figure` is withheld pending permission for its nested `figures4papers` assets; `figures` installs only the plotting runtime. Earlier local installations are not removed.
 
 Files matching a source, dependencies loading, host discovery, and a real task passing are separate checks. Skills do not supply accounts, MATLAB licenses, institutional access, model services, or every upstream optional integration.
+
+The [reading workflow](docs/READING.md) distinguishes overviews, local questions, mechanism explanations, and comparison/reproduction work. Continue through the existing research index rather than duplicating progress files. [Synthetic acceptance cases](docs/RESEARCH_ACCEPTANCE.md) check observable outputs without requiring an extra model service. Pristine tracked foundation skills can upgrade with a whole-directory backup; edited or unowned skills require review.
 
 ## Optional hosted literature service
 

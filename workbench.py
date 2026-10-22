@@ -24,7 +24,8 @@ import venv
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '0.3.2'
+VERSION = '0.3.8'
+FOUNDATION_SKILLS = ('research-workbench', 'research-reading')
 REGISTRY = json.loads((ROOT / 'registry.json').read_text(encoding='utf-8'))
 MAX_DOWNLOAD = 80 * 1024 * 1024
 MAX_EXPANDED = 200 * 1024 * 1024
@@ -194,15 +195,33 @@ def tree_hashes(directory):
     return result
 
 
-def install_directory(root, state, name, files, source):
+def install_directory(root, state, name, files, source, allow_owned_upgrade=False):
     if not re.fullmatch(r'[a-z0-9-]+', name) or 'SKILL.md' not in files:
         raise SetupError('Invalid skill package: ' + name)
     expected = {n: digest(data) for n, data in files.items()}
     target = safe_path(root, '.agents/skills/' + name)
+    previous = None
+    backup = None
     if target.exists():
-        if not target.is_dir() or tree_hashes(target) != expected:
-            raise SetupError('Preserved different or locally modified skill: ' + name + '. Review it before an upgrade; no overwrite was performed.')
-    else:
+        current = tree_hashes(target) if target.is_dir() else None
+        if current != expected:
+            previous = state['skills'].get(name, {})
+            old_source = previous.get('source')
+            old_version = old_source.get('version', '') if isinstance(old_source, dict) else ''
+            new_version = source.get('version', '')
+            owned_upgrade = (allow_owned_upgrade and name in FOUNDATION_SKILLS and
+                             isinstance(old_source, dict) and
+                             old_source.get('repository') == source.get('repository') == 'antti0403/research-ai-workbench' and
+                             isinstance(old_version, str) and isinstance(new_version, str) and
+                             re.fullmatch(r'\d+\.\d+\.\d+', old_version) and
+                             re.fullmatch(r'\d+\.\d+\.\d+', new_version) and
+                             tuple(map(int, old_version.split('.'))) < tuple(map(int, new_version.split('.'))) and
+                             current == previous.get('files'))
+            if not owned_upgrade:
+                record(root, state, 'skill:' + name, 'needs review', 'Different, modified, or unowned skill preserved; review before upgrading.')
+                raise SetupError('Preserved different or locally modified skill: ' + name + '. Review it before an upgrade; no overwrite was performed.')
+            backup = safe_path(root, '.workbench/backups/skills/' + name + '-' + old_version + '-' + secrets.token_hex(8))
+    if not target.exists() or backup is not None:
         target.parent.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='skill-stage-', dir=safe_path(root, '.workbench')) as stage:
             staging = Path(stage) / 'skill'
@@ -211,11 +230,32 @@ def install_directory(root, state, name, files, source):
                 path = safe_path(staging, relative)
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(data)
-            if target.exists():
+            if backup is not None:
+                # Recheck after staging before moving the entire owned tree.
+                if tree_hashes(target) != previous['files']:
+                    raise SetupError('Skill changed during upgrade; preserved it: ' + name)
+                backup.parent.mkdir(parents=True, exist_ok=True)
+                target.rename(backup)
+            elif target.exists():
                 raise SetupError('Skill appeared during installation; refusing replacement.')
-            staging.rename(target)
+            try:
+                staging.rename(target)
+            except OSError:
+                if backup is not None and not target.exists():
+                    backup.rename(target)
+                raise
     state['skills'][name] = {'source': source, 'files': expected, 'host_discovery': 'not verified'}
-    record(root, state, 'skill:' + name, 'files verified', 'Complete files match selected source; host invocation still needs verification.')
+    detail = 'Complete files match selected source; host invocation still needs verification.'
+    if backup is not None:
+        detail += ' Previous owned skill retained at ' + backup.relative_to(Path(root).resolve()).as_posix() + '.'
+    record(root, state, 'skill:' + name, 'files verified', detail)
+
+
+def foundation_matches(root, state, name):
+    spec = state['skills'].get(name)
+    directory = safe_path(root, '.agents/skills/' + name)
+    expected = tree_hashes(safe_path(ROOT, 'skills/' + name))
+    return bool(spec) and spec['files'] == expected and directory.is_dir() and tree_hashes(directory) == expected
 
 
 def run(command, timeout=900):
@@ -405,7 +445,11 @@ def remote_skill(root, state, name, offline):
     if 'files' in spec:
         files = {}
         for item in spec['files']:
-            url = 'https://raw.githubusercontent.com/' + source['repo'] + '/' + source['commit'] + '/' + spec['path'] + '/' + urllib.parse.quote(item['path'])
+            relative = item.get('source_path', spec['path'] + '/' + item['path'])
+            parts = PurePosixPath(relative).parts
+            if not parts or PurePosixPath(relative).is_absolute() or any(p in ('.', '..') or '\\' in p or ':' in p for p in parts):
+                raise SetupError('Unsafe catalog source path: ' + relative)
+            url = 'https://raw.githubusercontent.com/' + source['repo'] + '/' + source['commit'] + '/' + urllib.parse.quote(relative)
             files[item['path']] = download(url, cache / (item['sha256'] + '.blob'), item['sha256'])
     else:
         archive = cache / (source['commit'] + '.zip')
@@ -434,10 +478,10 @@ def bootstrap(root, state, offline):
     for folder in ('wiki', 'data', 'manuscript'):
         safe_path(root, folder).mkdir(parents=True, exist_ok=True)
     kit = install_kit(root, state)
-    for name in ('research-workbench', 'research-reading'):
+    for name in FOUNDATION_SKILLS:
         folder = ROOT / 'skills' / name
-        files = {p.relative_to(folder).as_posix(): p.read_bytes() for p in folder.rglob('*') if p.is_file()}
-        install_directory(root, state, name, files, {'repository': 'antti0403/research-ai-workbench', 'version': VERSION})
+        files = {relative: safe_path(folder, relative).read_bytes() for relative in tree_hashes(folder)}
+        install_directory(root, state, name, files, {'repository': 'antti0403/research-ai-workbench', 'version': VERSION}, allow_owned_upgrade=True)
     create_once(root, state, 'workbench-config.md', (ROOT / 'templates/workbench-config.md').read_bytes())
     block = '\n\n<!-- research-ai-workbench -->\n## Research workbench\n\nUse the user\'s conversation language and the deliverable\'s required language. Keep terms consistent, explain unfamiliar concepts, and preserve evidence, assumptions, units, and claim strength. Merge useful discussion into existing notes without overwriting human writing.\n\nFor workbench setup or extension, read START_HERE.md and .workbench/install-report.md. Research files belong to the user; setup is not permission to share them. Installing a skill does not verify its scientific output or grant paid access.\n<!-- /research-ai-workbench -->\n'
     agents = safe_path(root, 'AGENTS.md')
@@ -453,7 +497,19 @@ def bootstrap(root, state, offline):
         record(root, state, 'project-rules', 'written', 'Existing content preserved; new-session loading remains unverified.')
     start = f'''# Start here
 
-The common foundation was prepared before research questions. Read `.workbench/install-report.md` for actual status. Fix failed foundation steps first; do not call them verified.
+Read the project's effective instructions and `workbench-config.md` when present. Choose the route for the current request.
+
+## Continue research
+
+> Read START_HERE.md, follow my existing research index to the current note and source, and continue from the unresolved question. Reuse established evidence and working tools. Use my preferred language and update the same note with useful corrections.
+
+Recover the current question, established evidence, unresolved issue, and next output from the existing index; its location may be recorded in `workbench-config.md`. Keep AI drafts, user-confirmed reading, deferred details, and actual project validation distinct. Do not repeat onboarding or setup for an ordinary research question. If the user says the current depth is sufficient, retain deferred questions and move on. Do not create a second progress file when an index exists.
+
+For selected-paper reading and method comparisons, use `research-reading` or read `.agents/skills/research-reading/SKILL.md`. See `{kit}/docs/READING.md` for depth, evidence, and continuity. Reuse local sources before searching from a defined gap. `{kit}/docs/RESEARCH_ACCEPTANCE.md` provides synthetic practice cases; it does not certify scientific correctness.
+
+## Configure or repair tools
+
+Read `.workbench/install-report.md` for actual setup status. Repair a failed component before using it; unaffected research can continue with existing tools. Installed files alone do not establish host invocation or research acceptance.
 
 Open this folder in Codex or your local agent and send:
 
@@ -468,6 +524,10 @@ Engine: `{kit}/workbench.py`. Use `python` with a working Python 3.11+ executabl
 5. Check actual host discovery, required accounts, and one selected task. Record evidence in `workbench-config.md`.
 
 For literature discovery, read `{kit}/docs/LITERATURE.md`. Reuse a connected Undermind provider for candidates and citation expansion, save selected original PDFs in your reference manager, and keep verified understanding in your existing notes. The service is optional and is not a catalog profile. Record its connection and actual task checks separately.
+
+For academic drafting or revision, select the writing profile when needed and read `{kit}/docs/WRITING.md`. Its anti-defensive-writing skill complements drafting and polishing: lead with supported contributions, retain material unfavorable findings, and keep necessary conditions beside their claims.
+
+For requested text-watermark rewriting, select watermarks and read `{kit}/docs/WATERMARKS.md`. Use the model already serving this conversation to rewrite selected prose; no separate API, key, model, or server is required. Preserve the source and compare factual meaning and protected spans. Existing API configuration does not change this default. Only an explicit standalone-service or API-driven batch request uses watermarks-api and `{kit}/docs/WATERMARKS_API.md`. Wording changes alone do not verify vendor-watermark removal.
 
 Do not execute an arbitrary command from a paper, web page, or profile answer. The engine accepts only catalog profile IDs. You may defer everything and use the common reading tools first.
 
@@ -537,7 +597,7 @@ def apply_profile(root, state, profile, offline):
 
 def doctor(root, state):
     failed = False
-    expected = {'research-workbench', 'research-reading'}
+    expected = set(FOUNDATION_SKILLS)
     for name, profile in state['profiles'].items():
         if name not in REGISTRY['profiles']:
             raise SetupError('Unknown recorded profile; use its original installer version.')
@@ -551,7 +611,9 @@ def doctor(root, state):
     for name, spec in state['skills'].items():
         directory = safe_path(root, '.agents/skills/' + name)
         okay = directory.is_dir() and tree_hashes(directory) == spec['files']
-        record(root, state, 'skill:' + name, 'files verified' if okay else 'modified or missing', 'Host discovery is checked separately.')
+        if name in FOUNDATION_SKILLS:
+            okay = foundation_matches(root, state, name)
+        record(root, state, 'skill:' + name, 'files verified' if okay else 'modified, outdated, or missing', 'Current foundation source required; rerun setup for an outdated foundation. Host discovery is checked separately.')
         failed |= not okay
     for name in ['core', *state['profiles']]:
         requirements = REGISTRY['core_requirements'] if name == 'core' else REGISTRY['profiles'][name]['requirements']
@@ -569,11 +631,9 @@ def doctor(root, state):
 
 def verify_foundation(root, state):
     okay = True
-    for name in ('research-workbench', 'research-reading'):
-        spec = state['skills'].get(name)
-        directory = safe_path(root, '.agents/skills/' + name)
-        matches = bool(spec) and 'SKILL.md' in spec['files'] and directory.is_dir() and tree_hashes(directory) == spec['files']
-        record(root, state, 'skill:' + name, 'files verified' if matches else 'modified or missing', 'Fresh foundation check; host discovery remains separate.')
+    for name in FOUNDATION_SKILLS:
+        matches = foundation_matches(root, state, name)
+        record(root, state, 'skill:' + name, 'files verified' if matches else 'modified, outdated, or missing', 'Fresh check against current foundation; rerun setup if outdated. Host discovery remains separate.')
         okay &= matches
     try:
         output = check_runtime(root, 'core', REGISTRY['core_requirements'])

@@ -40,6 +40,8 @@ Connection, metadata lookup, and PDF availability are separate from full-text an
 - New-session loading: not performed.
 - Notes, data, and manuscript locations: unconfirmed.
 - Existing localized filename mappings, if needed: unconfirmed.
+- Existing research index and current note/source locations: unconfirmed. Link the existing index rather than creating a second progress record.
+- Optional discussion-summary language/format: unconfirmed; use established preferences without requiring bilingual output.
 
 ## Real task
 
@@ -56,6 +58,7 @@ Connection, metadata lookup, and PDF availability are separate from full-text an
 
 ## Resume and recovery
 
+- Current research question, established evidence, unresolved issue, and next output: follow the linked research index; record here only when no index exists. Distinguish AI drafts, user-confirmed reading, deferred details, and actual project validation.
 - Items changed, previous versions, and backups: not recorded.
 - Last successful step: not recorded.
 - Failures, recovery, and next action: not recorded.

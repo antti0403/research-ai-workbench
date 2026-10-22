@@ -45,7 +45,10 @@ class ReliabilityTests(unittest.TestCase):
 
     def core_skills(self):
         for name in ('research-workbench', 'research-reading'):
-            w.install_directory(self.root, self.state, name, {'SKILL.md': b'Synthetic skill'}, {'source': 'test'})
+            folder = w.ROOT / 'skills' / name
+            files = {relative: (folder / relative).read_bytes() for relative in w.tree_hashes(folder)}
+            w.install_directory(self.root, self.state, name, files,
+                                {'repository': 'antti0403/research-ai-workbench', 'version': w.VERSION})
 
     def test_unowned_existing_python_is_never_repaired(self):
         self.fake_python()

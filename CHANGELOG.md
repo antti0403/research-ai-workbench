@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.3.8 — 2026-10-22
+
+- Add progressive paper reading with focused mechanism explanations, explicit claim/evidence/condition boundaries, and comparator-aware method assessment. Keep user-confirmed reading and deferred implementation distinct from AI drafts and actual project validation.
+- Route START_HERE and the workbench skill between research continuation and tool configuration. Reuse the current research index, sources, notes, and working tools without repeating onboarding or creating duplicate progress records.
+- Add original synthetic research-acceptance cases for a diagram, a versioned conditional claim, and an unequal comparison. Retain the standalone guide and bilingual entry points; no new specialist runtime or service is required.
+- Upgrade only pristine tracked first-party foundation skills from older versions, retain whole-directory backups and immutable old kits, and preserve edited/unowned skills and human files. Reject stale foundation files during doctor/apply after a partial upgrade. Advance the kit to 0.3.8 and guide to 2.4; dependency and upstream pins are unchanged.
+
+## 0.3.7 — 2026-10-18
+
+- Default research-watermarks to direct rewriting with the active conversation model. Remove separate model/API/service setup from normal Skill use; existing API configuration does not override this route.
+- Make `watermarks` a bundled-only profile that prepares offline without service downloads or backend configuration. Retain the unchanged standalone helper and pinned upstream runtime under the explicit opt-in `watermarks-api` profile.
+- Align the standalone guide, bilingual entry points, generated project instructions, provenance and validation paths. Preserve originals, protected spans, existing installations, configuration, and separate watermark-detection verification. Advance the kit to 0.3.7 and guide to 2.3.
+
+## 0.3.6 — 2026-10-15
+
+- Run the watermark service in the launcher process on every platform, fixing Windows path splitting when an interpreter or project path contains spaces. Terminating the launcher stops the actual service. Pinned upstream files remain unchanged.
+- Exercise spaces and Unicode in the service fixture, use explicit UTF-8 for fixture comparisons, verify shutdown, and allow up to 60 seconds for cold startup with captured diagnostics on failure.
+- Advance the immutable kit to 0.3.6 and guide to 2.2; dependency pins and model configuration are unchanged.
+
+## 0.3.5 — 2026-10-15
+
+- Keep the model-provider API key on the service side. Local status/rewrite clients no longer require a duplicate provider key in their own environment.
+- Test the real Layer B service request with the provider key absent from the client environment; keep source preservation and explicit unconfigured-service failures.
+- Use the macOS system CA bundle for the service when a Python build has no configured bundle; retain HTTPS verification.
+- Advance the immutable kit to 0.3.5 and guide to 2.1; runtime dependencies and selected upstream sources are unchanged.
+
+## 0.3.4 — 2026-10-15
+
+- Add the optional `watermarks` profile with the full watermarks-remover HTTP client and service, pinned source paths/file hashes and retained MIT license, plus an original research integration skill.
+- Add project-local API configuration, loopback service startup, and a Layer B paraphrase client that preserves the original and writes a candidate/report. A configured authorized model API is required for real rewriting; Unicode cleanup alone is not treated as this operation.
+- Route the workflow after academic drafting/polishing and Anti Defensive Writing. Track source integrity, service wiring, real model execution, and vendor-key detection separately.
+- Advance the immutable kit to 0.3.4 and standalone guide to 2.0. Preserve foundation skill bytes and runtime dependency pins; optional model/media/detector backends remain separately configured.
+
+## 0.3.3 — 2026-10-15
+
+- Add Anti Defensive Writing to the optional writing profile as a bundled MIT adaptation of Adkid-Zephyr's pinned Chinese/English skill source, retaining its license, source hashes, and explicit modification notice.
+- Connect the skill to generated START_HERE, the standalone guide, project-rule template, and bilingual documentation. Use it after drafting/polishing to clarify supported contributions while preserving material unfavorable findings, evaluation conditions, and necessary qualifications.
+- Advance the immutable kit to 0.3.3 and standalone guide to 1.9. Preserve existing foundation skill bytes and runtime/source dependency pins. New framing skill files can be prepared offline; other writing downloads and host discovery remain separate checks.
+
 ## 0.3.2 — 2026-10-12
 
 - Add an optional Undermind workflow for discovery, citation expansion, available-PDF analysis, and handoff to the user's existing reference manager and notes.

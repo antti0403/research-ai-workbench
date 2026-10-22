@@ -1,5 +1,5 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
-<!-- workbench-release: 0.3.2 -->
+<!-- workbench-release: 0.3.8 -->
 
 # Research AI Workbench
 
@@ -69,7 +69,17 @@ bash install.sh
 
 从[三条任务请求](docs/FIRST_TASK.md)中选一个：读摘要、核对一个全文结论，或对选定论文提问。每条都说明预期产物。[完整操作示例](examples/attention-scaling.md)包含原文定位、公式核对和可复算的小型计算。
 
+日常读论文可按[阅读工作流](docs/READING.md)推进：先抓问题、思路、贡献、证据与边界，再围绕当前疑问深入。续读时复用现有研究索引，讨论后完善同一篇笔记。[科研验收案例](docs/RESEARCH_ACCEPTANCE.md)提供明确标为合成材料的小任务，用于检查原文定位、机制解释和比较边界。
+
+已有项目可以直接发送：
+
+> 请读取 START_HERE.md 和现有研究索引，从当前笔记尚未解决的问题继续。复用能用的工具，保留来源条件和我实际确认的阅读状态。
+
 需要补充文献时，可复用已连接的 **Undermind** 插件找候选论文、追踪引用关系和分析可用 PDF。选中的原文与书目继续保存在 Zotero 或已有文献库，核实后的理解写入 Obsidian 或现有笔记。详见可选的[文献工作流](docs/LITERATURE.md)；安装器不负责安装该服务、登录账号或购买订阅。
+
+写论文或修改正文时，**writing** 模块会加入基于 Adkid-Zephyr 原作改编的 **Anti Defensive Writing 学术写作原则**：围绕有证据的贡献组织文章、减少重复辩解，同时保留影响结论的结果和必要限定。详见[写作工作流](docs/WRITING.md)。
+
+需要进行去水印改写时，**watermarks** 默认直接使用当前对话模型，不用另外配置 API、Key、模型或本地服务。详见[使用流程](docs/WATERMARKS.md)。独立服务仅用于明确要求的 API 自动化；改写效果和水印检测分别验证。
 
 ## 本地检查与体检命令
 
@@ -92,8 +102,12 @@ python workbench.py doctor --workspace "path/to/project"
 - [SETUP.md](SETUP.md)：面向 AI Agent 的单文件完整配置指南。
 - [SKILLS.md](SKILLS.md)：科研技能目录、检查范围与可选候选清单。
 - [docs/FIRST_TASK.md](docs/FIRST_TASK.md)：从零开始完成第一个科研任务的上手演练。
+- [docs/READING.md](docs/READING.md)：按问题逐步深入、核对比较证据，并续接已有研究。
+- [docs/RESEARCH_ACCEPTANCE.md](docs/RESEARCH_ACCEPTANCE.md)：可检查的合成练习与验收边界。
 - [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)：系统平台、Python 版本要求与兼容性边界。
 - [docs/AUTOMATION.md](docs/AUTOMATION.md)：自动化参数配置与 CLI 参考。
+- [docs/WATERMARKS.md](docs/WATERMARKS.md)：当前对话模型直接改写，以及可选的独立 API 方式。
+- [docs/WRITING.md](docs/WRITING.md)：Anti Defensive Writing 与论文起草、润色的衔接。
 - [docs/LITERATURE.md](docs/LITERATURE.md)：Undermind 检索、文献库 PDF 验收与有出处的笔记。
 
 ---
@@ -105,8 +119,10 @@ python workbench.py doctor --workspace "path/to/project"
 致谢：
 
 - 技能原型与实现参考自 **袁一哲 / Yuan1z0825 (Nature Skills)** 与 **K-Dense Inc. (Scientific Agent Skills)**。
+- **Guillaume Meyer 及贡献者** 提供了 watermarks-remover；可选的独立 API 模块按固定版本下载客户端与服务源码，并保留 MIT 许可证。
+- **Adkid-Zephyr** 提供了 MIT 许可的 Anti-Defensive Writing 原作；工作台内置的是明确标注修改的改编版。
 - 渐进式工作流设计灵感来自 **艺雨YiLight**，并参考了 **sunweihunu** 整理的实践记录。
 - 交互与受控输出准则借鉴了 **ASD-STE100** 标准与 **Andrej Karpathy** 的技术表达建议。
 - 外部集成组件保留各自原始协议，详见 [NOTICE.md](NOTICE.md) 与 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
-仓库版本 **0.3.2**，配置指南 **1.8**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。
+仓库版本 **0.3.8**，配置指南 **2.4**。修改记录见 [CHANGELOG.md](CHANGELOG.md)。

@@ -1,13 +1,13 @@
 # Third-party sources, dependencies, and acknowledgements
 
-Existing component reviews are retained from 2026-10-03; the Undermind interoperability entry was added on 2026-10-12 for repository 0.3.2 and guide 1.8. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
+Existing component reviews are retained from 2026-10-03; the Undermind interoperability entry was added on 2026-10-12 for repository 0.3.2 and guide 1.8. Anti Defensive Writing was reviewed and adapted on 2026-10-15 for repository 0.3.3 and guide 1.9. This inventory describes how this project uses each source. A public repository is not necessarily open source, and a source credit is not a substitute for permission. Linked license texts and component-specific notices control reuse.
 
 ## What this repository contains
 
 | Material | Relationship to this project |
 | --- | --- |
 | Installer, launchers, helpers, tests, `research-workbench`, `research-reading`, `research-paperqa`, guide and templates | Developed for this project with AI assistance. The project's MIT license covers these original contributions. External ideas and APIs are credited below. |
-| Third-party skills | Not vendored here. The installer obtains selected files from upstream using catalog revisions and hashes. |
+| Third-party skills | The modified Anti Defensive Writing skill is bundled with its upstream MIT license. Other selected third-party skills are downloaded using catalog revisions and hashes. |
 | Python, uv, Python packages and their native libraries/fonts | Not bundled here. Obtained or reused during setup; their distributions keep their own licenses. |
 | Paper example | An attributed abstract paraphrase in `examples/attention-abstract.md`, not a reproduced paper, figure, or full-text review. |
 | Video, transcript, social post, ASD-STE100 and product documentation | Linked sources of ideas or technical guidance. Their distributions are not included or relicensed. |
@@ -23,6 +23,15 @@ Existing component reviews are retained from 2026-10-03; the Undermind interoper
 - **Integration:** Download the pinned archive, verify SHA-256, and extract the selected directories without changing their contents. Any root `LICENSE`/`NOTICE` is retained as `UPSTREAM_LICENSE`/`UPSTREAM_NOTICE`; in-directory notices are retained. The cache contains the full archive, including unselected material; it is not a distributable package owned by this project.
 - **Redistribution:** Preserve the license and relevant copyright, attribution and NOTICE texts for covered files; mark modified files. Check nested material independently. Our MIT license does not apply to these skills.
 
+### Anti Defensive Writing
+
+- **Creator:** [Adkid-Zephyr](https://github.com/Adkid-Zephyr), Copyright (c) 2026 Adkid-Zephyr.
+- **Source/revision:** [anti-defensive-writing-Skill at 82d31402caa0db1790026824399044538483171b](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill/tree/82d31402caa0db1790026824399044538483171b), reviewed on 2026-10-15. Reviewed inputs: `skills/anti-defensive-writing-en/SKILL.md`, `skills/anti-defensive-writing/SKILL.md`, and root `LICENSE`; SHA-256 values are recorded in `registry.json`.
+- **License:** [Pinned MIT](https://github.com/Adkid-Zephyr/anti-defensive-writing-Skill/blob/82d31402caa0db1790026824399044538483171b/LICENSE); complete notice retained unchanged in [UPSTREAM_LICENSE](skills/anti-defensive-writing/UPSTREAM_LICENSE).
+- **Use:** Optional `writing` profile installs the bundled `anti-defensive-writing` adaptation. It requires no additional runtime or service and complements drafting/polishing tools.
+- **Modifications:** Condensed into one canonical English skill with multilingual output. Retains contribution-first organization and removal of redundant defensive wording. Replaces unconditional instructions about never admitting losses, suppressing weaknesses, or changing evaluation frames with material-result disclosure, transparent evaluation changes, necessary nearby qualifications, and evidence-matched claims. Adds local-edit scope and reviewer-response handling. It is not an unchanged upstream installation.
+- **Included material:** Adapted `SKILL.md` and complete root MIT license only. Upstream plugins, installers, scripts, images, and prompt packs are not bundled or executed. Preserve the original copyright/license and the modification notice with redistributed adaptations.
+
 ### Scientific Agent Skills
 
 - **Creator/maintainers:** [K-Dense Inc. / K-Dense-AI](https://github.com/K-Dense-AI) and contributors. Upstream notice: Copyright (c) 2025 K-Dense Inc.
@@ -31,6 +40,16 @@ Existing component reviews are retained from 2026-10-03; the Undermind interoper
 - **Use:** `symbolic` selects `skills/sympy`; `units` selects `skills/uncertainty-and-units`; `matlab` selects `skills/matlab`.
 - **Integration:** Download individual files and the license with the hashes in `registry.json`. Skill contents remain unchanged; `UPSTREAM_LICENSE.md` carries the upstream license. We select and connect these skills; we did not author them.
 - **Redistribution:** Retain the copyright and MIT permission/disclaimer text with copies or substantial portions. A MATLAB skill does not include MATLAB or grant a MathWorks license.
+
+### watermarks-remover
+
+- **Creator:** Guillaume Meyer and contributors, Copyright (c) 2026 Guillaume Meyer and contributors.
+- **Revision:** [c5297e9e69fec0779c29127c7892427e673fafd9](https://github.com/guillaumemeyer/watermarks-remover/tree/c5297e9e69fec0779c29127c7892427e673fafd9), reviewed on 2026-10-15 for repository 0.3.4 and guide 2.0.
+- **License:** [Pinned MIT](https://github.com/guillaumemeyer/watermarks-remover/blob/c5297e9e69fec0779c29127c7892427e673fafd9/LICENSE), retained unchanged with the installed package as `UPSTREAM_LICENSE.md`.
+- **Selected files (optional `watermarks-api` profile):** Complete `skills/remove-ai-marks`, `service/scripts`, and `config/clean_strategy.json`. Individual hashes and upstream-to-install paths are recorded in `registry.json`. The service scripts/config are placed under the installed client's `runtime/` so they remain available after the source checkout is gone. Upstream files remain unchanged; no upstream plugin hooks are activated.
+- **Original integration:** The bundled `research-watermarks` skill defaults to direct rewriting by the current conversation model. Its opt-in helper creates API configuration, starts a loopback service, and submits selected prose to the full Layer B rewrite endpoint using `paraphrase@0.8`. The direct workflow and helper are workbench-authored integration, not an upstream release or a claim that direct chat rewriting executes the upstream pipeline.
+- **Dependencies:** The selected service/rewrite path uses Python's standard library and the user's configured compatible model API. Optional requirement files and setup scripts arrive as source but are not executed automatically. No Ollama, Docker, model weights, media libraries, stealer, MarkLLM, or MarkDiffusion backend is installed by the profile. Review those components and their own licenses separately before enabling them.
+- **Verification:** File checks, live service/API wiring, real model execution, and vendor-key watermark detection are distinct. A controlled local test responder validates integration without proving any reduction of a real watermark. Preserve disclosures and keep endpoint credentials outside the public repository.
 
 ## Nested sources and exceptions
 
@@ -147,3 +166,7 @@ The foundation-first installer, question grouping, catalog integration, verifica
 ## Maintaining this inventory
 
 For each new component, record the original creator, source, version, use location, bundled/downloaded/reference-only status, license, retained notices and local changes. Follow [CONTRIBUTING.md](CONTRIBUTING.md). Keep credit next to copied/adapted material where appropriate as well as here. New versions and platforms require checking their actual distributions.
+
+## Original reading-workflow fixtures
+
+`docs/READING.md`, `docs/RESEARCH_ACCEPTANCE.md`, and `examples/reading-workflow-fixture.md` are original workbench instructions and synthetic material developed with AI assistance. The fixture is not a published paper, real experiment, or copied scientific result. No private research, third-party figures, or new external dependency is included; these files retain this project's MIT license.
